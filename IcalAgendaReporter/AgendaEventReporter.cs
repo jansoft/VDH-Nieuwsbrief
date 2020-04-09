@@ -71,6 +71,8 @@ namespace IcalAgendaReporter
             var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
 
             AddLegend(section);
+            var plegendspacer = section.AddParagraph("");
+            plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(15);
 
 
             foreach(var agendaEvent in eventsToReport)
@@ -124,16 +126,36 @@ namespace IcalAgendaReporter
 
         private void AddLegend(Section section)
         {
-            var para = section.AddParagraph();
-            var algemeen = para.AddFormattedText("\u275A");
-            algemeen.Color = GetOrganizationColor("algemeen");
-            para.AddText("Algemeen");
+            var table = section.AddTable();
+            var col1 = table.AddColumn();
+            var col2 = table.AddColumn();
+            var col3 = table.AddColumn();
+            var col4 = table.AddColumn();
+            var col5 = table.AddColumn();
+            var row = table.AddRow();
+            
+            var orgs = new[] { "Algemeen", "Therapeuticum", "Vereniging", "Consultatiebureau", "Keerkring"};
+            var orgwidths = new[] { 25, 35, 30, 40, 30 };
+            var cellindex = 0;
+
+            foreach(var org in orgs)
+            {
+                table.Columns[cellindex].Width =  Unit.FromMillimeter(orgwidths[cellindex]);
+                var p = row.Cells[cellindex].AddParagraph();
+                var ptext = p.AddFormattedText(org);
+                var border = row.Cells[cellindex].Borders.Left;
+                border.Width = Unit.FromMillimeter(2);
+                border.Color = GetOrganizationColor(org);
+                
+                cellindex++;
+            }
+  
             
         }
 
         private Color GetOrganizationColor(string organisatie)
         {
-            switch(organisatie)
+            switch(organisatie.ToLowerInvariant())
             {
                 case "therapeuticum":
                     return HexToColor("2396c9");
