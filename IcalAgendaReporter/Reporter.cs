@@ -171,9 +171,10 @@ h1 {
 
             File.WriteAllText(reportpath, sb.ToString(), Encoding.UTF8);
 
-            WriteToPdf(html, Path.ChangeExtension(reportpath, "pdf"));
+            var pdfpath = Path.ChangeExtension(reportpath, "pdf");
+            WriteToPdf(html, pdfpath);
 
-            return reportpath;
+            return pdfpath;
             
         }
 

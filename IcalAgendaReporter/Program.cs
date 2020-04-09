@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,10 @@ namespace IcalAgendaReporter
         {
             var filepath = @"d:\_Jan\Antroposofie\Website\vandamhuis.nl\events.csv";
             var reporter = new Reporter(filepath);
-            var reportpath = reporter.GenerateReport();
-            Console.WriteLine(reportpath);
-            Console.ReadLine();
+            var pdfpath = reporter.GenerateReport();
+
+            Process.Start(pdfpath);
+
         }
     }
 }
