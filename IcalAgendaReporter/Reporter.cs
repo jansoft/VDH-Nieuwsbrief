@@ -12,11 +12,13 @@ namespace IcalAgendaReporter
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
         private readonly List<AgendaEvent> parsedEvents;
+        private readonly bool includePrivateEvents;
 
         private readonly string filepath;
-        public Reporter(string filepath)
+        public Reporter(string filepath, bool includePrivateEvents)
         {
             this.filepath = filepath;
+            this.includePrivateEvents = includePrivateEvents;
             parsedEvents = Parse();
         }
 
@@ -37,7 +39,14 @@ namespace IcalAgendaReporter
 
         private List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records)
         {
-            return records.Where(p => p.event_start_date >= DateTime.Now.Date).OrderBy(p => p.event_start_date).ToList();
+            if (includePrivateEvents)
+            {
+                return records.Where(p => p.event_start_date >= DateTime.Now.Date).OrderBy(p => p.event_start_date).ToList();
+            }
+            else
+            {
+                return records.Where(p => p.event_start_date >= DateTime.Now.Date && !p.event_private).OrderBy(p => p.event_start_date).ToList();
+            }
         }
 
         private List<AgendaEvent> ReduceRepeatingEvents(List<AgendaEvent> records)

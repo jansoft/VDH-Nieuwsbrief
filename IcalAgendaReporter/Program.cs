@@ -12,12 +12,16 @@ namespace IcalAgendaReporter
     {
         static void Main(string[] args)
         {
+            var commands = CommandLineParser.GetCommands(args);
+            var includePrivateEvents = commands["scope"] == "private";
+
             var filepath = @"d:\_Jan\Antroposofie\Website\vandamhuis.nl\events.csv";
-            var reporter = new Reporter(filepath);
+            var reporter = new Reporter(filepath, includePrivateEvents);
             var pdfpath = reporter.GenerateReport();
 
             Process.Start(pdfpath);
 
         }
+        
     }
 }
