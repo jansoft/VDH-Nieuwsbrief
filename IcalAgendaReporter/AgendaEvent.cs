@@ -16,5 +16,7 @@ namespace IcalAgendaReporter
         public string organisatie { get; set; }
         public string url { get; set; }
         public string reeks { get; set; }
+
+        public bool event_private { get; set; }
     }
 }
