@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace IcalAgendaReporter
 {
-    public class Reporter
+    public class AgendaEventParser
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
         private readonly List<AgendaEvent> parsedEvents;
         private readonly bool includePrivateEvents;
 
         private readonly string filepath;
-        public Reporter(string filepath, bool includePrivateEvents)
+        public AgendaEventParser(string filepath, bool includePrivateEvents)
         {
             this.filepath = filepath;
             this.includePrivateEvents = includePrivateEvents;
