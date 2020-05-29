@@ -13,12 +13,14 @@ namespace IcalAgendaReporter
         private CultureInfo ciNL = new CultureInfo("nl-NL");
         private readonly List<AgendaEvent> parsedEvents;
         private readonly bool includePrivateEvents;
+        private readonly bool includeRepeatingEvents;
 
         private readonly string filepath;
-        public AgendaEventParser(string filepath, bool includePrivateEvents)
+        public AgendaEventParser(string filepath, bool includePrivateEvents, bool includeRepeatingEvents)
         {
             this.filepath = filepath;
             this.includePrivateEvents = includePrivateEvents;
+            this.includeRepeatingEvents = includeRepeatingEvents;
             parsedEvents = Parse();
         }
 
@@ -77,7 +79,11 @@ namespace IcalAgendaReporter
         public List<AgendaEvent> GetEventsForReporting()
         {
             var futureEvents = GetFutureEvents(parsedEvents);
-            return ReduceRepeatingEvents(futureEvents);
+            if (!includeRepeatingEvents)
+            {
+                return ReduceRepeatingEvents(futureEvents);
+            }
+            return futureEvents;
         }
 
         public string GenerateReport()
