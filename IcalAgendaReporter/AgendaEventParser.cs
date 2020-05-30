@@ -12,15 +12,13 @@ namespace IcalAgendaReporter
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
         private readonly List<AgendaEvent> parsedEvents;
-        private readonly bool includePrivateEvents;
-        private readonly bool includeRepeatingEvents;
-
+        private readonly AgendaEventParserOptions options;
+ 
         private readonly string filepath;
-        public AgendaEventParser(string filepath, bool includePrivateEvents, bool includeRepeatingEvents)
+        public AgendaEventParser(string filepath, AgendaEventParserOptions options)
         {
             this.filepath = filepath;
-            this.includePrivateEvents = includePrivateEvents;
-            this.includeRepeatingEvents = includeRepeatingEvents;
+            this.options = options;
             parsedEvents = Parse();
         }
 
@@ -41,13 +39,13 @@ namespace IcalAgendaReporter
 
         private List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records)
         {
-            if (includePrivateEvents)
+            if (options.IncludePrivate)
             {
-                return records.Where(p => p.event_start_date >= DateTime.Now.Date).OrderBy(p => p.event_start_date).ToList();
+                return records.Where(p => p.event_start_date >= DateTime.Now.Date && p.event_start_date < options.Until).OrderBy(p => p.event_start_date).ToList();
             }
             else
             {
-                return records.Where(p => p.event_start_date >= DateTime.Now.Date && !p.event_private).OrderBy(p => p.event_start_date).ToList();
+                return records.Where(p => p.event_start_date >= DateTime.Now.Date && p.event_start_date < options.Until && !p.event_private).OrderBy(p => p.event_start_date).ToList();
             }
         }
 
@@ -79,7 +77,7 @@ namespace IcalAgendaReporter
         public List<AgendaEvent> GetEventsForReporting()
         {
             var futureEvents = GetFutureEvents(parsedEvents);
-            if (!includeRepeatingEvents)
+            if (!options.IncludeRepeating)
             {
                 return ReduceRepeatingEvents(futureEvents);
             }

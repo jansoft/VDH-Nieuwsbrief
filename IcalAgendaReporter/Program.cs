@@ -12,20 +12,27 @@ namespace IcalAgendaReporter
     {
         static void Main(string[] args)
         {
-            bool includePrivateEvents = false;
-            bool includeRepeatingEvens = false;
+            var options = new AgendaEventParserOptions();
 
             var commands = CommandLineParser.GetCommands(args);
             if (commands.ContainsKey("scope")) {
-                includePrivateEvents = commands["scope"] == "private";
+                options.IncludePrivate = commands["scope"] == "private";
             }
 
             if (commands.ContainsKey("repeating")) {
-                includeRepeatingEvens  = commands["repeating"] == "include";
+                options.IncludeRepeating  = commands["repeating"] == "include";
+            }
+            if (commands.ContainsKey("until"))
+            {
+                options.Until = DateTime.Parse(commands["until"]);
+            }
+            else
+            {
+                options.Until = DateTime.Now.AddYears(1);
             }
 
             var filepath = @"d:\_Jan\Antroposofie\Website\vandamhuis.nl\events.csv";
-            var parser = new AgendaEventParser(filepath, includePrivateEvents, includeRepeatingEvens);
+            var parser = new AgendaEventParser(filepath, options);
             var eventsToReport = parser.GetEventsForReporting();
             var reporter = new AgendaEventReporter(eventsToReport);
             reporter.Report();

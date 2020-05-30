@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IcalAgendaReporter
+{
+    public class AgendaEventParserOptions
+    {
+        public bool IncludePrivate { get; set; } = false;
+        public bool IncludeRepeating { get; set; } = false;
+
+        public DateTime Until { get; set; }
+    }
+}

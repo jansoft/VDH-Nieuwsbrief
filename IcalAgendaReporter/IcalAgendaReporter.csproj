@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaEvent.cs" />
+    <Compile Include="AgendaEventParserOptions.cs" />
     <Compile Include="AgendaEventReporter.cs" />
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="Program.cs" />
