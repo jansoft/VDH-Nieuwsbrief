@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace IcalAgendaReporter
 {
+    public enum EventScope { All, Public, Private}
+
     public class AgendaEventParser
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");

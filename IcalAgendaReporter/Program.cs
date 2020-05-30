@@ -16,7 +16,15 @@ namespace IcalAgendaReporter
 
             var commands = CommandLineParser.GetCommands(args);
             if (commands.ContainsKey("scope")) {
-                options.IncludePrivate = commands["scope"] == "private";
+                var scope = commands["scope"];
+                if (scope == "private")
+                {
+                    options.Scope = EventScope.Private;
+                }
+                else if (scope == "all")
+                {
+                    options.Scope = EventScope.All;
+                }
             }
 
             if (commands.ContainsKey("repeating")) {
