@@ -31,13 +31,30 @@ namespace IcalAgendaReporter
                 options.Until = DateTime.Now.AddYears(1);
             }
 
-            var filepath = @"d:\_Jan\Antroposofie\Website\vandamhuis.nl\events.csv";
+            var filepath = GetCsvPath();
             var parser = new AgendaEventParser(filepath, options);
             var eventsToReport = parser.GetEventsForReporting();
-            var reporter = new AgendaEventReporter(eventsToReport);
+
+            var reporter = new AgendaEventReporter(eventsToReport, GetMyDocsAppPath());
             reporter.Report();
             
 
+        }
+
+        static private string GetMyDocsAppPath()
+        {
+            var mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var mydocsAppPath = Path.Combine(mydocs, "Van Dam Huis agenda");
+            if (!Directory.Exists(mydocsAppPath))
+            {
+                Directory.CreateDirectory(mydocsAppPath);
+            }
+            return mydocsAppPath;
+        }
+
+        static private string GetCsvPath()
+        {
+            return Path.Combine(GetMyDocsAppPath(), "events.csv");
         }
         
     }

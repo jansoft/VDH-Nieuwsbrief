@@ -22,10 +22,12 @@ namespace IcalAgendaReporter
         double liney = 278.2;
 
         private readonly List<AgendaEvent> eventsToReport;
+        private readonly string reportDirectory;
 
-        public AgendaEventReporter(List<AgendaEvent> eventsToReport)
+        public AgendaEventReporter(List<AgendaEvent> eventsToReport, string reportDirectory)
         {
             this.eventsToReport = eventsToReport;
+            this.reportDirectory = reportDirectory;
         }
 
         
@@ -46,7 +48,9 @@ namespace IcalAgendaReporter
 
             // add header
             var header = section.Headers.Primary;
-            var headerimg = header.AddImage(@"d:\_Jan\Antroposofie\Website\Sanne Schuurman\Logoset\PNG (150x150px)\Logo Van Dam Huis (150x150 px).png");
+            // @"d:\_Jan\Antroposofie\Website\Sanne Schuurman\Logoset\PNG (150x150px)\Logo Van Dam Huis (150x150 px).png"
+            var logoPath = GetLogoPath();
+            var headerimg = header.AddImage(logoPath);
             headerimg.Height = Unit.FromCentimeter(3);
             headerimg.RelativeHorizontal = RelativeHorizontal.Page;
             headerimg.RelativeVertical = RelativeVertical.Page;
@@ -124,6 +128,7 @@ namespace IcalAgendaReporter
             Process.Start(reportpath);
         }
 
+ 
         private void AddLegend(Section section)
         {
             var table = section.AddTable();
@@ -151,6 +156,12 @@ namespace IcalAgendaReporter
             }
   
             
+        }
+
+        private string GetLogoPath()
+        {
+            var appDirectory = Path.GetDirectoryName(new Uri(this.GetType().Assembly.GetName().CodeBase).LocalPath);
+            return Path.Combine(appDirectory, "Assets", "logo.png");
         }
 
         private Color GetOrganizationColor(string organisatie)
@@ -250,13 +261,7 @@ namespace IcalAgendaReporter
 
         private string GetReportPath()
         {
-            var mydocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var reportfolder = Path.Combine(mydocuments, "Van Dam Huis Agenda");
-            if (!Directory.Exists(reportfolder))
-            {
-                Directory.CreateDirectory(reportfolder);
-            }
-            var reportpath = Path.Combine(reportfolder, $"Agenda-report-{DateTime.Now:yyyy-MM-dd HHmm}.pdf");
+            var reportpath = Path.Combine(reportDirectory, $"Agenda-report-{DateTime.Now:yyyy-MM-dd HHmm}.pdf");
             return reportpath;
 
         }
