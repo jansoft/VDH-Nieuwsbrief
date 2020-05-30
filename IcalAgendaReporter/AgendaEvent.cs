@@ -8,15 +8,38 @@ namespace IcalAgendaReporter
 {
     public class AgendaEvent
     {
-        public string event_name { get; set; }
-        public DateTime event_start_date { get; set; }
-        public DateTime event_end_date { get; set; }
-        public DateTime event_start_time { get; set; }
-        public DateTime event_end_time { get; set; }
-        public string organisatie { get; set; }
-        public string url { get; set; }
-        public string reeks { get; set; }
+        public CsvAgendaEvent Event { get; set; }
+        public string ReeksInfo { get; set; }
 
-        public bool event_private { get; set; }
+        public int Interval()
+        {
+            if (int.TryParse(Event.recurrence_interval, out int value)) {
+                return value;
+            }
+            return 0;
+        }
+
+        public int ByWeekNo()
+        {
+            if (int.TryParse(Event.recurrence_byweekno, out int value))
+            {
+                return value;
+            }
+            return 0;
+        }
+
+        public List<int> ByDay()
+        {
+            var result = new List<int>();
+            var terms = Event.recurrence_byday.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var term in terms)
+            {
+                if (int.TryParse(term, out int value))
+                {
+                    result.Add(value);
+                }
+            }
+            return result;
+        }
     }
 }

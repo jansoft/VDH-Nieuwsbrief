@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,18 +14,42 @@ namespace IcalAgendaReporter
     public class AgendaEventParser
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
-        private readonly List<AgendaEvent> parsedEvents;
+        private readonly List<AgendaEvent> parsedEvents = new List<AgendaEvent>();
         private readonly AgendaEventParserOptions options;
+
+        private readonly Dictionary<string, AgendaEvent> allReeksen = new Dictionary<string, AgendaEvent>();
  
         private readonly string filepath;
         public AgendaEventParser(string filepath, AgendaEventParserOptions options)
         {
             this.filepath = filepath;
             this.options = options;
-            parsedEvents = Parse();
+            Initialize();
         }
 
-        private List<AgendaEvent> Parse()
+        private void Initialize()
+        {
+            var csvParsedEvents = ParseCsv();
+            
+            foreach(var item in csvParsedEvents)
+            {
+                parsedEvents.Add(new AgendaEvent { Event = item });
+            }
+
+            foreach (var item in parsedEvents)
+            {
+                var reeks = item.Event.reeks;
+                if (!string.IsNullOrWhiteSpace(reeks))
+                {
+                    if (!allReeksen.ContainsKey(reeks))
+                    {
+                        allReeksen[reeks] = item;
+                    }
+                }
+            }
+        }
+
+        private List<CsvAgendaEvent> ParseCsv()
         {
             var config = new CsvHelper.Configuration.CsvConfiguration(ciNL);
             config.Delimiter = ";";
@@ -32,7 +57,7 @@ namespace IcalAgendaReporter
             {
                 using (var csv = new CsvHelper.CsvReader(reader, config))
                 {
-                    var records = csv.GetRecords<AgendaEvent>();
+                    var records = csv.GetRecords<CsvAgendaEvent>();
                     return records.ToList();
                 }
                 
@@ -43,11 +68,11 @@ namespace IcalAgendaReporter
         {
             if (options.IncludePrivate)
             {
-                return records.Where(p => p.event_start_date >= DateTime.Now.Date && p.event_start_date < options.Until).OrderBy(p => p.event_start_date).ToList();
+                return records.Where(p => p.Event.event_start_date >= DateTime.Now.Date && p.Event.event_start_date < options.Until).OrderBy(p => p.Event.event_start_date).ToList();
             }
             else
             {
-                return records.Where(p => p.event_start_date >= DateTime.Now.Date && p.event_start_date < options.Until && !p.event_private).OrderBy(p => p.event_start_date).ToList();
+                return records.Where(p => p.Event.event_start_date >= DateTime.Now.Date && p.Event.event_start_date < options.Until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
             }
         }
 
@@ -58,7 +83,7 @@ namespace IcalAgendaReporter
 
             foreach(var record in records)
             {
-                var reeks = record.reeks;
+                var reeks = record.Event.reeks;
                 if (string.IsNullOrWhiteSpace(reeks))
                 {
                     result.Add(record);
@@ -73,17 +98,85 @@ namespace IcalAgendaReporter
                 }
             }
 
+            foreach (var record in result)
+            {
+                var reeks = record.Event.reeks;
+                if (!string.IsNullOrWhiteSpace(reeks))
+                {
+                    var reeksFirst = allReeksen[reeks];
+                    record.ReeksInfo = GetReeksInfo(reeksFirst);
+                 }
+            }
+
             return result;
+        }
+
+
+        private string GetDayName(int day)
+        {
+            switch(day)
+            {
+                case 0: return "zondag";
+                case 1: return "maandag";
+                case 2: return "dinsdag";
+                case 3: return "woensdag";
+                case 4: return "donderdag";
+                case 5: return "vrijdag";
+                case 6: return "zaterdag";
+                default: return "onbekende dag";
+            } 
+        }
+
+        private string GetDayNames(List<int> daynames)
+        {
+            var result = new List<string>();
+            foreach(var day in daynames)
+            {
+                result.Add(GetDayName(day));
+            }
+
+            return string.Join(", ", result);
+        }
+
+        private string GetSequenceName(int sequence)
+        {
+            switch(sequence)
+            {
+                case 1: return "eerste";
+                case 2: return "tweede";
+                case 3: return "derde";
+                case 4: return "vierde";
+                case 5: return "vijfde";
+                default: return "onbekende volgorde";
+            }
+        }
+
+        private string GetReeksInfo(AgendaEvent item)
+        {
+            var freq = item.Event.recurrence_freq;
+            var interval = item.Interval();
+            var byweekno = item.ByWeekNo();
+            var byday = item.ByDay();
+
+            if (freq == "weekly")
+            {
+                return $"(wekelijks op {GetDayNames(byday)} tot {item.Event.event_end_date:dd MMMM yyyy})";
+            }
+            else if (freq == "monthly")
+            {
+                if (byweekno != 0)
+                {
+                    return $"(elke {GetSequenceName(byweekno)} {GetDayNames(byday)} van de maand tot {item.Event.event_end_date:dd MMMM yyyy})";
+                }
+                return "Elke maand";
+            }
+            return "TODO";
         }
 
         public List<AgendaEvent> GetEventsForReporting()
         {
             var futureEvents = GetFutureEvents(parsedEvents);
-            if (!options.IncludeRepeating)
-            {
-                return ReduceRepeatingEvents(futureEvents);
-            }
-            return futureEvents;
+            return ReduceRepeatingEvents(futureEvents);
         }
 
         public string GenerateReport()
@@ -167,15 +260,20 @@ h1 {
             sb.AppendLine($@"
 <div><img src='d:\_Jan\Antroposofie\Website\vandamhuis.nl\logo\vdh-logo.png' width='150px'/></div>
 <h1>Agenda</h1>
-<p>Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring</p>
 <div class='vdh-event-filters'>{GetAgendaLegend()}</div>
 ");
             foreach(var agendaEvent in eventsToReport)
             {
+                var reeksInfo = "";
+                if (!string.IsNullOrWhiteSpace(agendaEvent.Event.reeks) && !string.IsNullOrWhiteSpace(agendaEvent.ReeksInfo) )
+                {
+                    reeksInfo = agendaEvent.ReeksInfo;
+                }
+                
                 sb.AppendLine($@"
-<div class='vdh-event {agendaEvent.organisatie}'>
-    <div class='vdh-event-title'><a href='{agendaEvent.url}'>{agendaEvent.event_name}</a></div>
-    <div class='vdh-event-date'>{agendaEvent.event_start_date:dd MMMM yyyy} {agendaEvent.event_start_time:HH:mm} - {agendaEvent.event_end_time:HH:mm}</div>
+<div class='vdh-event {agendaEvent.Event.organisatie}'>
+    <div class='vdh-event-title'><a href='{agendaEvent.Event.url}'>{agendaEvent.Event.event_name}</a></div>
+    <div class='vdh-event-date'>{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}</div>
 </div>
 ");
             }

@@ -72,7 +72,7 @@ namespace IcalAgendaReporter
 
             var pintro = section.AddParagraph();
             pintro.Format.SpaceAfter = Unit.FromPoint(16);
-            var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
+           // var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
 
             AddLegend(section);
             var plegendspacer = section.AddParagraph("");
@@ -86,19 +86,25 @@ namespace IcalAgendaReporter
                 para.Format.SpaceAfter = Unit.FromPoint(12);
                 para.Format.Borders.Left.Style = BorderStyle.Single;
                 para.Format.Borders.Left.Width = Unit.FromMillimeter(2);
-                para.Format.Borders.Left.Color = GetOrganizationColor(agendaEvent.organisatie);
+                para.Format.Borders.Left.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
                 para.Format.Borders.DistanceFromLeft = Unit.FromMillimeter(2);
                 para.Format.KeepTogether = true;
                 
-                var hyperlink = para.AddHyperlink(agendaEvent.url, HyperlinkType.Web);
-                var linktext = hyperlink.AddFormattedText(agendaEvent.event_name);
+                var hyperlink = para.AddHyperlink(agendaEvent.Event.url, HyperlinkType.Web);
+                var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name);
                 linktext.Underline = Underline.Single;
                 linktext.Color = Color.FromRgb(53, 90, 162);
                 linktext.Font.Name = "Rubik Medium";
 
                 para.AddLineBreak();
 
-                var datetext = para.AddFormattedText($"{agendaEvent.event_start_date:dd MMMM yyyy} {agendaEvent.event_start_time:HH:mm} - {agendaEvent.event_end_time:HH:mm}");
+                var reeksInfo = "";
+                if (!string.IsNullOrWhiteSpace(agendaEvent.Event.reeks) && !string.IsNullOrWhiteSpace(agendaEvent.ReeksInfo))
+                {
+                    reeksInfo = agendaEvent.ReeksInfo;
+                }
+
+                var datetext = para.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}");
             }
 
  

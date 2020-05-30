@@ -8,9 +8,8 @@ namespace IcalAgendaReporter
 {
     public class AgendaEventParserOptions
     {
-        public EventScope Scope { get; set; } = EventScope.Public;
-        public bool IncludeRepeating { get; set; } = false;
-
+        public bool IncludePrivate { get; set; }
+ 
         public DateTime Until { get; set; }
     }
 }
