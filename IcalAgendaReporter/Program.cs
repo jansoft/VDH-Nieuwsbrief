@@ -15,8 +15,8 @@ namespace IcalAgendaReporter
             var options = new AgendaEventParserOptions();
 
             var commands = CommandLineParser.GetCommands(args);
-            if (commands.ContainsKey("scope")) {
-                options.IncludePrivate = commands["scope"] == "private";
+            if (commands.ContainsKey("include")) {
+                options.IncludePrivate = commands["include"] == "private";
             }
 
             if (commands.ContainsKey("until"))

@@ -13,15 +13,14 @@ PDF rapport genereren
 3. Het rapport wordt als PDF bestand opgeslagen in My Documents\Van Dam Huis agenda\
 
 Command line argumenten:
-scope :: all | public | private ; standaard worden alleen publieke evenementen getoond
-repeating=include ; standaard worden van herhaalde evenementen alleen de eerstvolgende getoond.
+inhclude=private ; standaard worden alleen publieke evenementen getoond
 until=2020-12-31 ; standaard worden evenementen tot een jaar vooruit getoond.
 
 Voorbeelden:
-app\VanDamHuisAgendaReporter.exe scope=all
-app\VanDamHuisAgendaReporter.exe scope=public
-app\VanDamHuisAgendaReporter.exe scope=public repeating=include
-app\VanDamHuisAgendaReporter.exe scope=private
-app\VanDamHuisAgendaReporter.exe scope=private repeating=include
+app\VanDamHuisAgendaReporter.exe 
+app\VanDamHuisAgendaReporter.exe include=private
+app\VanDamHuisAgendaReporter.exe include=private until=2020-12-31
+app\VanDamHuisAgendaReporter.exe until=2020-12-31
+
 
 
