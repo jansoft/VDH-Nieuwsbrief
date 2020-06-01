@@ -54,6 +54,9 @@
     <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NodaTime, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
       <HintPath>..\packages\NodaTime.2.0.2\lib\net45\NodaTime.dll</HintPath>
     </Reference>
@@ -95,7 +98,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaClient.cs" />
     <Compile Include="AgendaEvent.cs" />
+    <Compile Include="BooleanConverter.cs" />
     <Compile Include="CsvAgendaEvent.cs" />
     <Compile Include="AgendaEventParserOptions.cs" />
     <Compile Include="AgendaEventReporter.cs" />
@@ -103,6 +108,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AgendaEventParser.cs" />
+    <Compile Include="BaseAgendaParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

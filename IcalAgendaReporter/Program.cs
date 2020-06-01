@@ -28,9 +28,23 @@ namespace IcalAgendaReporter
                 options.Until = DateTime.Now.AddYears(1);
             }
 
-            var filepath = GetCsvPath();
-            var parser = new AgendaEventParser(filepath, options);
-            var eventsToReport = parser.GetEventsForReporting();
+            List<AgendaEvent> eventsToReport;
+            var sourceType = "api";
+
+            if (sourceType == "api")
+            {
+
+                var url = "http://localhost/vandamhuis/wp-json/service/agenda";
+                var client = new AgendaClient(url, options);
+                eventsToReport = client.GetEventsForReporting();
+            }
+            else
+            {
+
+                var filepath = GetCsvPath();
+                var parser = new AgendaEventParser(filepath, options);
+                eventsToReport = parser.GetEventsForReporting();
+            }
 
             var reporter = new AgendaEventReporter(eventsToReport, GetMyDocsAppPath());
             reporter.Report();
