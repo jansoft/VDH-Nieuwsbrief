@@ -34,7 +34,8 @@ namespace IcalAgendaReporter
             if (sourceType == "api")
             {
 
-                var url = "http://localhost/vandamhuis/wp-json/service/agenda?bop=2020-01-01&eop=2020-08-01";
+                //var url = "https://localhost/vandamhuis/wp-json/vdh/agenda?bop=2020-01-01&eop=2020-08-01";
+                var url = "https://www.vandamhuis.nl/wp-json/vdh/agenda";
                 var client = new AgendaClient(url, options);
                 eventsToReport = client.GetEventsForReporting();
             }
