@@ -11,5 +11,6 @@ namespace IcalAgendaReporter
         public bool IncludePrivate { get; set; }
  
         public DateTime Until { get; set; }
+
     }
 }

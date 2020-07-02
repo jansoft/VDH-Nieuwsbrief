@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace IcalAgendaReporter
         }
 
         
-        public void Report()
+        public string Report(bool showBackground = false)
         {
             var document = new Document();
             document.DefaultPageSetup.TopMargin = Unit.FromMillimeter(topmargin);
@@ -49,26 +50,40 @@ namespace IcalAgendaReporter
             // add header
             var header = section.Headers.Primary;
             // @"d:\_Jan\Antroposofie\Website\Sanne Schuurman\Logoset\PNG (150x150px)\Logo Van Dam Huis (150x150 px).png"
-            var logoPath = GetLogoPath();
-            var headerimg = header.AddImage(logoPath);
-            headerimg.Height = Unit.FromCentimeter(3);
-            headerimg.RelativeHorizontal = RelativeHorizontal.Page;
-            headerimg.RelativeVertical = RelativeVertical.Page;
-            headerimg.Left = Unit.FromMillimeter(20);
-            headerimg.Top = Unit.FromMillimeter(5);
 
-            // add footer
-            var footer = section.Footers.Primary;
+            if (showBackground)
+            {
+                AddLogo(header);
+            }
+            
+            
 
             var vdhRgbColor = Color.FromRgb(57, 70, 157);
-            AddFooterText(footer, vdhRgbColor);
-
-            var ph1 = section.AddParagraph();
-            ph1.Format.SpaceAfter = Unit.FromPoint(16);
+ 
+            // Toon Agenda rechtsboven
+                
+            var agendaframe = header.AddTextFrame();
+            agendaframe.Width = Unit.FromMillimeter(80);
+            agendaframe.RelativeVertical = RelativeVertical.Page;
+            agendaframe.RelativeHorizontal = RelativeHorizontal.Page;
+            agendaframe.Top = Unit.FromMillimeter(15);
+            agendaframe.Left = document.DefaultPageSetup.PageWidth - XUnit.FromMillimeter(rightmargin) - Unit.FromMillimeter(80);
+            var ph1 = agendaframe.AddParagraph();
+            ph1.Format.Alignment = ParagraphAlignment.Right;
             var h1 = ph1.AddFormattedText("Agenda");
-            h1.Font.Color = Color.FromRgb(34, 57, 103);
+            h1.Font.Color = vdhRgbColor;
             h1.Font.Size = Unit.FromPoint(16);
             h1.Font.Name = "Rubik Medium";
+
+             // add footer
+            var footer = section.Footers.Primary;
+
+            if (showBackground)
+            {
+                AddFooterText(footer, vdhRgbColor);
+            }
+
+            
 
             var pintro = section.AddParagraph();
             pintro.Format.SpaceAfter = Unit.FromPoint(16);
@@ -118,20 +133,35 @@ namespace IcalAgendaReporter
             var vdhColor = XColor.FromArgb(57, 70, 157);
             var vdhPen = new XPen(vdhColor);
 
-            foreach (var page in pdfdoc.Pages)
+            if (showBackground)
             {
-                XGraphics gfx = XGraphics.FromPdfPage(page);
-                var y = XUnit.FromMillimeter(liney);
-                var x2 = page.Width - XUnit.FromMillimeter(rightmargin);
-               
-               
-                gfx.DrawLine(vdhPen, 0, y, x2, y);
-                gfx.DrawLine(vdhPen, x2, y, page.Width, y - XUnit.FromMillimeter(15));
+                foreach (var page in pdfdoc.Pages)
+                {
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    var y = XUnit.FromMillimeter(liney);
+                    var x2 = page.Width - XUnit.FromMillimeter(rightmargin);
+
+
+                    gfx.DrawLine(vdhPen, 0, y, x2, y);
+                    gfx.DrawLine(vdhPen, x2, y, page.Width, y - XUnit.FromMillimeter(15));
+                }
             }
 
             var reportpath = GetReportPath();
             renderer.PdfDocument.Save(reportpath);
             Process.Start(reportpath);
+            return reportpath;
+        }
+
+        private void AddLogo(HeaderFooter header)
+        {
+            var logoPath = GetLogoPath();
+            var headerimg = header.AddImage(logoPath);
+            headerimg.Height = Unit.FromCentimeter(3);
+            headerimg.RelativeHorizontal = RelativeHorizontal.Page;
+            headerimg.RelativeVertical = RelativeVertical.Page;
+            headerimg.Left = Unit.FromMillimeter(20);
+            headerimg.Top = Unit.FromMillimeter(5);
         }
 
  

@@ -48,7 +48,12 @@ namespace IcalAgendaReporter
             }
 
             var reporter = new AgendaEventReporter(eventsToReport, GetMyDocsAppPath());
-            reporter.Report();
+            var showBackground = commands.ContainsKey("bg") && commands["bg"] == "true";
+            var reportpath = reporter.Report(showBackground);
+
+            Console.WriteLine("Agenda PDF staat in:");
+            Console.WriteLine(reportpath);
+            Console.ReadLine();
             
 
         }
