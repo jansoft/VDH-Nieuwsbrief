@@ -10,15 +10,15 @@ namespace IcalAgendaReporter
     {
         private readonly Dictionary<string, AgendaEvent> allReeksen = new Dictionary<string, AgendaEvent>();
 
-        protected List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records, bool includePrivate, DateTime until)
+        protected List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records, bool includePrivate, DateTime from, DateTime until)
         {
             if (includePrivate)
             {
-                return records.Where(p => p.Event.event_start_date >= DateTime.Now.Date && p.Event.event_start_date < until).OrderBy(p => p.Event.event_start_date).ToList();
+                return records.Where(p => p.Event.event_start_date >= from.Date && p.Event.event_start_date < until).OrderBy(p => p.Event.event_start_date).ToList();
             }
             else
             {
-                return records.Where(p => p.Event.event_start_date >= DateTime.Now.Date && p.Event.event_start_date < until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
+                return records.Where(p => p.Event.event_start_date >= from.Date && p.Event.event_start_date < until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
             }
         }
 

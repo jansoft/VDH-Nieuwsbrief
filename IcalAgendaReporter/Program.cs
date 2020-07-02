@@ -19,13 +19,32 @@ namespace IcalAgendaReporter
                 options.IncludePrivate = commands["include"] == "private";
             }
 
-            if (commands.ContainsKey("until"))
+            if (commands.ContainsKey("weeks"))
             {
-                options.Until = DateTime.Parse(commands["until"]);
+                options.From = DateTime.Now.AddDays(1).Date;
+                options.Until = options.From.AddDays(7 * int.Parse(commands["weeks"])).Date;
             }
             else
             {
-                options.Until = DateTime.Now.AddYears(1);
+
+                if (commands.ContainsKey("from"))
+                {
+                    options.From = DateTime.Parse(commands["from"]);
+
+                }
+                else
+                {
+                    options.From = DateTime.Now;
+                }
+
+                if (commands.ContainsKey("until"))
+                {
+                    options.Until = DateTime.Parse(commands["until"]);
+                }
+                else
+                {
+                    options.Until = DateTime.Now.AddYears(1);
+                }
             }
 
             List<AgendaEvent> eventsToReport;

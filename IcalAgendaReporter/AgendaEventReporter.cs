@@ -211,7 +211,7 @@ namespace IcalAgendaReporter
                 case "consultatiebureau":
                     return HexToColor("ec744e");
                 case "keerkring":
-                    return HexToColor("ba79a0");
+                    return HexToColor("901d6a"); // HexToColor("ba79a0");
                 case "algemeen":
                     return HexToColor("39469D");
                 default:

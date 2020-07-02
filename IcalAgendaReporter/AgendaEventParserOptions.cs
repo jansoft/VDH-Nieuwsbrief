@@ -10,6 +10,7 @@ namespace IcalAgendaReporter
     {
         public bool IncludePrivate { get; set; }
  
+        public DateTime From { get; set; }
         public DateTime Until { get; set; }
 
     }
