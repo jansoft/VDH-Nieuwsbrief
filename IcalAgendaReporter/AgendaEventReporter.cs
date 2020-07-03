@@ -2,6 +2,7 @@
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
 using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +20,7 @@ namespace IcalAgendaReporter
         double topmargin = 35;
         double leftmargin = 25;
         double rightmargin = 25;
-        double bottommargin = 25;
+        double bottommargin = 40; //25;
         double liney = 278.2;
 
         private readonly List<AgendaEvent> eventsToReport;
@@ -78,10 +79,9 @@ namespace IcalAgendaReporter
              // add footer
             var footer = section.Footers.Primary;
 
-            if (showBackground)
-            {
-                AddFooterText(footer, vdhRgbColor);
-            }
+           
+            AddFooterText(footer, vdhRgbColor, showBackground);
+            
 
             
 
@@ -235,63 +235,82 @@ namespace IcalAgendaReporter
             return Color.FromRgb(r, g, b);
         }
 
-        private void AddFooterText(HeaderFooter footer, Color fontcolor)
+        private void AddWebsiteReference(PdfPage page)
         {
             
-            var leftcell = footer.AddTextFrame();
-            leftcell.RelativeVertical =RelativeVertical.Page;
-            leftcell.RelativeHorizontal = RelativeHorizontal.Page;
-            leftcell.Top = Unit.FromMillimeter(280);
-            leftcell.Left = Unit.FromMillimeter(leftmargin);
-            leftcell.Width = Unit.FromMillimeter(80);
-            
-            var rightcell = footer.AddTextFrame();
-            rightcell.RelativeVertical = RelativeVertical.Page;
-            rightcell.RelativeHorizontal = RelativeHorizontal.Page;
-            rightcell.Top = Unit.FromMillimeter(280);
-            rightcell.Width = Unit.FromMillimeter(80);
-            rightcell.Left = Unit.FromMillimeter(210 - rightmargin - 80);
-           
-            var fontname = "Rubik Light";
+        }
 
-            var pf1 = leftcell.AddParagraph();
-            pf1.Format.Font.Color = fontcolor;
-            pf1.Format.Font.Name = "Rubik Medium";
-            pf1.Format.Font.Size = Unit.FromPoint(9);
-            pf1.AddText("Van Dam Huis");
+        private void AddFooterText(HeaderFooter footer, Color fontcolor, bool showBackground)
+        {
+            var notice = footer.AddTextFrame();
+            notice.RelativeVertical = RelativeVertical.Page;
+            notice.RelativeHorizontal = RelativeHorizontal.Page;
+            notice.Top = Unit.FromMillimeter(270);
+            notice.Left = Unit.FromMillimeter(leftmargin);
+            notice.Width = Unit.FromMillimeter(150);
+            var pnotice = notice.AddParagraph();
+            pnotice.AddText("De meest recente agenda vindt u op vandamhuis.nl");
+            pnotice.Format.Font.Name = "Rubik Light";
+            pnotice.Format.Font.Color = fontcolor;
+            pnotice.Format.Font.Size = Unit.FromPoint(10.5);
 
-            
-           
-            var pf2 = leftcell.AddParagraph();
-            pf2.Format.Font.Color = fontcolor;
-            pf2.Format.Font.Name = fontname;
-            pf2.Format.Font.Size = Unit.FromPoint(9);
-            pf2.AddText("Prinsen Bolwerk 3B");
+            if (showBackground)
+            {
+                var leftcell = footer.AddTextFrame();
+                leftcell.RelativeVertical = RelativeVertical.Page;
+                leftcell.RelativeHorizontal = RelativeHorizontal.Page;
+                leftcell.Top = Unit.FromMillimeter(280);
+                leftcell.Left = Unit.FromMillimeter(leftmargin);
+                leftcell.Width = Unit.FromMillimeter(80);
 
-            var pf3 = leftcell.AddParagraph();
-            pf3.Format.Font.Color = fontcolor;
-            pf3.Format.Font.Name = fontname;
-            pf3.Format.Font.Size = Unit.FromPoint(9);
-            pf3.AddText("2011 MA Haarlem");
+                var rightcell = footer.AddTextFrame();
+                rightcell.RelativeVertical = RelativeVertical.Page;
+                rightcell.RelativeHorizontal = RelativeHorizontal.Page;
+                rightcell.Top = Unit.FromMillimeter(280);
+                rightcell.Width = Unit.FromMillimeter(80);
+                rightcell.Left = Unit.FromMillimeter(210 - rightmargin - 80);
 
-            var pf4 = rightcell.AddParagraph();
-            pf4.Format.Font.Color = fontcolor;
-            pf4.Format.Font.Name = fontname;
-            pf4.Format.Font.Size = Unit.FromPoint(9);
-            pf4.AddText("");
+                var fontname = "Rubik Light";
 
-            var pf5 = rightcell.AddParagraph();
-            pf5.Format.Font.Color = fontcolor;
-            pf5.Format.Font.Name = fontname;
-            pf5.Format.Font.Size = Unit.FromPoint(9);
-            pf5.AddText("");
+                var pf1 = leftcell.AddParagraph();
+                pf1.Format.Font.Color = fontcolor;
+                pf1.Format.Font.Name = "Rubik Medium";
+                pf1.Format.Font.Size = Unit.FromPoint(9);
+                pf1.AddText("Van Dam Huis");
 
-            var pf6 = rightcell.AddParagraph();
-            pf6.Format.Font.Color = fontcolor;
-            pf6.Format.Font.Name = fontname;
-            pf6.Format.Font.Size = Unit.FromPoint(9);
-            pf6.Format.Alignment = ParagraphAlignment.Right;
-            pf6.AddText("www.vandamhuis.nl");
+
+
+                var pf2 = leftcell.AddParagraph();
+                pf2.Format.Font.Color = fontcolor;
+                pf2.Format.Font.Name = fontname;
+                pf2.Format.Font.Size = Unit.FromPoint(9);
+                pf2.AddText("Prinsen Bolwerk 3B");
+
+                var pf3 = leftcell.AddParagraph();
+                pf3.Format.Font.Color = fontcolor;
+                pf3.Format.Font.Name = fontname;
+                pf3.Format.Font.Size = Unit.FromPoint(9);
+                pf3.AddText("2011 MA Haarlem");
+
+                var pf4 = rightcell.AddParagraph();
+                pf4.Format.Font.Color = fontcolor;
+                pf4.Format.Font.Name = fontname;
+                pf4.Format.Font.Size = Unit.FromPoint(9);
+                pf4.AddText("");
+
+                var pf5 = rightcell.AddParagraph();
+                pf5.Format.Font.Color = fontcolor;
+                pf5.Format.Font.Name = fontname;
+                pf5.Format.Font.Size = Unit.FromPoint(9);
+                pf5.AddText("");
+
+                var pf6 = rightcell.AddParagraph();
+                pf6.Format.Font.Color = fontcolor;
+                pf6.Format.Font.Name = fontname;
+                pf6.Format.Font.Size = Unit.FromPoint(9);
+                pf6.Format.Alignment = ParagraphAlignment.Right;
+                pf6.AddText("www.vandamhuis.nl");
+            }
 
         }
 

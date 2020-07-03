@@ -26,6 +26,10 @@ weeks=5
 - evenementen worden tot 5 weken vooruit getoond
 - als je weeks gebruikt dan worden from en until genegeerd.
 
+bg=true
+- toont de achtergrond
+- standaard is false
+
 Voorbeelden:
 app\VanDamHuisAgendaReporter.exe 
 app\VanDamHuisAgendaReporter.exe include=private
