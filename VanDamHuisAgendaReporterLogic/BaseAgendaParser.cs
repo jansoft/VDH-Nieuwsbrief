@@ -14,27 +14,33 @@ namespace IcalAgendaReporter
         {
             if (includePrivate)
             {
-                return records.Where(p => p.Event.event_start_date >= from.Date && p.Event.event_start_date < until).OrderBy(p => p.Event.event_start_date).ToList();
+                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= from.Date && p.Event.event_start_date < until).OrderBy(p => p.Event.event_start_date).ToList();
             }
             else
             {
-                return records.Where(p => p.Event.event_start_date >= from.Date && p.Event.event_start_date < until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
+                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= from.Date && p.Event.event_start_date < until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
             }
         }
-
-        protected void ParseReeksen(List<AgendaEvent> events)
+        /// <summary>
+        /// Extracts all RecurrenceEvents
+        /// </summary>
+        /// <param name="events"></param>
+        /// <returns></returns>
+        protected List<AgendaEvent> ParseReeksen(List<AgendaEvent> events)
         {
+            var result = new List<AgendaEvent>();
             foreach (var item in events)
             {
-                var reeks = item.Event.reeks;
-                if (!string.IsNullOrWhiteSpace(reeks))
+                if (item.Event.recurrence == "1")
                 {
-                    if (!allReeksen.ContainsKey(reeks))
-                    {
-                        allReeksen[reeks] = item;
-                    }
+                    allReeksen[item.Event.event_id.ToString()] = item;
+                }
+                else
+                {
+                    result.Add(item);
                 }
             }
+            return result;
         }
 
         protected List<AgendaEvent> ReduceRepeatingEvents(List<AgendaEvent> records)
@@ -44,7 +50,7 @@ namespace IcalAgendaReporter
 
             foreach (var record in records)
             {
-                var reeks = record.Event.reeks;
+                var reeks = record.Event.recurrence_id;//  .reeks;
                 if (string.IsNullOrWhiteSpace(reeks))
                 {
                     result.Add(record);
@@ -54,18 +60,17 @@ namespace IcalAgendaReporter
                     if (!reeksen.ContainsKey(reeks))
                     {
                         reeksen[reeks] = true;
-                        result.Add(record);
+                        var reeksEvent = allReeksen.ContainsKey(reeks) ? allReeksen[reeks] : null;
+                        if (reeksEvent == null && !record.Event.event_private)
+                        {
+                            result.Add(record);
+                        }
+                        else if (!reeksEvent.Event.event_private)
+                        {
+                            record.ReeksInfo = GetReeksInfo(reeksEvent);
+                            result.Add(record);
+                        }
                     }
-                }
-            }
-
-            foreach (var record in result)
-            {
-                var reeks = record.Event.reeks;
-                if (!string.IsNullOrWhiteSpace(reeks))
-                {
-                    var reeksFirst = allReeksen[reeks];
-                    record.ReeksInfo = GetReeksInfo(reeksFirst);
                 }
             }
 

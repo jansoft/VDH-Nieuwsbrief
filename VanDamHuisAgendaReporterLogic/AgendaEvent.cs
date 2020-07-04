@@ -11,6 +11,8 @@ namespace IcalAgendaReporter
         public CsvAgendaEvent Event { get; set; }
         public string ReeksInfo { get; set; }
 
+        public CsvAgendaEvent RecurrenceEvent { get; set; }
+
         public int Interval()
         {
             if (int.TryParse(Event.recurrence_interval, out int value)) {

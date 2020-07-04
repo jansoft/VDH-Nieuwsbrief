@@ -149,7 +149,7 @@ namespace IcalAgendaReporter
 
             var reportpath = GetReportPath();
             renderer.PdfDocument.Save(reportpath);
-            Process.Start(reportpath);
+            //Process.Start(reportpath);
             return reportpath;
         }
 

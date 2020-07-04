@@ -24,24 +24,27 @@ namespace IcalAgendaReporter
         public List<AgendaEvent> GetEventsForReporting()
         {
             var parsedEvents = FetchEvents();
-            var futureEvents = GetFutureEvents(parsedEvents, options.IncludePrivate, options.From, options.Until);
+
+             var futureEvents = GetFutureEvents(parsedEvents, options.IncludePrivate, options.From, options.Until);
             return ReduceRepeatingEvents(futureEvents);
 
         }
 
  
 
-        private List<AgendaEvent> FetchEvents()
+        public List<AgendaEvent> FetchEvents()
         {
             var result = new List<AgendaEvent>();
             var remoteEvents = GetRemoteEvents();
             foreach (var item in remoteEvents)
             {
-                result.Add(new AgendaEvent { Event = item });
+                if (!string.IsNullOrWhiteSpace(item.event_status) && item.event_status != "0")
+                {
+                    result.Add(new AgendaEvent { Event = item });
+                }
             }
 
-            ParseReeksen(result);
-            return result;
+            return ParseReeksen(result);
         }
 
         public List<CsvAgendaEvent> GetRemoteEvents()
