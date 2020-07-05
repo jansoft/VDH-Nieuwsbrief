@@ -37,7 +37,7 @@ namespace IcalAgendaReporter
             ParseReeksen(parsedEvents);
         }
 
-        private List<CsvAgendaEvent> ParseCsv()
+        private List<JsonAgendaEvent> ParseCsv()
         {
             var config = new CsvHelper.Configuration.CsvConfiguration(ciNL);
             config.Delimiter = ";";
@@ -45,7 +45,7 @@ namespace IcalAgendaReporter
             {
                 using (var csv = new CsvHelper.CsvReader(reader, config))
                 {
-                    var records = csv.GetRecords<CsvAgendaEvent>();
+                    var records = csv.GetRecords<JsonAgendaEvent>();
                     return records.ToList();
                 }
                 
@@ -143,11 +143,7 @@ h1 {
 ");
             foreach(var agendaEvent in eventsToReport)
             {
-                var reeksInfo = "";
-                if (!string.IsNullOrWhiteSpace(agendaEvent.Event.reeks) && !string.IsNullOrWhiteSpace(agendaEvent.ReeksInfo) )
-                {
-                    reeksInfo = agendaEvent.ReeksInfo;
-                }
+                var reeksInfo = agendaEvent.ReeksInfo;
                 
                 sb.AppendLine($@"
 <div class='vdh-event {agendaEvent.Event.organisatie}'>

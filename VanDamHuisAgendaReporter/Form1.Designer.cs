@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btGenerateReport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dpFrom = new System.Windows.Forms.DateTimePicker();
@@ -38,7 +39,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.LocationLabel = new System.Windows.Forms.Label();
             this.btOpenLocation = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btGenerateReport
@@ -130,22 +130,11 @@
             this.btOpenLocation.UseVisualStyleBackColor = true;
             this.btOpenLocation.Click += new System.EventHandler(this.btOpenLocation_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(423, 142);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 24);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Test Mamacafe2";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 315);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btOpenLocation);
             this.Controls.Add(this.LocationLabel);
             this.Controls.Add(this.label4);
@@ -156,6 +145,7 @@
             this.Controls.Add(this.dpFrom);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btGenerateReport);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Van Dam Huis Agenda Reporter";
             this.ResumeLayout(false);
@@ -175,7 +165,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LocationLabel;
         private System.Windows.Forms.Button btOpenLocation;
-        private System.Windows.Forms.Button button1;
     }
 }
 

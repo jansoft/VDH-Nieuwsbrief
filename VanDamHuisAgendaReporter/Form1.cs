@@ -50,15 +50,5 @@ namespace VanDamHuisAgendaReporter
                 Process.Start("explorer.exe", argument);
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var logic = new Logic();
-            var parserOptions = new AgendaEventParserOptions();
-            parserOptions.From = dpFrom.Value;
-            parserOptions.Until = dpUntil.Value;
-            var eventsToReport = logic.FetchEvents(parserOptions);
-            var reeksItem = logic.GetEvensInReeks(eventsToReport, "meerlucht");
-        }
     }
 }

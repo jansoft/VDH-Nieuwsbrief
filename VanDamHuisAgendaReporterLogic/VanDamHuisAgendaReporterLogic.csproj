@@ -104,7 +104,7 @@
     <Compile Include="AgendaClient.cs" />
     <Compile Include="AgendaEvent.cs" />
     <Compile Include="BooleanConverter.cs" />
-    <Compile Include="CsvAgendaEvent.cs" />
+    <Compile Include="JsonAgendaEvent.cs" />
     <Compile Include="AgendaEventParserOptions.cs" />
     <Compile Include="AgendaEventReporter.cs" />
     <Compile Include="CommandLineParser.cs" />
@@ -120,9 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

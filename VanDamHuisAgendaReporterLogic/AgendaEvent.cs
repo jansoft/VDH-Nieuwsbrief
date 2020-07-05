@@ -8,10 +8,10 @@ namespace IcalAgendaReporter
 {
     public class AgendaEvent
     {
-        public CsvAgendaEvent Event { get; set; }
-        public string ReeksInfo { get; set; }
+        public JsonAgendaEvent Event { get; set; }
+        public string ReeksInfo { get; set; } = "";
 
-        public CsvAgendaEvent RecurrenceEvent { get; set; }
+        public JsonAgendaEvent RecurrenceEvent { get; set; }
 
         public int Interval()
         {

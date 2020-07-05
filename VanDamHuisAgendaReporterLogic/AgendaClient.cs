@@ -47,14 +47,14 @@ namespace IcalAgendaReporter
             return ParseReeksen(result);
         }
 
-        public List<CsvAgendaEvent> GetRemoteEvents()
+        public List<JsonAgendaEvent> GetRemoteEvents()
         {
             var client = new HttpClient();
             var json = client.GetStringAsync(url).Result;
 
             var settings = new JsonSerializerSettings();
             settings.Converters.Add(new BooleanConverter());
-            return JsonConvert.DeserializeObject<List<CsvAgendaEvent>>(json, settings);
+            return JsonConvert.DeserializeObject<List<JsonAgendaEvent>>(json, settings);
         }
 
     }

@@ -113,12 +113,7 @@ namespace IcalAgendaReporter
 
                 para.AddLineBreak();
 
-                var reeksInfo = "";
-                if (!string.IsNullOrWhiteSpace(agendaEvent.Event.reeks) && !string.IsNullOrWhiteSpace(agendaEvent.ReeksInfo))
-                {
-                    reeksInfo = agendaEvent.ReeksInfo;
-                }
-
+                var reeksInfo = agendaEvent.ReeksInfo;
                 var datetext = para.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}");
             }
 

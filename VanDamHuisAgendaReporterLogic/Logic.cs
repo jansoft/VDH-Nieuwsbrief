@@ -33,20 +33,6 @@ namespace IcalAgendaReporter
             return reporter.Report(showBackground);
         }
 
-        public List<AgendaEvent> GetEvensInReeks(List<AgendaEvent> eventsToReport, string reeks)
-        {
-            var result = new List<AgendaEvent>();
-            foreach(var item in eventsToReport)
-            {
-                if (item.Event.reeks == reeks)
-                {
-                    result.Add(item);
-                }
-            }
-
-            return result;
-        }
-
         private string GetMyDocsAppPath()
         {
             var mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

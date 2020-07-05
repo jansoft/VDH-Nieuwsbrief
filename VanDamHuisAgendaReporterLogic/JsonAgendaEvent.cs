@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace IcalAgendaReporter
 {
-    public class CsvAgendaEvent
+    public class JsonAgendaEvent
     {
         public int event_id { get; set; }
         public string event_name { get; set; }
@@ -24,9 +24,7 @@ namespace IcalAgendaReporter
         public string recurrence_days { get; set; }
         public string organisatie { get; set; }
         public string url { get; set; }
-        public string reeks { get; set; }
         public bool event_private { get; set; }
-
         public string event_status { get; set; }
     }
 }
