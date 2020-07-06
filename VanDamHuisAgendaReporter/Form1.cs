@@ -33,6 +33,7 @@ namespace VanDamHuisAgendaReporter
             var parserOptions = new AgendaEventParserOptions();
             parserOptions.From = dpFrom.Value;
             parserOptions.Until = dpUntil.Value;
+            parserOptions.IncludePrivate = cbPrivate.Checked;
             var eventsToPreport = logic.GetEventsForReporting(parserOptions);
 
             var reportPath = logic.ReportEvents(eventsToPreport, false);
