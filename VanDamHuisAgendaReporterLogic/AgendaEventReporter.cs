@@ -33,7 +33,7 @@ namespace IcalAgendaReporter
         }
 
         
-        public string Report(bool showBackground = false)
+        public string Report(ReporterOptions options)
         {
             var document = new Document();
             document.DefaultPageSetup.TopMargin = Unit.FromMillimeter(topmargin);
@@ -52,7 +52,7 @@ namespace IcalAgendaReporter
             var header = section.Headers.Primary;
             // @"d:\_Jan\Antroposofie\Website\Sanne Schuurman\Logoset\PNG (150x150px)\Logo Van Dam Huis (150x150 px).png"
 
-            if (showBackground)
+            if (options.ShowBackground)
             {
                 AddLogo(header);
             }
@@ -76,11 +76,21 @@ namespace IcalAgendaReporter
             h1.Font.Size = Unit.FromPoint(16);
             h1.Font.Name = "Rubik Medium";
 
-             // add footer
+            if (options.PrivateEventsIncluded)
+            {
+                var psub = agendaframe.AddParagraph();
+                psub.Format.Alignment = ParagraphAlignment.Right;
+                var pscope = psub.AddFormattedText("Voor intern gebruik");
+                pscope.Font.Color = vdhRgbColor;
+                pscope.Font.Size = Unit.FromPoint(12);
+                pscope.Font.Name = "Rubik Light";
+            }
+
+            // add footer
             var footer = section.Footers.Primary;
 
            
-            AddFooterText(footer, vdhRgbColor, showBackground);
+            AddFooterText(footer, vdhRgbColor, options.ShowBackground);
             
 
             
@@ -106,7 +116,8 @@ namespace IcalAgendaReporter
                 para.Format.KeepTogether = true;
                 
                 var hyperlink = para.AddHyperlink(agendaEvent.Event.url, HyperlinkType.Web);
-                var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name);
+                var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
+                var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
                 linktext.Underline = Underline.Single;
                 linktext.Color = Color.FromRgb(53, 90, 162);
                 linktext.Font.Name = "Rubik Medium";
@@ -128,7 +139,7 @@ namespace IcalAgendaReporter
             var vdhColor = XColor.FromArgb(57, 70, 157);
             var vdhPen = new XPen(vdhColor);
 
-            if (showBackground)
+            if (options.ShowBackground)
             {
                 foreach (var page in pdfdoc.Pages)
                 {
@@ -142,7 +153,7 @@ namespace IcalAgendaReporter
                 }
             }
 
-            var reportpath = GetReportPath();
+            var reportpath = GetReportPath(options);
             renderer.PdfDocument.Save(reportpath);
             //Process.Start(reportpath);
             return reportpath;
@@ -309,9 +320,19 @@ namespace IcalAgendaReporter
 
         }
 
-        private string GetReportPath()
+        private string GetReportPath(ReporterOptions options)
         {
-            var reportpath = Path.Combine(reportDirectory, $"Agenda-report-{DateTime.Now:yyyy-MM-dd HHmm}.pdf");
+            var scope = "";
+            if (options.PrivateEventsIncluded)
+            {
+                scope = "voor-intern-gebruik";
+            }
+            else if (options.PublicEventsIncluded)
+            {
+                scope = "voor-publiek-gebruik";
+            }
+             
+            var reportpath = Path.Combine(reportDirectory, $"VDH-Agenda-{scope}-{DateTime.Now:yyyy-MM-dd HHmm}.pdf");
             return reportpath;
 
         }

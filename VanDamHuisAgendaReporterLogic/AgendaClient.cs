@@ -21,11 +21,11 @@ namespace IcalAgendaReporter
         }
 
 
-        public List<AgendaEvent> GetEventsForReporting()
+        public List<AgendaEvent> GetEventsForReporting(AgendaEventParserOptions options)
         {
             var parsedEvents = FetchEvents();
-
-             var futureEvents = GetFutureEvents(parsedEvents, options.IncludePrivate, options.From, options.Until);
+            var futureEvents = GetFutureEvents(parsedEvents, options);
+            //var event166 = futureEvents.FirstOrDefault(p => p.Event.event_id == 166);
             return ReduceRepeatingEvents(futureEvents);
 
         }
@@ -43,6 +43,8 @@ namespace IcalAgendaReporter
                     result.Add(new AgendaEvent { Event = item });
                 }
             }
+
+            var event166 = result.FirstOrDefault(p => p.Event.event_id == 166);
 
             return ParseReeksen(result);
         }

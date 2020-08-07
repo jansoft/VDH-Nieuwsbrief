@@ -9,6 +9,7 @@ namespace IcalAgendaReporter
     public class AgendaEventParserOptions
     {
         public bool IncludePrivate { get; set; }
+        public bool IncludePublic { get; set; }
  
         public DateTime From { get; set; }
         public DateTime Until { get; set; }

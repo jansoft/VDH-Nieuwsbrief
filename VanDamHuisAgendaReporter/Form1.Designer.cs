@@ -35,17 +35,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dpUntil = new System.Windows.Forms.DateTimePicker();
             this.cbShowBackground = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.LocationLabel = new System.Windows.Forms.Label();
             this.btOpenLocation = new System.Windows.Forms.Button();
             this.cbPrivate = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.cbPublic = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btGenerateReport
             // 
-            this.btGenerateReport.Location = new System.Drawing.Point(120, 174);
+            this.btGenerateReport.Location = new System.Drawing.Point(120, 205);
             this.btGenerateReport.Name = "btGenerateReport";
             this.btGenerateReport.Size = new System.Drawing.Size(116, 23);
             this.btGenerateReport.TabIndex = 0;
@@ -90,24 +89,15 @@
             this.cbShowBackground.AutoSize = true;
             this.cbShowBackground.Location = new System.Drawing.Point(120, 110);
             this.cbShowBackground.Name = "cbShowBackground";
-            this.cbShowBackground.Size = new System.Drawing.Size(57, 17);
+            this.cbShowBackground.Size = new System.Drawing.Size(161, 17);
             this.cbShowBackground.TabIndex = 5;
-            this.cbShowBackground.Text = "Tonen";
+            this.cbShowBackground.Text = "Achtergrond tonen in rapport";
             this.cbShowBackground.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Achtergrond";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 220);
+            this.label4.Location = new System.Drawing.Point(69, 251);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 7;
@@ -116,7 +106,7 @@
             // LocationLabel
             // 
             this.LocationLabel.AutoSize = true;
-            this.LocationLabel.Location = new System.Drawing.Point(118, 220);
+            this.LocationLabel.Location = new System.Drawing.Point(118, 251);
             this.LocationLabel.Name = "LocationLabel";
             this.LocationLabel.Size = new System.Drawing.Size(59, 13);
             this.LocationLabel.TabIndex = 8;
@@ -124,7 +114,7 @@
             // 
             // btOpenLocation
             // 
-            this.btOpenLocation.Location = new System.Drawing.Point(120, 249);
+            this.btOpenLocation.Location = new System.Drawing.Point(120, 280);
             this.btOpenLocation.Name = "btOpenLocation";
             this.btOpenLocation.Size = new System.Drawing.Size(75, 23);
             this.btOpenLocation.TabIndex = 9;
@@ -137,31 +127,33 @@
             this.cbPrivate.AutoSize = true;
             this.cbPrivate.Location = new System.Drawing.Point(120, 134);
             this.cbPrivate.Name = "cbPrivate";
-            this.cbPrivate.Size = new System.Drawing.Size(57, 17);
+            this.cbPrivate.Size = new System.Drawing.Size(165, 17);
             this.cbPrivate.TabIndex = 10;
-            this.cbPrivate.Text = "Tonen";
+            this.cbPrivate.Text = "Privé evenementen opnemen";
             this.cbPrivate.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // cbPublic
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(83, 135);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Privé";
+            this.cbPublic.AutoSize = true;
+            this.cbPublic.Checked = true;
+            this.cbPublic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPublic.Location = new System.Drawing.Point(120, 156);
+            this.cbPublic.Name = "cbPublic";
+            this.cbPublic.Size = new System.Drawing.Size(188, 17);
+            this.cbPublic.TabIndex = 13;
+            this.cbPublic.Text = "Openbare evenementen opnemen";
+            this.cbPublic.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 315);
-            this.Controls.Add(this.label5);
+            this.ClientSize = new System.Drawing.Size(668, 351);
+            this.Controls.Add(this.cbPublic);
             this.Controls.Add(this.cbPrivate);
             this.Controls.Add(this.btOpenLocation);
             this.Controls.Add(this.LocationLabel);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.cbShowBackground);
             this.Controls.Add(this.dpUntil);
             this.Controls.Add(this.label2);
@@ -184,12 +176,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dpUntil;
         private System.Windows.Forms.CheckBox cbShowBackground;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LocationLabel;
         private System.Windows.Forms.Button btOpenLocation;
         private System.Windows.Forms.CheckBox cbPrivate;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox cbPublic;
     }
 }
 

@@ -10,15 +10,23 @@ namespace IcalAgendaReporter
     {
         private readonly Dictionary<string, AgendaEvent> allReeksen = new Dictionary<string, AgendaEvent>();
 
-        protected List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records, bool includePrivate, DateTime from, DateTime until)
+        protected List<AgendaEvent> GetFutureEvents(List<AgendaEvent> records, AgendaEventParserOptions options)
         {
-            if (includePrivate)
+            if (options.IncludePrivate && options.IncludePublic)
             {
-                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= from.Date && p.Event.event_start_date < until).OrderBy(p => p.Event.event_start_date).ToList();
+                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= options.From.Date && p.Event.event_start_date < options.Until).OrderBy(p => p.Event.event_start_date).ToList();
+            }
+            else if (options.IncludePrivate && !options.IncludePublic)
+            {
+                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= options.From.Date && p.Event.event_start_date < options.Until && p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
+            }
+            else if (!options.IncludePrivate && options.IncludePublic)
+            {
+                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= options.From.Date && p.Event.event_start_date < options.Until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
             }
             else
             {
-                return records.Where(p => p.Event.recurrence != "1" && p.Event.event_start_date >= from.Date && p.Event.event_start_date < until && !p.Event.event_private).OrderBy(p => p.Event.event_start_date).ToList();
+                return new List<AgendaEvent>();
             }
         }
         /// <summary>
@@ -50,7 +58,7 @@ namespace IcalAgendaReporter
 
             foreach (var record in records)
             {
-                var reeks = record.Event.recurrence_id;//  .reeks;
+                var reeks = record.Event.recurrence_id;
                 if (string.IsNullOrWhiteSpace(reeks))
                 {
                     result.Add(record);
@@ -61,11 +69,11 @@ namespace IcalAgendaReporter
                     {
                         reeksen[reeks] = true;
                         var reeksEvent = allReeksen.ContainsKey(reeks) ? allReeksen[reeks] : null;
-                        if (reeksEvent == null && !record.Event.event_private)
+                        if (reeksEvent == null)
                         {
                             result.Add(record);
                         }
-                        else if (!reeksEvent.Event.event_private)
+                        else 
                         {
                             record.ReeksInfo = GetReeksInfo(reeksEvent);
                             result.Add(record);

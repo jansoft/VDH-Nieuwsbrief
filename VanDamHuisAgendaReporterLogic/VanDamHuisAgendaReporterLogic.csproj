@@ -109,10 +109,10 @@
     <Compile Include="AgendaEventReporter.cs" />
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="Logic.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AgendaEventParser.cs" />
     <Compile Include="BaseAgendaParser.cs" />
+    <Compile Include="ReporterOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

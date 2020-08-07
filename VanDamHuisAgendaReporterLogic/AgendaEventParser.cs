@@ -54,7 +54,7 @@ namespace IcalAgendaReporter
 
         public List<AgendaEvent> GetEventsForReporting()
         {
-            var futureEvents = GetFutureEvents(parsedEvents, options.IncludePrivate, options.From, options.Until);
+            var futureEvents = GetFutureEvents(parsedEvents, options);
             return ReduceRepeatingEvents(futureEvents);
         }
 

@@ -34,9 +34,21 @@ namespace VanDamHuisAgendaReporter
             parserOptions.From = dpFrom.Value;
             parserOptions.Until = dpUntil.Value;
             parserOptions.IncludePrivate = cbPrivate.Checked;
+            parserOptions.IncludePublic = cbPublic.Checked;
+
+            if (!parserOptions.IncludePrivate && ! parserOptions.IncludePublic)
+            {
+                MessageBox.Show("Kies privé of openbare evenementen opnemen of beide", "Maak uw keuze");
+                return;
+            }
+
             var eventsToPreport = logic.GetEventsForReporting(parserOptions);
 
-            var reportPath = logic.ReportEvents(eventsToPreport, false);
+            var reportOptions = new ReporterOptions();
+            reportOptions.ShowBackground = cbShowBackground.Checked;
+            reportOptions.PrivateEventsIncluded = cbPrivate.Checked;
+            reportOptions.PublicEventsIncluded = cbPublic.Checked;
+            var reportPath = logic.ReportEvents(eventsToPreport, reportOptions);
             LocationLabel.Text = reportPath;
 
             Process.Start(reportPath);

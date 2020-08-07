@@ -15,7 +15,7 @@ namespace IcalAgendaReporter
             var eop = DateTime.Now.AddYears(1).ToString("yyyy-MM-dd");
             var url = "https://www.vandamhuis.nl/wp-json/vdh/agenda?bop=" + bop + "&eop=" + eop;
             var client = new AgendaClient(url, options);
-            return client.GetEventsForReporting();
+            return client.GetEventsForReporting(options);
         }
 
         public List<AgendaEvent> FetchEvents(AgendaEventParserOptions options)
@@ -27,10 +27,10 @@ namespace IcalAgendaReporter
             return client.FetchEvents();
         }
 
-        public string ReportEvents(List<AgendaEvent> eventsToReport, bool showBackground)
+        public string ReportEvents(List<AgendaEvent> eventsToReport, ReporterOptions options)
         {
             var reporter = new AgendaEventReporter(eventsToReport, GetMyDocsAppPath());
-            return reporter.Report(showBackground);
+            return reporter.Report(options);
         }
 
         private string GetMyDocsAppPath()
