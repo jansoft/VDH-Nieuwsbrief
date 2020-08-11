@@ -83,6 +83,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VanDamHuisAgendaLogic\VanDamHuisAgendaLogic.csproj">
+      <Project>{61ca03d1-b65e-46cc-a1c5-f6ca4efa0193}</Project>
+      <Name>VanDamHuisAgendaLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VanDamHuisAgendaReporterLogic\VanDamHuisAgendaReporterLogic.csproj">
       <Project>{82f6a2ae-079b-4552-aa90-48717f77c578}</Project>
       <Name>VanDamHuisAgendaReporterLogic</Name>

@@ -1,4 +1,4 @@
-﻿using IcalAgendaReporter;
+﻿using VanDamHuisAgendaLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;

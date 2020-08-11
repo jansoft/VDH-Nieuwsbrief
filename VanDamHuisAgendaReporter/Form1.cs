@@ -1,4 +1,4 @@
-﻿using IcalAgendaReporter;
+﻿using VanDamHuisAgendaLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +29,7 @@ namespace VanDamHuisAgendaReporter
 
         private void btGenerateReport_Click(object sender, EventArgs e)
         {
-            var logic = new Logic();
+            var agendaLogic = new AgendaLogic();
             var parserOptions = new AgendaEventParserOptions();
             parserOptions.From = dpFrom.Value;
             parserOptions.Until = dpUntil.Value;
@@ -42,13 +42,14 @@ namespace VanDamHuisAgendaReporter
                 return;
             }
 
-            var eventsToPreport = logic.GetEventsForReporting(parserOptions);
+            var eventsToPreport = agendaLogic.GetEventsForReporting(parserOptions);
 
+            var reporterLogic = new ReporterLogic();
             var reportOptions = new ReporterOptions();
             reportOptions.ShowBackground = cbShowBackground.Checked;
             reportOptions.PrivateEventsIncluded = cbPrivate.Checked;
             reportOptions.PublicEventsIncluded = cbPublic.Checked;
-            var reportPath = logic.ReportEvents(eventsToPreport, reportOptions);
+            var reportPath = reporterLogic.ReportEvents(eventsToPreport, reportOptions);
             LocationLabel.Text = reportPath;
 
             Process.Start(reportPath);

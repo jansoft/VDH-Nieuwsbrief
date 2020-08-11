@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanDamHuisAgendaReporter", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanDamHuisNieuwsbriefGenerator", "VanDamHuisNieuwsbrief\VanDamHuisNieuwsbriefGenerator.csproj", "{218A8935-E412-48F6-93D4-E65F8EB8BC22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanDamHuisAgendaLogic", "VanDamHuisAgendaLogic\VanDamHuisAgendaLogic.csproj", "{61CA03D1-B65E-46CC-A1C5-F6CA4EFA0193}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{218A8935-E412-48F6-93D4-E65F8EB8BC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218A8935-E412-48F6-93D4-E65F8EB8BC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{218A8935-E412-48F6-93D4-E65F8EB8BC22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CA03D1-B65E-46CC-A1C5-F6CA4EFA0193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CA03D1-B65E-46CC-A1C5-F6CA4EFA0193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CA03D1-B65E-46CC-A1C5-F6CA4EFA0193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CA03D1-B65E-46CC-A1C5-F6CA4EFA0193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

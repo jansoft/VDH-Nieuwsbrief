@@ -101,17 +101,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgendaClient.cs" />
-    <Compile Include="AgendaEvent.cs" />
-    <Compile Include="BooleanConverter.cs" />
-    <Compile Include="JsonAgendaEvent.cs" />
-    <Compile Include="AgendaEventParserOptions.cs" />
     <Compile Include="AgendaEventReporter.cs" />
     <Compile Include="CommandLineParser.cs" />
-    <Compile Include="Logic.cs" />
+    <Compile Include="ReporterLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AgendaEventParser.cs" />
-    <Compile Include="BaseAgendaParser.cs" />
     <Compile Include="ReporterOptions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +115,12 @@
     <Content Include="Assets\Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VanDamHuisAgendaLogic\VanDamHuisAgendaLogic.csproj">
+      <Project>{61ca03d1-b65e-46cc-a1c5-f6ca4efa0193}</Project>
+      <Name>VanDamHuisAgendaLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

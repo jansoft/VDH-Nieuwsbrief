@@ -13,7 +13,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IcalAgendaReporter
+namespace VanDamHuisAgendaLogic
 {
     public class AgendaEventReporter
     {

@@ -1,4 +1,4 @@
-﻿using IcalAgendaReporter;
+﻿using VanDamHuisAgendaLogic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+
 
 namespace VanDamHuisNieuwsbriefGenerator
 {
@@ -48,7 +49,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private List<AgendaEvent> GetAgenda()
         {
-            var logic = new Logic();
+            var logic = new AgendaLogic();
             var parserOptions = new AgendaEventParserOptions();
             parserOptions.From = dpAgendaVanaf.Value;
             parserOptions.Until = dpAgendaTot.Value;
