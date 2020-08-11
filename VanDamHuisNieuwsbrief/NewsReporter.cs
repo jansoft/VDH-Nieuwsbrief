@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IcalAgendaReporter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Globalization;
@@ -15,7 +16,10 @@ namespace VanDamHuisNieuwsbriefGenerator
         private CultureInfo ciNL = new CultureInfo("nl-NL");
 
         private const string header = @"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
-<style>
+</head><body>
+<section class='nieuwsbrief'>";
+
+        private const string style = @"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
 html, p {
     font-family: 'Rubik', sans-serif;
@@ -52,19 +56,31 @@ section.nieuwsbrief {
 article {
     margin-bottom: 2em;
 }
-</style>
-</head><body>
-<section class='nieuwsbrief'>";
 
-        public string GenerateNewsLetterReport(NewsLetter newsLetter, bool forPrint)
+
+</style>";
+
+        public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, bool forPrint)
         {
             var sb = new StringBuilder();
             sb.AppendLine(header);
+
+            if (agenda.Count > 0)
+            {
+                sb.AppendLine($"<h1 style='color:#39469d'>Agenda</h1>");
+                sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
+                foreach (var item in agenda)
+                {
+                    sb.AppendLine($"<div class='event'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}; {item.Event.organisatie}</span></div>");
+                }
+            }
 
             foreach (var organization in newsLetter.Organizations)
             {
                 sb.AppendLine(GenerateOrganizationReport(organization, forPrint));
             }
+
+            sb.AppendLine(style);
 
             sb.AppendLine("</section></body></html>");
 

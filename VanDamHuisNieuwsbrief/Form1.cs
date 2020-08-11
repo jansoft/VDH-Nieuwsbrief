@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using IcalAgendaReporter;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,13 +23,17 @@ namespace VanDamHuisNieuwsbriefGenerator
         {
             InitializeComponent();
             DateFromPicker.Value = DateTime.Now.AddMonths(-1);
+            dpAgendaVanaf.Value = DateTime.Now;
+            dpAgendaTot.Value = DateTime.Now.AddMonths(2);
  
         }
 
         private FeedLoader loader = new FeedLoader();
         private List<Organization> organizations = new List<Organization>();
         private NewsReporter reporter = new NewsReporter();
-                private NewsLetter LoadNewsFeeds(string after, int maxPosts, bool nieuwsbriefOnly)
+        
+
+        private NewsLetter LoadNewsFeeds(string after, int maxPosts, bool nieuwsbriefOnly)
         {
             var newsLetter = new NewsLetter();
             newsLetter.Organizations = LoadOrganizations();
@@ -39,6 +44,17 @@ namespace VanDamHuisNieuwsbriefGenerator
                 loader.LoadFeed(organization, nieuwsbriefOnly);
             }
             return newsLetter;
+        }
+
+        private List<AgendaEvent> GetAgenda()
+        {
+            var logic = new Logic();
+            var parserOptions = new AgendaEventParserOptions();
+            parserOptions.From = dpAgendaVanaf.Value;
+            parserOptions.Until = dpAgendaTot.Value;
+            parserOptions.IncludePrivate = false;
+            parserOptions.IncludePublic = true;
+            return logic.GetEventsForReporting(parserOptions);
         }
  
         private string GetAfter()
@@ -65,7 +81,13 @@ namespace VanDamHuisNieuwsbriefGenerator
         {
             var newsLetter = LoadNewsFeeds(GetAfter(), GetMaxPosts(), true);
 
-            var html = reporter.GenerateNewsLetterReport(newsLetter, rbpaper.Checked);
+            List<AgendaEvent> agenda = new List<AgendaEvent>();
+            if (cbAgenda.Checked)
+            {
+                agenda = GetAgenda();
+            }
+
+            var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, rbpaper.Checked);
             var reportPath = reporter.GetReportPath();
             File.WriteAllText(reportPath, html, Encoding.UTF8);
 

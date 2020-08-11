@@ -36,8 +36,13 @@
             this.DocPathValue = new System.Windows.Forms.Label();
             this.DateFromPicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbdigital = new System.Windows.Forms.RadioButton();
             this.rbpaper = new System.Windows.Forms.RadioButton();
+            this.rbdigital = new System.Windows.Forms.RadioButton();
+            this.cbAgenda = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dpAgendaTot = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dpAgendaVanaf = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +61,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 21;
-            this.label1.Text = "Datum vanaf";
+            this.label1.Text = "Nieuwsbrief vanaf";
             // 
             // label2
             // 
@@ -103,6 +108,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Genereer voor";
             // 
+            // rbpaper
+            // 
+            this.rbpaper.AutoSize = true;
+            this.rbpaper.Location = new System.Drawing.Point(139, 29);
+            this.rbpaper.Name = "rbpaper";
+            this.rbpaper.Size = new System.Drawing.Size(122, 17);
+            this.rbpaper.TabIndex = 1;
+            this.rbpaper.Text = "papieren nieuwsbrief";
+            this.rbpaper.UseVisualStyleBackColor = true;
+            // 
             // rbdigital
             // 
             this.rbdigital.AutoSize = true;
@@ -115,21 +130,58 @@
             this.rbdigital.Text = "digitale nieuwsbrief";
             this.rbdigital.UseVisualStyleBackColor = true;
             // 
-            // rbpaper
+            // cbAgenda
             // 
-            this.rbpaper.AutoSize = true;
-            this.rbpaper.Location = new System.Drawing.Point(139, 29);
-            this.rbpaper.Name = "rbpaper";
-            this.rbpaper.Size = new System.Drawing.Size(122, 17);
-            this.rbpaper.TabIndex = 1;
-            this.rbpaper.Text = "papieren nieuwsbrief";
-            this.rbpaper.UseVisualStyleBackColor = true;
+            this.cbAgenda.AutoSize = true;
+            this.cbAgenda.Location = new System.Drawing.Point(264, 103);
+            this.cbAgenda.Name = "cbAgenda";
+            this.cbAgenda.Size = new System.Drawing.Size(110, 17);
+            this.cbAgenda.TabIndex = 33;
+            this.cbAgenda.Text = "Agenda opnemen";
+            this.cbAgenda.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(468, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Agenda tot";
+            // 
+            // dpAgendaTot
+            // 
+            this.dpAgendaTot.Location = new System.Drawing.Point(471, 51);
+            this.dpAgendaTot.Name = "dpAgendaTot";
+            this.dpAgendaTot.Size = new System.Drawing.Size(200, 20);
+            this.dpAgendaTot.TabIndex = 35;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(244, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "Agenda vanaf";
+            // 
+            // dpAgendaVanaf
+            // 
+            this.dpAgendaVanaf.Location = new System.Drawing.Point(247, 51);
+            this.dpAgendaVanaf.Name = "dpAgendaVanaf";
+            this.dpAgendaVanaf.Size = new System.Drawing.Size(200, 20);
+            this.dpAgendaVanaf.TabIndex = 37;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 314);
+            this.ClientSize = new System.Drawing.Size(749, 314);
+            this.Controls.Add(this.dpAgendaVanaf);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dpAgendaTot);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cbAgenda);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DateFromPicker);
             this.Controls.Add(this.DocPathValue);
@@ -158,6 +210,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbpaper;
         private System.Windows.Forms.RadioButton rbdigital;
+        private System.Windows.Forms.CheckBox cbAgenda;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dpAgendaTot;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dpAgendaVanaf;
     }
 }
 
