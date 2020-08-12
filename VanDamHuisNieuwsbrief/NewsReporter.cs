@@ -23,7 +23,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
 html, p {
     font-family: 'Rubik', sans-serif;
-    font-size: 16pt;
+    font-size: 12pt;
     font-weight: 300;
 }
 
@@ -57,6 +57,40 @@ article {
     margin-bottom: 2em;
 }
 
+.event {
+	padding-left: 0.25em;
+	border-left-style: solid;
+	border-left-width: 5px;
+	margin-bottom: 0.25em;
+}
+
+.legend {
+    display: inline-block;
+    padding-left: 0.25em;
+	border-left-style: solid;
+	border-left-width: 5px;
+    margin-right: 1em;
+}
+
+.algemeen {
+	border-left-color: #39469D;
+}
+
+.therapeuticum {
+	border-left-color: #2396c9;
+}
+
+.vereniging {
+	border-left-color: #DE557D;
+}
+
+.keerkring {
+	border-left-color: #ba79a0;
+}
+
+.consultatiebureau {
+	border-left-color: #ec744e
+}
 
 </style>";
 
@@ -69,9 +103,10 @@ article {
             {
                 sb.AppendLine($"<h1 style='color:#39469d'>Agenda</h1>");
                 sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
+                sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span>");
                 foreach (var item in agenda)
                 {
-                    sb.AppendLine($"<div class='event'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}; {item.Event.organisatie}</span></div>");
+                    sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
                 }
             }
 
