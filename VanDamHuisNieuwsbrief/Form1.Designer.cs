@@ -43,12 +43,16 @@
             this.dpAgendaTot = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dpAgendaVanaf = new System.Windows.Forms.DateTimePicker();
+            this.cbPaperLinks = new System.Windows.Forms.CheckBox();
+            this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 229);
+            this.button1.Location = new System.Drawing.Point(30, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 28;
@@ -84,7 +88,7 @@
             // DocPathValue
             // 
             this.DocPathValue.AutoSize = true;
-            this.DocPathValue.Location = new System.Drawing.Point(30, 259);
+            this.DocPathValue.Location = new System.Drawing.Point(30, 379);
             this.DocPathValue.Name = "DocPathValue";
             this.DocPathValue.Size = new System.Drawing.Size(42, 13);
             this.DocPathValue.TabIndex = 29;
@@ -101,7 +105,7 @@
             // 
             this.groupBox1.Controls.Add(this.rbpaper);
             this.groupBox1.Controls.Add(this.rbdigital);
-            this.groupBox1.Location = new System.Drawing.Point(30, 139);
+            this.groupBox1.Location = new System.Drawing.Point(30, 259);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(378, 66);
             this.groupBox1.TabIndex = 32;
@@ -133,7 +137,7 @@
             // cbAgenda
             // 
             this.cbAgenda.AutoSize = true;
-            this.cbAgenda.Location = new System.Drawing.Point(264, 103);
+            this.cbAgenda.Location = new System.Drawing.Point(6, 19);
             this.cbAgenda.Name = "cbAgenda";
             this.cbAgenda.Size = new System.Drawing.Size(110, 17);
             this.cbAgenda.TabIndex = 33;
@@ -172,16 +176,48 @@
             this.dpAgendaVanaf.Size = new System.Drawing.Size(200, 20);
             this.dpAgendaVanaf.TabIndex = 37;
             // 
+            // cbPaperLinks
+            // 
+            this.cbPaperLinks.AutoSize = true;
+            this.cbPaperLinks.Location = new System.Drawing.Point(6, 65);
+            this.cbPaperLinks.Name = "cbPaperLinks";
+            this.cbPaperLinks.Size = new System.Drawing.Size(168, 17);
+            this.cbPaperLinks.TabIndex = 38;
+            this.cbPaperLinks.Text = "Links in papieren nieuwsbrief?";
+            this.cbPaperLinks.UseVisualStyleBackColor = true;
+            // 
+            // cbNewsPubdate
+            // 
+            this.cbNewsPubdate.AutoSize = true;
+            this.cbNewsPubdate.Location = new System.Drawing.Point(6, 42);
+            this.cbNewsPubdate.Name = "cbNewsPubdate";
+            this.cbNewsPubdate.Size = new System.Drawing.Size(190, 17);
+            this.cbNewsPubdate.TabIndex = 39;
+            this.cbNewsPubdate.Text = "Publicatiedatum nieuws opnemen?";
+            this.cbNewsPubdate.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbAgenda);
+            this.groupBox2.Controls.Add(this.cbPaperLinks);
+            this.groupBox2.Controls.Add(this.cbNewsPubdate);
+            this.groupBox2.Location = new System.Drawing.Point(30, 139);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(394, 100);
+            this.groupBox2.TabIndex = 40;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Inhoud";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 314);
+            this.ClientSize = new System.Drawing.Size(724, 434);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dpAgendaVanaf);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dpAgendaTot);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cbAgenda);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DateFromPicker);
             this.Controls.Add(this.DocPathValue);
@@ -194,6 +230,8 @@
             this.Text = "Van Dam Huis nieuwsbrief generator ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,6 +253,9 @@
         private System.Windows.Forms.DateTimePicker dpAgendaTot;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dpAgendaVanaf;
+        private System.Windows.Forms.CheckBox cbPaperLinks;
+        private System.Windows.Forms.CheckBox cbNewsPubdate;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

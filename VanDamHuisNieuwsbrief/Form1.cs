@@ -88,7 +88,12 @@ namespace VanDamHuisNieuwsbriefGenerator
                 agenda = GetAgenda();
             }
 
-            var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, rbpaper.Checked);
+            var options = new NewsReporterOptions();
+            options.ForPrint = rbpaper.Checked;
+            options.PrintLinks = cbPaperLinks.Checked;
+            options.IncludeNewsPublicationDate = cbNewsPubdate.Checked;
+
+            var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();
             File.WriteAllText(reportPath, html, Encoding.UTF8);
 

@@ -101,9 +101,13 @@ section.agenda {
     margin-bottom: 2em;
 }
 
+span.title {
+    font-weight:500;
+}
+
 </style>";
 
-        public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, bool forPrint)
+        public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
             sb.AppendLine(header);
@@ -112,18 +116,34 @@ section.agenda {
             {
                 sb.AppendLine("<section class='agenda'>");
                 sb.AppendLine($"<h1 style='color:#39469d'>Agenda</h1>");
-                sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
-                sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span></p>");
+                if (options.ForPrint)
+                {
+                    sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
+                }
+                else
+                {
+                    sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
+                }
+                if (!options.ForPrint)
+                {
+                    sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span></p>");
+                }
                 foreach (var item in agenda)
                 {
+                    if (options.ForPrint)
+                    {
+                        sb.AppendLine($"<p><b>{item.Event.event_name}</b><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span><br>{item.Event.organisatie}</p>");
+                    }
+                    else { 
                     sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
+                    }
                 }
                 sb.AppendLine("</section>");
             }
 
             foreach (var organization in newsLetter.Organizations)
             {
-                sb.AppendLine(GenerateOrganizationReport(organization, forPrint));
+                sb.AppendLine(GenerateOrganizationReport(organization, options));
             }
 
             sb.AppendLine(style);
@@ -139,59 +159,40 @@ section.agenda {
 
         }
 
-        public string GenerateOrganizationReport(Organization organization, bool forPrint, bool asPage = false)
+        public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            if (asPage)
-            {
-                sb.AppendLine(header);
-            }
+ 
             sb.AppendLine($"<h1 style='color:{organization.Color}'>{organization.Name}</h1>");
             foreach (var item in organization.NewsItems)
             {
-                sb.AppendLine(GetNewsItemHtml(item, forPrint));
-            }
-            if (asPage)
-            {
-                sb.AppendLine("</section></body></html>");
+                sb.AppendLine(GetNewsItemHtml(item, options));
             }
             return sb.ToString();
         }
 
-        public string GenerateNewsItemReport(NewsItem newsItem, bool includeLinkToPost, bool asPage = false)
-        {
-            var sb = new StringBuilder();
-            if (asPage)
-            {
-                sb.AppendLine(header);
-            }
-            
-            sb.AppendLine(GetNewsItemHtml(newsItem, includeLinkToPost));
-
-            if (asPage)
-            {
-                sb.AppendLine("</section></body></html>");
-            }
-            var html = sb.ToString();
-
-            return html;
-        }
-
-        private string GetNewsItemHtml(NewsItem item, bool forPrint)
+ 
+        private string GetNewsItemHtml(NewsItem item, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
             sb.Append("<article>");
 
-            if (!forPrint)
+            if (!options.ForPrint)
             {
                 sb.Append($"<a href='{item.Url}'><h2>{item.Title}</h2></a>");
             }
             else
             {
-                sb.Append($"<h2>{item.Title}</h2>");
-                sb.Append($"<p>{item.Url}</p>");
+                sb.Append($"<p><b>{item.Title}</b></p>");
+                if (options.PrintLinks)
+                {
+                    sb.Append($"<p>{item.Url}</p>");
+                }
             }
-            sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
+            if (options.IncludeNewsPublicationDate)
+            {
+                sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
+            }
              sb.Append("<div class='content'>" + item.Content + "</div>");
             sb.Append("</article>");
 

@@ -68,6 +68,7 @@
     <Compile Include="NewsItem.cs" />
     <Compile Include="NewsLetter.cs" />
     <Compile Include="NewsReporter.cs" />
+    <Compile Include="NewsReporterOptions.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostText.cs" />
