@@ -25,14 +25,15 @@ html, p {
     font-family: 'Rubik', sans-serif;
     font-size: 12pt;
     font-weight: 300;
+    color: #222;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 h1, h2, h3 {
@@ -41,6 +42,10 @@ h1, h2, h3 {
 
 b, strong {
     font-weight:500;
+}
+
+a {
+    color: #222 !important;
 }
 
 section.nieuwsbrief {
@@ -92,6 +97,10 @@ article {
 	border-left-color: #ec744e
 }
 
+section.agenda {
+    margin-bottom: 2em;
+}
+
 </style>";
 
         public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, bool forPrint)
@@ -101,13 +110,15 @@ article {
 
             if (agenda.Count > 0)
             {
+                sb.AppendLine("<section class='agenda'>");
                 sb.AppendLine($"<h1 style='color:#39469d'>Agenda</h1>");
                 sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
-                sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span>");
+                sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span></p>");
                 foreach (var item in agenda)
                 {
                     sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
                 }
+                sb.AppendLine("</section>");
             }
 
             foreach (var organization in newsLetter.Organizations)
