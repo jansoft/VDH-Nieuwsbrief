@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace VanDamHuisNieuwsbriefGenerator
 {
@@ -193,10 +194,22 @@ span.title {
             {
                 sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
             }
-             sb.Append("<div class='content'>" + item.Content + "</div>");
+            if (options.ForPrint)
+            {
+                sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
+            }
+            else
+            {
+                sb.Append("<div class='content'>" + item.Content + "</div>");
+            }
             sb.Append("</article>");
 
             return sb.ToString();
+        }
+
+        private string Unlink(string source)
+        {
+            return Regex.Replace(source, @"<a[^>]+>([^<]+)</a>", "$1");
         }
 
         private string GetOutPutPath()
