@@ -61,6 +61,7 @@ section.nieuwsbrief {
 
 article {
     margin-bottom: 2em;
+    margin-top:1em;
 }
 
 .event {
@@ -163,8 +164,9 @@ span.title {
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
- 
+            sb.AppendLine("<p>&nbsp;</p>");
             sb.AppendLine($"<h1 style='color:{organization.Color}'>{organization.Name}</h1>");
+            sb.AppendLine("<p>&nbsp;</p>");
             foreach (var item in organization.NewsItems)
             {
                 sb.AppendLine(GetNewsItemHtml(item, options));
