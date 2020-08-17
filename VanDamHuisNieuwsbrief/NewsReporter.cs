@@ -30,15 +30,15 @@ html, p, section.nieuwsbrief * {
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 1.5em !important;
 }
 
 h2 {
-    font-size: 1.2em;
+    font-size: 1.2em !important;
 }
 
 h1, h2, h3 {
-    font-weight:300;
+    font-weight:300 !important;
 }
 
 b, strong {
@@ -109,11 +109,8 @@ span.title {
 
 </style>";
 
-        public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
+        private void RenderAgenda(StringBuilder sb, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine(header);
-
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
@@ -136,16 +133,34 @@ span.title {
                     {
                         sb.AppendLine($"<p><b>{item.Event.event_name}</b><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span><br>{item.Event.organisatie}</p>");
                     }
-                    else { 
-                    sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
+                    else
+                    {
+                        sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
                     }
                 }
                 sb.AppendLine("</section>");
             }
 
+        }
+
+        public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(header);
+
+            if (options.IncludeAgenda && options.AgendaVooraan)
+            {
+                RenderAgenda(sb, agenda, options);
+            }
+
             foreach (var organization in newsLetter.Organizations)
             {
                 sb.AppendLine(GenerateOrganizationReport(organization, options));
+            }
+
+            if (options.IncludeAgenda && !options.AgendaVooraan)
+            {
+                RenderAgenda(sb, agenda, options);
             }
 
             sb.AppendLine(style);

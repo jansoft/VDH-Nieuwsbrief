@@ -1,24 +1,24 @@
 ﻿[
     {
-        Name : "Gezondheidscentrum Therapeuticum Haarlem",
-        Color : "#2396C9",
-        Url : "https://www.therapeuticumhaarlem.nl",
-        Categories: "47"
+      "Name": "Van Dam Huis",
+      "Color": "#39469d",
+      "Url": "https://www.vandamhuis.nl",
+      "Categories": "13"
     },
+    {
+        "Name" : "Gezondheidscentrum Therapeuticum Haarlem",
+        "Color" : "#2396C9",
+        "Url" : "https://www.therapeuticumhaarlem.nl",
+        "Categories": "47"
+    },
+    {
+      "Name": "Antroposofische Vereniging Haarlem",
+      "Color": "#de557d",
+      "Url": "https://www.antroposofiehaarlem.nl",
+      "Categories": "46"
+    }
 
-  {
-    Name: "Antroposofische Vereniging Haarlem",
-    Color: "#de557d",
-    Url: "https://www.antroposofiehaarlem.nl",
-    Categories: "46"
-  },
 
-  {
-    "Name": "Van Dam Huis",
-    "Color": "#39469d",
-    "Url": "https://www.vandamhuis.nl",
-    "Categories": "13"
-  }
 ]
 
 // Categories: een comma gescheiden lijst van categorie id (integer). Indien leeg wordt er niet gefilterd op categorie.

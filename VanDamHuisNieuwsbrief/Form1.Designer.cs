@@ -46,8 +46,12 @@
             this.cbPaperLinks = new System.Windows.Forms.CheckBox();
             this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rbAgendaVooraan = new System.Windows.Forms.RadioButton();
+            this.rbAchteraan = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -107,7 +111,7 @@
             this.groupBox1.Controls.Add(this.rbdigital);
             this.groupBox1.Location = new System.Drawing.Point(30, 259);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(378, 66);
+            this.groupBox1.Size = new System.Drawing.Size(273, 66);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Genereer voor";
@@ -203,16 +207,51 @@
             this.groupBox2.Controls.Add(this.cbNewsPubdate);
             this.groupBox2.Location = new System.Drawing.Point(30, 139);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(394, 100);
+            this.groupBox2.Size = new System.Drawing.Size(641, 100);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inhoud";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rbAchteraan);
+            this.groupBox3.Controls.Add(this.rbAgendaVooraan);
+            this.groupBox3.Location = new System.Drawing.Point(334, 259);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(299, 66);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Agenda positie";
+            // 
+            // rbAgendaVooraan
+            // 
+            this.rbAgendaVooraan.AutoSize = true;
+            this.rbAgendaVooraan.Checked = true;
+            this.rbAgendaVooraan.Location = new System.Drawing.Point(18, 29);
+            this.rbAgendaVooraan.Name = "rbAgendaVooraan";
+            this.rbAgendaVooraan.Size = new System.Drawing.Size(65, 17);
+            this.rbAgendaVooraan.TabIndex = 0;
+            this.rbAgendaVooraan.TabStop = true;
+            this.rbAgendaVooraan.Text = "Vooraan";
+            this.rbAgendaVooraan.UseVisualStyleBackColor = true;
+            // 
+            // rbAchteraan
+            // 
+            this.rbAchteraan.AutoSize = true;
+            this.rbAchteraan.Location = new System.Drawing.Point(98, 29);
+            this.rbAchteraan.Name = "rbAchteraan";
+            this.rbAchteraan.Size = new System.Drawing.Size(74, 17);
+            this.rbAchteraan.TabIndex = 1;
+            this.rbAchteraan.TabStop = true;
+            this.rbAchteraan.Text = "Achteraan";
+            this.rbAchteraan.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 434);
+            this.ClientSize = new System.Drawing.Size(724, 425);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dpAgendaVanaf);
             this.Controls.Add(this.label4);
@@ -232,6 +271,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +297,9 @@
         private System.Windows.Forms.CheckBox cbPaperLinks;
         private System.Windows.Forms.CheckBox cbNewsPubdate;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton rbAchteraan;
+        private System.Windows.Forms.RadioButton rbAgendaVooraan;
     }
 }
 
