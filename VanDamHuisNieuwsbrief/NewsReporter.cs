@@ -22,7 +22,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private const string style = @"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
-html, p {
+html, p, section.nieuwsbrief * {
     font-family: 'Rubik', sans-serif;
     font-size: 12pt;
     font-weight: 300;
