@@ -63,24 +63,14 @@ namespace VanDamHuisNieuwsbriefGenerator
             return DateFromPicker.Value.ToString("yyyy-MM-ddT00:00:00");
         }
 
-        private int GetMaxPosts()
-        {
-            if (int.TryParse(tbMaxPosts.Text, out int max))
-            {
-                return max;
-            }
-            return 15;
-        }
-
- 
-        private string Decode(string value)
+         private string Decode(string value)
         {
             return WebUtility.HtmlDecode(value);
         }
 
         private void GenerateHtml(object sender, EventArgs e)
         {
-            var newsLetter = LoadNewsFeeds(GetAfter(), GetMaxPosts(), true);
+            var newsLetter = LoadNewsFeeds(GetAfter(), Convert.ToInt32(MaxPosts.Value), true);
 
             List<AgendaEvent> agenda = new List<AgendaEvent>();
             if (cbAgenda.Checked)
@@ -94,6 +84,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.IncludeNewsPublicationDate = cbNewsPubdate.Checked;
             options.IncludeAgenda = cbAgenda.Checked;
             options.AgendaVooraan = rbAgendaVooraan.Checked;
+            options.LargeFont = rb12pt.Checked;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();

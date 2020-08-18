@@ -17,82 +17,6 @@ namespace VanDamHuisNieuwsbriefGenerator
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
 
-        
-
-        private const string style = @"<style>
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
-html, p, section.nieuwsbrief * {
-    font-family: 'Rubik', sans-serif;
-    font-size: 10.5pt;
-    font-weight: 300;
-    color: #222;
-}
-
-h1 {
-    font-size: 14pt !important;
-}
-
-h2 {
-    font-size: 12pt !important;
-}
-
-h1, h2, h3 {
-    font-weight:300 !important;
-}
-
-b, strong {
-    font-weight:500;
-}
-
-a {
-    color: #222 !important;
-}
-
-section.nieuwsbrief {
-    width: 1000px;
-    max-width:100%;
-    box-sizing: border-box;
-    padding-left:2em;
-    padding-right: 2em;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-article {
-    margin-bottom: 2em;
-    margin-top:1em;
-}
-
-span.bar.algemeen {
-    color: #39469D !important;
-}
-
-span.bar.therapeuticum {
-	color: #2396c9 !important;
-}
-
-span.bar.vereniging {
-	color: #DE557D !important;
-}
-
-span.bar.keerkring {
-	color: #ba79a0 !important;
-}
-
-span.bar.consultatiebureau {
-	color: #ec744e !important;
-}
-
-section.agenda {
-    margin-bottom: 2em;
-}
-
-span.title {
-    font-weight:500;
-}
-
-</style>";
-
         private void RenderAgenda(StringBuilder sb, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
             if (agenda.Count > 0)
@@ -135,7 +59,87 @@ span.title {
             sb.AppendLine($@"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
 </head><body>
 <section class='nieuwsbrief {media}'>");
-    }
+        }
+
+        private void RenderStyle(StringBuilder sb, NewsReporterOptions options)
+        {
+            var fp = options.LargeFont ? "12pt" : "10.5pt";
+            var fh1 = options.LargeFont ? "16pt" : "14pt";
+            var fh2 = options.LargeFont ? "14pt" : "12pt";
+            sb.AppendLine($@"<style>
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
+html, p, section.nieuwsbrief * {{
+    font-family: 'Rubik', sans-serif;
+    font-size: {fp};
+    font-weight: 300;
+    color: #222;
+}}
+
+h1 {{
+    font-size: {fh1} !important;
+}}
+
+h2 {{
+    font-size: {fh2} !important;
+}}
+
+h1, h2, h3 {{
+    font-weight:300 !important;
+}}
+
+b, strong {{
+    font-weight:500;
+}}
+
+a {{
+    color: #222 !important;
+}}
+
+section.nieuwsbrief {{
+    width: 1000px;
+    max-width:100%;
+    box-sizing: border-box;
+    padding-left:2em;
+    padding-right: 2em;
+    margin-left:auto;
+    margin-right:auto;
+}}
+
+article {{
+    margin-bottom: 2em;
+    margin-top:1em;
+}}
+
+span.bar.algemeen {{
+    color: #39469D !important;
+}}
+
+span.bar.therapeuticum {{
+	color: #2396c9 !important;
+}}
+
+span.bar.vereniging {{
+	color: #DE557D !important;
+}}
+
+span.bar.keerkring {{
+	color: #ba79a0 !important;
+}}
+
+span.bar.consultatiebureau {{
+	color: #ec744e !important;
+}}
+
+section.agenda {{
+    margin-bottom: 2em;
+}}
+
+span.title {{
+    font-weight:500;
+}}
+
+</style>");
+        }
 
         public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
@@ -158,7 +162,8 @@ span.title {
                 RenderAgenda(sb, agenda, options);
             }
 
-            sb.AppendLine(style);
+            RenderStyle(sb, options);
+            
 
             sb.AppendLine("</section></body></html>");
 
