@@ -47,8 +47,8 @@
             this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rbAgendaVooraan = new System.Windows.Forms.RadioButton();
             this.rbAchteraan = new System.Windows.Forms.RadioButton();
+            this.rbAgendaVooraan = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -223,6 +223,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Agenda positie";
             // 
+            // rbAchteraan
+            // 
+            this.rbAchteraan.AutoSize = true;
+            this.rbAchteraan.Location = new System.Drawing.Point(98, 29);
+            this.rbAchteraan.Name = "rbAchteraan";
+            this.rbAchteraan.Size = new System.Drawing.Size(74, 17);
+            this.rbAchteraan.TabIndex = 1;
+            this.rbAchteraan.TabStop = true;
+            this.rbAchteraan.Text = "Achteraan";
+            this.rbAchteraan.UseVisualStyleBackColor = true;
+            // 
             // rbAgendaVooraan
             // 
             this.rbAgendaVooraan.AutoSize = true;
@@ -234,17 +245,6 @@
             this.rbAgendaVooraan.TabStop = true;
             this.rbAgendaVooraan.Text = "Vooraan";
             this.rbAgendaVooraan.UseVisualStyleBackColor = true;
-            // 
-            // rbAchteraan
-            // 
-            this.rbAchteraan.AutoSize = true;
-            this.rbAchteraan.Location = new System.Drawing.Point(98, 29);
-            this.rbAchteraan.Name = "rbAchteraan";
-            this.rbAchteraan.Size = new System.Drawing.Size(74, 17);
-            this.rbAchteraan.TabIndex = 1;
-            this.rbAchteraan.TabStop = true;
-            this.rbAchteraan.Text = "Achteraan";
-            this.rbAchteraan.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

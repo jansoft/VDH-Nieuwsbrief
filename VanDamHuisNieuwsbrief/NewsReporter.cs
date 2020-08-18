@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Linq.Expressions;
 
 namespace VanDamHuisNieuwsbriefGenerator
 {
@@ -16,25 +17,23 @@ namespace VanDamHuisNieuwsbriefGenerator
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
 
-        private const string header = @"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
-</head><body>
-<section class='nieuwsbrief'>";
+        
 
         private const string style = @"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
 html, p, section.nieuwsbrief * {
     font-family: 'Rubik', sans-serif;
-    font-size: 12pt;
+    font-size: 10.5pt;
     font-weight: 300;
     color: #222;
 }
 
 h1 {
-    font-size: 1.5em !important;
+    font-size: 14pt !important;
 }
 
 h2 {
-    font-size: 1.2em !important;
+    font-size: 12pt !important;
 }
 
 h1, h2, h3 {
@@ -64,39 +63,24 @@ article {
     margin-top:1em;
 }
 
-.event {
-	padding-left: 0.25em;
-	border-left-style: solid;
-	border-left-width: 5px;
-	margin-bottom: 0.25em;
+span.bar.algemeen {
+    color: #39469D !important;
 }
 
-.legend {
-    display: inline-block;
-    padding-left: 0.25em;
-	border-left-style: solid;
-	border-left-width: 5px;
-    margin-right: 1em;
+span.bar.therapeuticum {
+	color: #2396c9 !important;
 }
 
-.algemeen {
-	border-left-color: #39469D;
+span.bar.vereniging {
+	color: #DE557D !important;
 }
 
-.therapeuticum {
-	border-left-color: #2396c9;
+span.bar.keerkring {
+	color: #ba79a0 !important;
 }
 
-.vereniging {
-	border-left-color: #DE557D;
-}
-
-.keerkring {
-	border-left-color: #ba79a0;
-}
-
-.consultatiebureau {
-	border-left-color: #ec744e
+span.bar.consultatiebureau {
+	color: #ec744e !important;
 }
 
 section.agenda {
@@ -123,19 +107,20 @@ span.title {
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op <a href='https://vandamhuis.nl'>Van Dam Huis</a></p>");
                 }
-                if (!options.ForPrint)
-                {
-                    sb.AppendLine("<p><span class='algemeen legend'>Algemeen</span><span class='therapeuticum legend'>Therapeuticum</span><span class='vereniging legend'>Vereniging</span><span class='consultatiebureau legend'>Consultatiebureau</span><span class='keerkring legend'>Keerkring</span></p>");
-                }
+ 
+                // legend 
+                var mark = "&#x275A;";
+                sb.AppendLine($@"<p><span class='algemeen bar'>{mark}</span> Algemeen</span> <span class='therapeuticum bar'>{mark}</span> Therapeuticum <span class='vereniging bar'>{mark}</span> Vereniging <span class='consultatiebureau bar'>{mark}</span> Consultatiebureau <span class='keerkring bar'>{mark}</span>  Keerkring </p>");
+ 
                 foreach (var item in agenda)
                 {
                     if (options.ForPrint)
                     {
-                        sb.AppendLine($"<p><b>{item.Event.event_name}</b><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span><br>{item.Event.organisatie}</p>");
+                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <b>{item.Event.event_name}</b><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
                     }
                     else
                     {
-                        sb.AppendLine($"<div class='event {item.Event.organisatie}'><a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></div>");
+                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
                     }
                 }
                 sb.AppendLine("</section>");
@@ -143,10 +128,19 @@ span.title {
 
         }
 
+        private void RenderHeader(StringBuilder sb, NewsReporterOptions options)
+        {
+            var media = options.ForPrint ? "print" : "digital";
+            sb.AppendLine($@"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
+</head><body>
+<section class='nieuwsbrief {media}'>");
+    }
+
         public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(header);
+            RenderHeader(sb, options);
+            
 
             if (options.IncludeAgenda && options.AgendaVooraan)
             {
@@ -179,9 +173,9 @@ span.title {
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("<p>&nbsp;</p>");
+            
             sb.AppendLine($"<h1 style='color:{organization.Color}'>{organization.Name}</h1>");
-            sb.AppendLine("<p>&nbsp;</p>");
+            
             foreach (var item in organization.NewsItems)
             {
                 sb.AppendLine(GetNewsItemHtml(item, options));
