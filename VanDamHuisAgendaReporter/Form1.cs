@@ -49,6 +49,8 @@ namespace VanDamHuisAgendaReporter
             reportOptions.ShowBackground = cbShowBackground.Checked;
             reportOptions.PrivateEventsIncluded = cbPrivate.Checked;
             reportOptions.PublicEventsIncluded = cbPublic.Checked;
+            reportOptions.MaxEvents = Convert.ToInt32(udMaxEvents.Value);
+            reportOptions.AllEvents = cbAllEvents.Checked;
             var reportPath = reporterLogic.ReportEvents(eventsToPreport, reportOptions);
             LocationLabel.Text = reportPath;
 

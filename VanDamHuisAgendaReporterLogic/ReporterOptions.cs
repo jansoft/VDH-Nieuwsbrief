@@ -11,5 +11,7 @@ namespace VanDamHuisAgendaLogic
         public bool ShowBackground { get; set; }
         public bool PrivateEventsIncluded { get; set; }
         public bool PublicEventsIncluded { get; set; }
+        public int MaxEvents { get; set; }
+        public bool AllEvents { get; set; }
     }
 }

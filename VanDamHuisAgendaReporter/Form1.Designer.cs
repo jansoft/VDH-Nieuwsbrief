@@ -40,11 +40,21 @@
             this.btOpenLocation = new System.Windows.Forms.Button();
             this.cbPrivate = new System.Windows.Forms.CheckBox();
             this.cbPublic = new System.Windows.Forms.CheckBox();
+            this.udMaxEvents = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbAllEvents = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.udMaxEvents)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btGenerateReport
             // 
-            this.btGenerateReport.Location = new System.Drawing.Point(120, 205);
+            this.btGenerateReport.Location = new System.Drawing.Point(22, 150);
             this.btGenerateReport.Name = "btGenerateReport";
             this.btGenerateReport.Size = new System.Drawing.Size(116, 23);
             this.btGenerateReport.TabIndex = 0;
@@ -55,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(88, 33);
+            this.label1.Location = new System.Drawing.Point(9, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 1;
@@ -63,7 +73,7 @@
             // 
             // dpFrom
             // 
-            this.dpFrom.Location = new System.Drawing.Point(120, 26);
+            this.dpFrom.Location = new System.Drawing.Point(41, 19);
             this.dpFrom.Name = "dpFrom";
             this.dpFrom.Size = new System.Drawing.Size(200, 20);
             this.dpFrom.TabIndex = 2;
@@ -71,7 +81,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(88, 70);
+            this.label2.Location = new System.Drawing.Point(9, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 3;
@@ -79,7 +89,7 @@
             // 
             // dpUntil
             // 
-            this.dpUntil.Location = new System.Drawing.Point(120, 70);
+            this.dpUntil.Location = new System.Drawing.Point(41, 63);
             this.dpUntil.Name = "dpUntil";
             this.dpUntil.Size = new System.Drawing.Size(200, 20);
             this.dpUntil.TabIndex = 4;
@@ -87,7 +97,7 @@
             // cbShowBackground
             // 
             this.cbShowBackground.AutoSize = true;
-            this.cbShowBackground.Location = new System.Drawing.Point(120, 110);
+            this.cbShowBackground.Location = new System.Drawing.Point(10, 21);
             this.cbShowBackground.Name = "cbShowBackground";
             this.cbShowBackground.Size = new System.Drawing.Size(161, 17);
             this.cbShowBackground.TabIndex = 5;
@@ -97,7 +107,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 251);
+            this.label4.Location = new System.Drawing.Point(19, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 7;
@@ -106,7 +116,7 @@
             // LocationLabel
             // 
             this.LocationLabel.AutoSize = true;
-            this.LocationLabel.Location = new System.Drawing.Point(118, 251);
+            this.LocationLabel.Location = new System.Drawing.Point(68, 192);
             this.LocationLabel.Name = "LocationLabel";
             this.LocationLabel.Size = new System.Drawing.Size(59, 13);
             this.LocationLabel.TabIndex = 8;
@@ -114,7 +124,7 @@
             // 
             // btOpenLocation
             // 
-            this.btOpenLocation.Location = new System.Drawing.Point(120, 280);
+            this.btOpenLocation.Location = new System.Drawing.Point(22, 220);
             this.btOpenLocation.Name = "btOpenLocation";
             this.btOpenLocation.Size = new System.Drawing.Size(75, 23);
             this.btOpenLocation.TabIndex = 9;
@@ -125,7 +135,7 @@
             // cbPrivate
             // 
             this.cbPrivate.AutoSize = true;
-            this.cbPrivate.Location = new System.Drawing.Point(120, 134);
+            this.cbPrivate.Location = new System.Drawing.Point(10, 45);
             this.cbPrivate.Name = "cbPrivate";
             this.cbPrivate.Size = new System.Drawing.Size(165, 17);
             this.cbPrivate.TabIndex = 10;
@@ -137,32 +147,103 @@
             this.cbPublic.AutoSize = true;
             this.cbPublic.Checked = true;
             this.cbPublic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPublic.Location = new System.Drawing.Point(120, 156);
+            this.cbPublic.Location = new System.Drawing.Point(10, 67);
             this.cbPublic.Name = "cbPublic";
             this.cbPublic.Size = new System.Drawing.Size(188, 17);
             this.cbPublic.TabIndex = 13;
             this.cbPublic.Text = "Openbare evenementen opnemen";
             this.cbPublic.UseVisualStyleBackColor = true;
             // 
+            // udMaxEvents
+            // 
+            this.udMaxEvents.Location = new System.Drawing.Point(63, 23);
+            this.udMaxEvents.Name = "udMaxEvents";
+            this.udMaxEvents.Size = new System.Drawing.Size(70, 20);
+            this.udMaxEvents.TabIndex = 14;
+            this.udMaxEvents.Value = new decimal(new int[] {
+            13,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Maximum";
+            // 
+            // cbAllEvents
+            // 
+            this.cbAllEvents.AutoSize = true;
+            this.cbAllEvents.Location = new System.Drawing.Point(9, 45);
+            this.cbAllEvents.Name = "cbAllEvents";
+            this.cbAllEvents.Size = new System.Drawing.Size(48, 17);
+            this.cbAllEvents.TabIndex = 16;
+            this.cbAllEvents.Text = "Alles";
+            this.cbAllEvents.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cbAllEvents);
+            this.groupBox1.Controls.Add(this.udMaxEvents);
+            this.groupBox1.Location = new System.Drawing.Point(506, 30);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(153, 98);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Aantal evenementen";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cbShowBackground);
+            this.groupBox2.Controls.Add(this.cbPrivate);
+            this.groupBox2.Controls.Add(this.cbPublic);
+            this.groupBox2.Location = new System.Drawing.Point(287, 30);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(213, 98);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Opties";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dpFrom);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.dpUntil);
+            this.groupBox3.Location = new System.Drawing.Point(22, 30);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(259, 98);
+            this.groupBox3.TabIndex = 19;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Periode";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 351);
-            this.Controls.Add(this.cbPublic);
-            this.Controls.Add(this.cbPrivate);
+            this.ClientSize = new System.Drawing.Size(682, 301);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btOpenLocation);
             this.Controls.Add(this.LocationLabel);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cbShowBackground);
-            this.Controls.Add(this.dpUntil);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dpFrom);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btGenerateReport);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Van Dam Huis Agenda Reporter";
+            ((System.ComponentModel.ISupportInitialize)(this.udMaxEvents)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +262,12 @@
         private System.Windows.Forms.Button btOpenLocation;
         private System.Windows.Forms.CheckBox cbPrivate;
         private System.Windows.Forms.CheckBox cbPublic;
+        private System.Windows.Forms.NumericUpDown udMaxEvents;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox cbAllEvents;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

@@ -21,7 +21,7 @@ namespace VanDamHuisAgendaLogic
         double leftmargin = 25;
         double rightmargin = 25;
         double bottommargin = 40; //25;
-        double liney = 278.2;
+        double liney = 272.5; // 278.2;
 
         private readonly List<AgendaEvent> eventsToReport;
         private readonly string reportDirectory;
@@ -101,10 +101,15 @@ namespace VanDamHuisAgendaLogic
 
             AddLegend(section);
             var plegendspacer = section.AddParagraph("");
-            plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(15);
+            plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(10);
 
+            var events = eventsToReport;
+            if (!options.AllEvents)
+            {
+                events = eventsToReport.GetRange(0, options.MaxEvents);
+            }
 
-            foreach(var agendaEvent in eventsToReport)
+            foreach(var agendaEvent in events)
             {
                 var para = section.AddParagraph();
 
@@ -251,7 +256,7 @@ namespace VanDamHuisAgendaLogic
             var notice = footer.AddTextFrame();
             notice.RelativeVertical = RelativeVertical.Page;
             notice.RelativeHorizontal = RelativeHorizontal.Page;
-            notice.Top = Unit.FromMillimeter(270);
+            notice.Top = Unit.FromMillimeter(262);
             notice.Left = Unit.FromMillimeter(leftmargin);
             notice.Width = Unit.FromMillimeter(150);
             var pnotice = notice.AddParagraph();
