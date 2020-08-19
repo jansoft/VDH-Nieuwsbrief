@@ -211,13 +211,22 @@ span.title {{
             {
                 sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
             }
-            if (options.ForPrint)
+
+            if (options.IncludeNewsSummary)
             {
-                sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
+                sb.Append("<div class='content'>" + item.Summary + "</div>");
             }
-            else
+
+            if (options.IncludeNewsContent)
             {
-                sb.Append("<div class='content'>" + item.Content + "</div>");
+                if (options.ForPrint)
+                {
+                    sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
+                }
+                else
+                {
+                    sb.Append("<div class='content'>" + item.Content + "</div>");
+                }
             }
             sb.Append("</article>");
 

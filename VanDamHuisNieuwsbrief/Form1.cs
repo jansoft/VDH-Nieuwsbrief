@@ -85,6 +85,8 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.IncludeAgenda = cbAgenda.Checked;
             options.AgendaVooraan = rbAgendaVooraan.Checked;
             options.LargeFont = rb12pt.Checked;
+            options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
+            options.IncludeNewsContent = cbIncludeNewsContent.Checked;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();

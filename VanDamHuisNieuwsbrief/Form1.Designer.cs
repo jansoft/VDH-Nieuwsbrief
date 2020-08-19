@@ -49,9 +49,11 @@
             this.rbAchteraan = new System.Windows.Forms.RadioButton();
             this.rbAgendaVooraan = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rb10pt = new System.Windows.Forms.RadioButton();
             this.rb12pt = new System.Windows.Forms.RadioButton();
+            this.rb10pt = new System.Windows.Forms.RadioButton();
             this.MaxPosts = new System.Windows.Forms.NumericUpDown();
+            this.cbIncludeNewsContent = new System.Windows.Forms.CheckBox();
+            this.cbIncludeNewsSummary = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -61,7 +63,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 265);
+            this.button1.Location = new System.Drawing.Point(30, 329);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 28;
@@ -90,7 +92,7 @@
             // DocPathValue
             // 
             this.DocPathValue.AutoSize = true;
-            this.DocPathValue.Location = new System.Drawing.Point(30, 295);
+            this.DocPathValue.Location = new System.Drawing.Point(30, 359);
             this.DocPathValue.Name = "DocPathValue";
             this.DocPathValue.Size = new System.Drawing.Size(42, 13);
             this.DocPathValue.TabIndex = 29;
@@ -183,7 +185,7 @@
             // cbPaperLinks
             // 
             this.cbPaperLinks.AutoSize = true;
-            this.cbPaperLinks.Location = new System.Drawing.Point(6, 65);
+            this.cbPaperLinks.Location = new System.Drawing.Point(6, 119);
             this.cbPaperLinks.Name = "cbPaperLinks";
             this.cbPaperLinks.Size = new System.Drawing.Size(168, 17);
             this.cbPaperLinks.TabIndex = 38;
@@ -193,21 +195,23 @@
             // cbNewsPubdate
             // 
             this.cbNewsPubdate.AutoSize = true;
-            this.cbNewsPubdate.Location = new System.Drawing.Point(6, 42);
+            this.cbNewsPubdate.Location = new System.Drawing.Point(6, 44);
             this.cbNewsPubdate.Name = "cbNewsPubdate";
-            this.cbNewsPubdate.Size = new System.Drawing.Size(190, 17);
+            this.cbNewsPubdate.Size = new System.Drawing.Size(184, 17);
             this.cbNewsPubdate.TabIndex = 39;
-            this.cbNewsPubdate.Text = "Publicatiedatum nieuws opnemen?";
+            this.cbNewsPubdate.Text = "Publicatiedatum nieuws opnemen";
             this.cbNewsPubdate.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbIncludeNewsSummary);
+            this.groupBox2.Controls.Add(this.cbIncludeNewsContent);
             this.groupBox2.Controls.Add(this.cbAgenda);
             this.groupBox2.Controls.Add(this.cbPaperLinks);
             this.groupBox2.Controls.Add(this.cbNewsPubdate);
             this.groupBox2.Location = new System.Drawing.Point(30, 139);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(210, 100);
+            this.groupBox2.Size = new System.Drawing.Size(210, 143);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inhoud";
@@ -257,6 +261,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lettergrootte";
             // 
+            // rb12pt
+            // 
+            this.rb12pt.AutoSize = true;
+            this.rb12pt.Location = new System.Drawing.Point(16, 52);
+            this.rb12pt.Name = "rb12pt";
+            this.rb12pt.Size = new System.Drawing.Size(46, 17);
+            this.rb12pt.TabIndex = 1;
+            this.rb12pt.TabStop = true;
+            this.rb12pt.Text = "12pt";
+            this.rb12pt.UseVisualStyleBackColor = true;
+            // 
             // rb10pt
             // 
             this.rb10pt.AutoSize = true;
@@ -268,17 +283,6 @@
             this.rb10pt.TabStop = true;
             this.rb10pt.Text = "10,5pt";
             this.rb10pt.UseVisualStyleBackColor = true;
-            // 
-            // rb12pt
-            // 
-            this.rb12pt.AutoSize = true;
-            this.rb12pt.Location = new System.Drawing.Point(16, 52);
-            this.rb12pt.Name = "rb12pt";
-            this.rb12pt.Size = new System.Drawing.Size(46, 17);
-            this.rb12pt.TabIndex = 1;
-            this.rb12pt.TabStop = true;
-            this.rb12pt.Text = "12pt";
-            this.rb12pt.UseVisualStyleBackColor = true;
             // 
             // MaxPosts
             // 
@@ -292,11 +296,33 @@
             0,
             0});
             // 
+            // cbIncludeNewsContent
+            // 
+            this.cbIncludeNewsContent.AutoSize = true;
+            this.cbIncludeNewsContent.Checked = true;
+            this.cbIncludeNewsContent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIncludeNewsContent.Location = new System.Drawing.Point(6, 69);
+            this.cbIncludeNewsContent.Name = "cbIncludeNewsContent";
+            this.cbIncludeNewsContent.Size = new System.Drawing.Size(142, 17);
+            this.cbIncludeNewsContent.TabIndex = 40;
+            this.cbIncludeNewsContent.Text = "Inhoud nieuws opnemen";
+            this.cbIncludeNewsContent.UseVisualStyleBackColor = true;
+            // 
+            // cbIncludeNewsSummary
+            // 
+            this.cbIncludeNewsSummary.AutoSize = true;
+            this.cbIncludeNewsSummary.Location = new System.Drawing.Point(6, 94);
+            this.cbIncludeNewsSummary.Name = "cbIncludeNewsSummary";
+            this.cbIncludeNewsSummary.Size = new System.Drawing.Size(174, 17);
+            this.cbIncludeNewsSummary.TabIndex = 41;
+            this.cbIncludeNewsSummary.Text = "Samenvatting nieuws opnemen";
+            this.cbIncludeNewsSummary.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 348);
+            this.ClientSize = new System.Drawing.Size(724, 418);
             this.Controls.Add(this.MaxPosts);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -353,6 +379,8 @@
         private System.Windows.Forms.RadioButton rb12pt;
         private System.Windows.Forms.RadioButton rb10pt;
         private System.Windows.Forms.NumericUpDown MaxPosts;
+        private System.Windows.Forms.CheckBox cbIncludeNewsSummary;
+        private System.Windows.Forms.CheckBox cbIncludeNewsContent;
     }
 }
 
