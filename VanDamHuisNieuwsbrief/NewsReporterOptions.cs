@@ -16,6 +16,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public bool IncludeNewsSummary { get; set; }
         public bool AgendaVooraan { get; set; }
         public bool LargeFont { get; set; }
+        public bool IncludeLogos { get; set; }
      
     }
 }

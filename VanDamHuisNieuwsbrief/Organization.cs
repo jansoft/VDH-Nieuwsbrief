@@ -12,6 +12,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public List<NewsItem> NewsItems { get; set; } = new List<NewsItem>();
         public string Color { get; set; }
         public string Url { get; set; }
+        public string LogoUrl { get; set; }
         public string After { get; set; } = "";
         public int MaxPosts { get; set; } = 15;
         public string Categories { get; set; } = "";

@@ -179,7 +179,19 @@ span.title {{
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            
+            if (options.IncludeLogos)
+            {
+                string logo = "";
+                if (options.ForPrint)
+                {
+                    logo = $"<div class='logo'><img src='{organization.LogoUrl}'></div>";
+                }
+                else
+                {
+                    logo = $"<div class='logo'><img src='{organization.LogoUrl}' style='height:48pt'></div>";
+                }
+                sb.AppendLine(logo);
+            }
             sb.AppendLine($"<h1 style='color:{organization.Color}'>{organization.Name}</h1>");
             
             foreach (var item in organization.NewsItems)

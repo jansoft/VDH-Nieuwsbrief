@@ -1,22 +1,25 @@
 ﻿[
-    {
-      "Name": "Van Dam Huis",
-      "Color": "#39469d",
-      "Url": "https://www.vandamhuis.nl",
-      "Categories": "13"
-    },
-    {
-        "Name" : "Gezondheidscentrum Therapeuticum Haarlem",
-        "Color" : "#2396C9",
-        "Url" : "https://www.therapeuticumhaarlem.nl",
-        "Categories": "47"
-    },
-    {
-      "Name": "Antroposofische Vereniging Haarlem",
-      "Color": "#de557d",
-      "Url": "https://www.antroposofiehaarlem.nl",
-      "Categories": "46"
-    }
+  {
+    "Name": "Van Dam Huis",
+    "Color": "#39469d",
+    "Url": "https://www.vandamhuis.nl",
+    "Categories": "13",
+    "LogoUrl": "https://www.vandamhuis.nl/wp-content/uploads/2020/08/Logo-Van-Dam-Huis-compact.png"
+  },
+  {
+    "Name": "Gezondheidscentrum Therapeuticum Haarlem",
+    "Color": "#2396C9",
+    "Url": "https://www.therapeuticumhaarlem.nl",
+    "Categories": "47",
+    "LogoUrl": "https://www.vandamhuis.nl/wp-content/uploads/2020/08/Logo-Gezondheidscentrum-Therapeuticum-compact.png"
+  },
+  {
+    "Name": "Antroposofische Vereniging Haarlem",
+    "Color": "#de557d",
+    "Url": "https://www.antroposofiehaarlem.nl",
+    "Categories": "46",
+    "LogoUrl": "https://www.vandamhuis.nl/wp-content/uploads/2020/08/Logo-Antroposofische-Vereniging-compact.png"
+  }
 
 
 ]
