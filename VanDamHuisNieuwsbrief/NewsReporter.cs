@@ -179,16 +179,18 @@ span.title {{
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
+            int h = options.LogoHeight;
+            int w = (int)(h * organization.LogoRatio);
             if (options.IncludeLogos)
             {
                 string logo = "";
                 if (options.ForPrint)
                 {
-                    logo = $"<div class='logo'><img src='{organization.LogoUrl}'></div>";
+                    logo = $"<div class='logo'><img src='{organization.LogoUrl}'width='{w}px' height='{h}px'></div>";
                 }
                 else
                 {
-                    logo = $"<div class='logo'><img src='{organization.LogoUrl}' style='height:48pt'></div>";
+                    logo = $"<div class='logo'><img src='{organization.LogoUrl}' width='{w}px' height='{h}px'></div>";
                 }
                 sb.AppendLine(logo);
             }

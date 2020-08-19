@@ -88,6 +88,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
             options.IncludeNewsContent = cbIncludeNewsContent.Checked;
             options.IncludeLogos = cbIncludeLogos.Checked;
+            options.LogoHeight = (int)udLogoHeight.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();

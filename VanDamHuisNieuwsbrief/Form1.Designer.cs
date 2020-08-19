@@ -45,6 +45,7 @@
             this.cbPaperLinks = new System.Windows.Forms.CheckBox();
             this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbIncludeLogos = new System.Windows.Forms.CheckBox();
             this.cbIncludeNewsSummary = new System.Windows.Forms.CheckBox();
             this.cbIncludeNewsContent = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -54,12 +55,16 @@
             this.rb12pt = new System.Windows.Forms.RadioButton();
             this.rb10pt = new System.Windows.Forms.RadioButton();
             this.MaxPosts = new System.Windows.Forms.NumericUpDown();
-            this.cbIncludeLogos = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.udLogoHeight = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udLogoHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -218,6 +223,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inhoud";
             // 
+            // cbIncludeLogos
+            // 
+            this.cbIncludeLogos.AutoSize = true;
+            this.cbIncludeLogos.Checked = true;
+            this.cbIncludeLogos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIncludeLogos.Location = new System.Drawing.Point(7, 143);
+            this.cbIncludeLogos.Name = "cbIncludeLogos";
+            this.cbIncludeLogos.Size = new System.Drawing.Size(104, 17);
+            this.cbIncludeLogos.TabIndex = 42;
+            this.cbIncludeLogos.Text = "Logo\'s opnemen";
+            this.cbIncludeLogos.UseVisualStyleBackColor = true;
+            // 
             // cbIncludeNewsSummary
             // 
             this.cbIncludeNewsSummary.AutoSize = true;
@@ -320,23 +337,44 @@
             0,
             0});
             // 
-            // cbIncludeLogos
+            // groupBox5
             // 
-            this.cbIncludeLogos.AutoSize = true;
-            this.cbIncludeLogos.Checked = true;
-            this.cbIncludeLogos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIncludeLogos.Location = new System.Drawing.Point(7, 143);
-            this.cbIncludeLogos.Name = "cbIncludeLogos";
-            this.cbIncludeLogos.Size = new System.Drawing.Size(104, 17);
-            this.cbIncludeLogos.TabIndex = 42;
-            this.cbIncludeLogos.Text = "Logo\'s opnemen";
-            this.cbIncludeLogos.UseVisualStyleBackColor = true;
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.udLogoHeight);
+            this.groupBox5.Location = new System.Drawing.Point(247, 246);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 65);
+            this.groupBox5.TabIndex = 44;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Logo hoogte";
+            // 
+            // udLogoHeight
+            // 
+            this.udLogoHeight.Location = new System.Drawing.Point(16, 20);
+            this.udLogoHeight.Name = "udLogoHeight";
+            this.udLogoHeight.Size = new System.Drawing.Size(82, 20);
+            this.udLogoHeight.TabIndex = 0;
+            this.udLogoHeight.Value = new decimal(new int[] {
+            75,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(104, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(18, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "px";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 418);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.MaxPosts);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -363,6 +401,9 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udLogoHeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,6 +437,9 @@
         private System.Windows.Forms.CheckBox cbIncludeNewsSummary;
         private System.Windows.Forms.CheckBox cbIncludeNewsContent;
         private System.Windows.Forms.CheckBox cbIncludeLogos;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown udLogoHeight;
     }
 }
 

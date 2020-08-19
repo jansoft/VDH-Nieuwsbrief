@@ -13,6 +13,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public string Color { get; set; }
         public string Url { get; set; }
         public string LogoUrl { get; set; }
+        public decimal LogoRatio { get; set; }
         public string After { get; set; } = "";
         public int MaxPosts { get; set; } = 15;
         public string Categories { get; set; } = "";
