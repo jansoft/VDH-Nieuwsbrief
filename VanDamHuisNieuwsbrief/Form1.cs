@@ -90,6 +90,9 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.IncludeLogos = cbIncludeLogos.Checked;
             options.LogoHeight = (int)udLogoHeight.Value;
             options.LogoAfterHeading = rbLogoNaKop.Checked;
+            options.EventTitleBold = cbEeventTitleBold.Checked;
+            options.NewsTitleBold = cbNewsTitleBold.Checked;
+            options.OrganizationTitleBold = cbOrganizationTitleBold.Checked;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();

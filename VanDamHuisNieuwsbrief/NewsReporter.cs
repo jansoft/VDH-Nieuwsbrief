@@ -22,7 +22,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
-                sb.AppendLine($"<h1 style='color:#39469d !important'>Agenda</h1>");
+                sb.AppendLine($"<h1 class='agenda-title' style='color:#39469d !important'>Agenda</h1>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
@@ -41,11 +41,11 @@ namespace VanDamHuisNieuwsbriefGenerator
                 {
                     if (options.ForPrint)
                     {
-                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <b>{item.Event.event_name}</b><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
+                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <span class='event-title'>{item.Event.event_name}</span><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
                     }
                     else
                     {
-                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <a href='{item.Event.url}'>{item.Event.event_name}</a><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
+                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <span class='event-title'><a href='{item.Event.url}'>{item.Event.event_name}</a></span><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
                     }
                 }
                 sb.AppendLine("</section>");
@@ -66,6 +66,21 @@ namespace VanDamHuisNieuwsbriefGenerator
             var fp = options.LargeFont ? "12pt" : "10.5pt";
             var fh1 = options.LargeFont ? "16pt" : "14pt";
             var fh2 = options.LargeFont ? "14pt" : "12pt";
+
+            string getBold()
+            {
+                return options.ForPrint ? "font-family: 'Rubik Medium' !important;" : "font-weight: 500 !important;";
+            }
+
+            string getNormal ()
+            {
+                return "font-weight: 300 !important";
+            }
+
+            var eventTitleWeight = options.EventTitleBold ? getBold() : getNormal();
+            var newsTitleWeight = options.NewsTitleBold ? getBold() : getNormal();
+            var organizationTitleWeight = options.OrganizationTitleBold ? getBold() : getNormal();
+
             sb.AppendLine($@"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
 html, p, section.nieuwsbrief * {{
@@ -91,8 +106,24 @@ section.nieuwsbrief b, section.nieuwsbrief strong {{
     font-weight:500 !important;
 }}
 
+section.nieuwsbrief p span.event-title,
+section.nieuwsbrief p span.event-title > a {{
+    {eventTitleWeight}
+
+}}
+
+section.nieuwsbrief p.news-title,
+section.nieuwsbrief a > h2.news-title {{
+    {newsTitleWeight}
+}}
+
 section.nieuwsbrief a {{
     color: #222 !important;
+}}
+
+section.nieuwsbrief h1.organization-title,
+section.nieuwsbrief h1.agenda-title {{
+    {organizationTitleWeight}
 }}
 
 section.nieuwsbrief {{
@@ -206,7 +237,7 @@ span.title {{
                 RenderLogo(sb, organization, options);
             }
 
-            sb.AppendLine($"<h1 style='color:{organization.Color} !important'>{organization.Name}</h1>");
+            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
 
             if (options.IncludeLogos && options.LogoAfterHeading)
             {
@@ -228,11 +259,11 @@ span.title {{
 
             if (!options.ForPrint)
             {
-                sb.Append($"<a href='{item.Url}'><h2>{item.Title}</h2></a>");
+                sb.Append($"<a href='{item.Url}'><h2 class='news-title'>{item.Title}</h2></a>");
             }
             else
             {
-                sb.Append($"<p><b>{item.Title}</b></p>");
+                sb.Append($"<p class='news-title'>{item.Title}</p>");
                 if (options.PrintLinks)
                 {
                     sb.Append($"<p>{item.Url}</p>");

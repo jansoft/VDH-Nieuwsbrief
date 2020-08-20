@@ -19,6 +19,9 @@ namespace VanDamHuisNieuwsbriefGenerator
         public bool IncludeLogos { get; set; }
         public int LogoHeight { get; set; }
         public bool LogoAfterHeading { get; set; }
+        public bool EventTitleBold { get; set; }
+        public bool NewsTitleBold { get; set; }
+        public bool OrganizationTitleBold { get; set; }
      
     }
 }
