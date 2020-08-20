@@ -22,7 +22,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
-                sb.AppendLine($"<h1 style='color:#39469d'>Agenda</h1>");
+                sb.AppendLine($"<h1 style='color:#39469d !important'>Agenda</h1>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
@@ -176,14 +176,14 @@ span.title {{
 
         }
 
-        public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
+        private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
         {
-            var sb = new StringBuilder();
-            int h = options.LogoHeight;
-            int w = (int)(h * organization.LogoRatio);
             if (options.IncludeLogos)
             {
                 string logo = "";
+                int h = options.LogoHeight;
+                int w = (int)(h * organization.LogoRatio);
+
                 if (options.ForPrint)
                 {
                     logo = $"<div class='logo'><img src='{organization.LogoUrl}'width='{w}px' height='{h}px'></div>";
@@ -194,8 +194,24 @@ span.title {{
                 }
                 sb.AppendLine(logo);
             }
-            sb.AppendLine($"<h1 style='color:{organization.Color}'>{organization.Name}</h1>");
+        }
+
+        public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
+        {
+            var sb = new StringBuilder();
             
+            if (options.IncludeLogos && !options.LogoAfterHeading)
+            {
+                RenderLogo(sb, organization, options);
+            }
+
+            sb.AppendLine($"<h1 style='color:{organization.Color} !important'>{organization.Name}</h1>");
+
+            if (options.IncludeLogos && options.LogoAfterHeading)
+            {
+                RenderLogo(sb, organization, options);
+            }
+
             foreach (var item in organization.NewsItems)
             {
                 sb.AppendLine(GetNewsItemHtml(item, options));
