@@ -58,7 +58,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             var media = options.ForPrint ? "print" : "digital";
             sb.AppendLine($@"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
 </head><body>
-<section class='nieuwsbrief {media}'>");
+<section class='nieuwsbrief {media}' style='max-width:600px;width:100%'>");
         }
 
         private void RenderStyle(StringBuilder sb, NewsReporterOptions options)
@@ -88,6 +88,11 @@ html, p, section.nieuwsbrief * {{
     font-size: {fp} !important;
     font-weight: 300 !important;
     color: #222 !important;
+}}
+
+section.nieuwsbrief img {{
+    max-width:100% !important;
+    height: auto !important;
 }}
 
 section.nieuwsbrief h1 {{
@@ -127,8 +132,6 @@ section.nieuwsbrief h1.agenda-title {{
 }}
 
 section.nieuwsbrief {{
-    width: 1000px;
-    max-width:100%;
     box-sizing: border-box !important;
     padding-left:2em !important;
     padding-right: 2em !important;
@@ -287,12 +290,30 @@ span.title {{
                 }
                 else
                 {
-                    sb.Append("<div class='content'>" + item.Content + "</div>");
+                    sb.Append("<div class='content'>" + CleanUpImages(item.Content) + "</div>");
                 }
             }
             sb.Append("</article>");
 
             return sb.ToString();
+        }
+
+        private string CleanUpImages(string content)
+        {
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(content);
+            var images = doc.DocumentNode.SelectNodes(".//img");
+            foreach (var image in images)
+            {
+                image.Attributes.Remove("height");
+                image.Attributes.Remove("width");
+                image.Attributes.Remove("srcset");
+                image.Attributes.Remove("sizes");
+                image.Attributes.Remove("style");
+                image.Attributes.Add("style", "width:100%;max-width:600px");
+                
+            }
+            return doc.DocumentNode.OuterHtml;
         }
 
         private string Unlink(string source)
