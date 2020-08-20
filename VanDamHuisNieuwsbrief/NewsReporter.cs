@@ -69,10 +69,10 @@ namespace VanDamHuisNieuwsbriefGenerator
             sb.AppendLine($@"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
 html, p, section.nieuwsbrief * {{
-    font-family: 'Rubik', sans-serif;
-    font-size: {fp};
-    font-weight: 300;
-    color: #222;
+    font-family: 'Rubik', sans-serif !important;
+    font-size: {fp} !important;
+    font-weight: 300 !important;
+    color: #222 !important;
 }}
 
 h1 {{
@@ -88,7 +88,7 @@ h1, h2, h3 {{
 }}
 
 b, strong {{
-    font-weight:500;
+    font-weight:500 !important;
 }}
 
 a {{
@@ -98,16 +98,16 @@ a {{
 section.nieuwsbrief {{
     width: 1000px;
     max-width:100%;
-    box-sizing: border-box;
-    padding-left:2em;
-    padding-right: 2em;
-    margin-left:auto;
-    margin-right:auto;
+    box-sizing: border-box !important;
+    padding-left:2em !important;
+    padding-right: 2em !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
 }}
 
 article {{
-    margin-bottom: 2em;
-    margin-top:1em;
+    margin-bottom: 2em !important;
+    margin-top:1em !important;
 }}
 
 span.bar.algemeen {{
@@ -131,11 +131,11 @@ span.bar.consultatiebureau {{
 }}
 
 section.agenda {{
-    margin-bottom: 2em;
+    margin-bottom: 2em !important;
 }}
 
 span.title {{
-    font-weight:500;
+    font-weight:500 !important;
 }}
 
 </style>");
