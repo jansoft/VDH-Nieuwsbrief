@@ -75,11 +75,11 @@ html, p, section.nieuwsbrief * {{
     color: #222 !important;
 }}
 
-h1 {{
+section.nieuwsbrief h1 {{
     font-size: {fh1} !important;
 }}
 
-h2 {{
+section.nieuwsbrief h2 {{
     font-size: {fh2} !important;
 }}
 
@@ -87,11 +87,11 @@ h1, h2, h3 {{
     font-weight:300 !important;
 }}
 
-b, strong {{
+section.nieuwsbrief b, section.nieuwsbrief strong {{
     font-weight:500 !important;
 }}
 
-a {{
+section.nieuwsbrief a {{
     color: #222 !important;
 }}
 
@@ -109,6 +109,7 @@ article {{
     margin-bottom: 2em !important;
     margin-top:1em !important;
 }}
+
 
 span.bar.algemeen {{
     color: #39469D !important;
