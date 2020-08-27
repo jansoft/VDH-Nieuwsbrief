@@ -277,7 +277,7 @@ span.title {{
                 sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
             }
 
-            if (options.IncludeNewsSummary)
+            if (options.IncludeNewsSummary && !string.IsNullOrWhiteSpace(item.Summary))
             {
                 sb.Append("<div class='content'>" + item.Summary + "</div>");
             }
