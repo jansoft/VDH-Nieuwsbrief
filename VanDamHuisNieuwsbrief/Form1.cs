@@ -72,34 +72,17 @@ namespace VanDamHuisNieuwsbriefGenerator
         private void GenerateHtml(object sender, EventArgs e)
         {
             var newsLetter = LoadNewsFeeds(GetAfter(), Convert.ToInt32(MaxPosts.Value), true);
+            var appconfig = GetAppConfig();
 
             List<AgendaEvent> agenda = new List<AgendaEvent>();
             agenda = GetAgenda();
 
             var options = new NewsReporterOptions();
             options.ForPrint = rbpaper.Checked;
-
-            if (rb9pt.Checked)
-            {
-                options.FontSize = BodyFontSize.Small;
-            }
-            else if (rb12pt.Checked)
-            {
-                options.FontSize = BodyFontSize.Large;
-            }
-            else
-            {
-                options.FontSize = BodyFontSize.Medium;
-            }
-            options.FontColor = "#222222";
-            options.LinkColor = "#007C89";
+            options.Config = GetAppConfig();
+ 
             options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
             options.IncludeNewsContent = cbIncludeNewsContent.Checked;
-            options.LogoHeight = (int)udLogoHeight.Value;
-            options.LogoAfterHeading = rbLogoNaKop.Checked;
-            options.EventTitleBold = false;
-            options.NewsTitleBold = cbNewsTitleBold.Checked;
-            options.OrganizationTitleBold = cbOrganizationTitleBold.Checked;
             options.PublicatieDatum = dpPublicatieDatum.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
@@ -113,6 +96,13 @@ namespace VanDamHuisNieuwsbriefGenerator
         private string GetExeDir()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        }
+
+        private AppConfig GetAppConfig()
+        {
+            var path = Path.Combine(GetExeDir(), "appconfig.json");
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<AppConfig>(json);
         }
 
         private List<Organization> LoadOrganizations()

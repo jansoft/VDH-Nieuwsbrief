@@ -63,23 +63,12 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private void RenderStyle(StringBuilder sb, NewsReporterOptions options)
         {
-            var fp = "10.5pt";
-            var fh1 = "14pt";
-            var fh2 = "12pt";
+            var fontsizes = options.ForPrint ? options.Config.PaperFontSize : options.Config.DigitalFontSize;
+            var fp = fontsizes.Paragraph;
+            var fh1 = fontsizes.Heading1;
+            var fh2 = fontsizes.Heading2;
 
-            if (options.FontSize == BodyFontSize.Large)
-            {
-                fp = "12pt";
-                fh1 = "16pt";
-                fh2 = "14pt";
-            }
-            else if (options.FontSize == BodyFontSize.Small)
-            {
-                fp = "9pt";
-                fh1 = "14pt";
-                fh2 = "12pt";
-            }
- 
+  
             string getBold()
             {
                 return options.ForPrint ? "font-family: 'Rubik Medium' !important;" : "font-weight: 500 !important;";
@@ -90,9 +79,9 @@ namespace VanDamHuisNieuwsbriefGenerator
                 return "font-weight: 300 !important;";
             }
 
-            var eventTitleWeight = options.EventTitleBold ? getBold() : getNormal();
-            var newsTitleWeight = options.NewsTitleBold ? getBold() : getNormal();
-            var organizationTitleWeight = options.OrganizationTitleBold ? getBold() : getNormal();
+            var eventTitleWeight = options.Config.EventTitleBold ? getBold() : getNormal();
+            var newsTitleWeight = options.Config.NewsTitleBold ? getBold() : getNormal();
+            var organizationTitleWeight = options.Config.OrganizationTitleBold ? getBold() : getNormal();
 
             sb.AppendLine($@"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
@@ -100,7 +89,7 @@ html, p, section.nieuwsbrief * {{
     font-family: 'Rubik', sans-serif !important;
     font-size: {fp} !important;
     font-weight: 300 !important;
-    color: {options.FontColor} !important;
+    color: {options.Config.TextColor} !important;
 }}
 
 section.nieuwsbrief img {{
@@ -136,11 +125,11 @@ section.nieuwsbrief a > h2.news-title {{
 }}
 
 section.nieuwsbrief a > h2.news-title {{
-    color: {options.LinkColor} !important;
+    color: {options.Config.LinkColor} !important;
 }}
 
 section.nieuwsbrief a {{
-    color: {options.LinkColor} !important;
+    color: {options.Config.LinkColor} !important;
 }}
 
 section.nieuwsbrief h1.organization-title,
@@ -232,7 +221,14 @@ span.title {{
 
             sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
 
-            sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Bureau Ouder- & Kindzorg en Patiëntenvereniging De Keerkring.</p>");
+            if (options.ForPrint)
+            {
+                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Bureau Ouder- & Kindzorg en Patiëntenvereniging De Keerkring.</p>");
+            }
+            else
+            {
+                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
+            }
   
             sb.AppendLine(@"<p>Inhoud van de nieuwsbrief</p>
 <ul>
@@ -247,7 +243,7 @@ span.title {{
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
         {
             string logo = "";
-            int h = options.LogoHeight;
+            int h = options.Config.LogoHeight;
             int w = (int)(h * organization.LogoRatio);
 
             if (options.ForPrint)
@@ -266,14 +262,14 @@ span.title {{
         {
             var sb = new StringBuilder();
             
-            if (!options.LogoAfterHeading)
+            if (!options.Config.LogoAfterHeading)
             {
                 RenderLogo(sb, organization, options);
             }
 
             sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
 
-            if (options.LogoAfterHeading)
+            if (options.Config.LogoAfterHeading)
             {
                 RenderLogo(sb, organization, options);
             }
