@@ -22,7 +22,6 @@ namespace VanDamHuisNieuwsbriefGenerator
         public bool EventTitleBold { get; set; }
         public bool NewsTitleBold { get; set; }
         public bool OrganizationTitleBold { get; set; }
-        public int Nummer { get; set; }
         public DateTime PublicatieDatum { get; set; }
 
      

@@ -56,7 +56,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         private void RenderHeader(StringBuilder sb, NewsReporterOptions options)
         {
             var media = options.ForPrint ? "print" : "digital";
-            sb.AppendLine($@"<html><head><title>Nieuwsbrief Van Dam Huis (gegenereerd)</title>
+            sb.AppendLine($@"<html><head><title>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</title>
 </head><body>
 <section class='nieuwsbrief {media}' style='max-width:600px;width:100%'>");
         }
@@ -199,10 +199,7 @@ span.title {{
             var sb = new StringBuilder();
             RenderHeader(sb, options);
             
-            if (options.ForPrint)
-            {
-                RenderPaperIntro(sb, newsLetter, options);
-            }
+            RenderIntro(sb, newsLetter, options);
 
             if (options.IncludeAgenda && options.AgendaVooraan)
             {
@@ -233,14 +230,23 @@ span.title {{
 
         }
 
-        private void RenderPaperIntro(StringBuilder sb, NewsLetter newsLetter, NewsReporterOptions options)
+        private void RenderIntro(StringBuilder sb, NewsLetter newsLetter, NewsReporterOptions options)
         {
             var organization = GetVanDamHuis(newsLetter);
             RenderLogo(sb, organization, options);
 
-            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Nieuwsbrief nr {options.Nummer} van het Van Dam Huis <span class='publication-date'>{options.PublicatieDatum:d MMMM yyyy}</span></h1>");
+            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
 
             sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Burea Ouder & Kindzorg en Patiëntenvereniging De Keerkring. Deze vier organisaties komen samen in de Van Dam Huis Nieuwsbrief, welke 10 maal per jaar digitaal zal verschijnen. Inschrijven kan op onze website: vandamhuis.nl</p>");
+
+            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief</p>
+<ul>
+    <li><a href='#agenda'>Agenda</a></li>
+    <li><a href='#vdh'>Van Dam Huis</a></li>
+    <li><a href='#gth'>Gezondheidscentrum Therapeuticum</a></li>
+    <li><a href='#avh'>Antroposofische Vereniging</a></li>
+    <li><a href='#pvk'>Patiëntenvereniging De Keerkring</a></li>
+</ul>");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
@@ -272,7 +278,7 @@ span.title {{
                 RenderLogo(sb, organization, options);
             }
 
-            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
+            sb.AppendLine($"<h1 id='{organization.Id}' class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
 
             if (options.IncludeLogos && options.LogoAfterHeading)
             {

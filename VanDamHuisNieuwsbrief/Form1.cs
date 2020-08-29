@@ -105,7 +105,6 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.EventTitleBold = cbEeventTitleBold.Checked;
             options.NewsTitleBold = cbNewsTitleBold.Checked;
             options.OrganizationTitleBold = cbOrganizationTitleBold.Checked;
-            options.Nummer = (int)udNummer.Value;
             options.PublicatieDatum = dpPublicatieDatum.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
