@@ -26,6 +26,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             DateFromPicker.Value = DateTime.Now.AddMonths(-1);
             dpAgendaVanaf.Value = DateTime.Now;
             dpAgendaTot.Value = DateTime.Now.AddMonths(2);
+            dpPublicatieDatum.Value = DateTime.Now;
  
         }
 
@@ -80,11 +81,22 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             var options = new NewsReporterOptions();
             options.ForPrint = rbpaper.Checked;
-            options.PrintLinks = cbPaperLinks.Checked;
             options.IncludeNewsPublicationDate = cbNewsPubdate.Checked;
             options.IncludeAgenda = cbAgenda.Checked;
             options.AgendaVooraan = rbAgendaVooraan.Checked;
-            options.LargeFont = rb12pt.Checked;
+
+            if (rb9pt.Checked)
+            {
+                options.FontSize = BodyFontSize.Small;
+            }
+            else if (rb12pt.Checked)
+            {
+                options.FontSize = BodyFontSize.Large;
+            }
+            else
+            {
+                options.FontSize = BodyFontSize.Medium;
+            }
             options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
             options.IncludeNewsContent = cbIncludeNewsContent.Checked;
             options.IncludeLogos = cbIncludeLogos.Checked;
@@ -93,6 +105,8 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.EventTitleBold = cbEeventTitleBold.Checked;
             options.NewsTitleBold = cbNewsTitleBold.Checked;
             options.OrganizationTitleBold = cbOrganizationTitleBold.Checked;
+            options.Nummer = (int)udNummer.Value;
+            options.PublicatieDatum = dpPublicatieDatum.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
             var reportPath = reporter.GetReportPath();

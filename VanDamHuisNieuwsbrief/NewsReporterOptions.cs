@@ -6,22 +6,25 @@ using System.Threading.Tasks;
 
 namespace VanDamHuisNieuwsbriefGenerator
 {
+    public enum BodyFontSize { Small, Medium, Large}
     public class NewsReporterOptions
     {
         public bool ForPrint { get; set; }
-        public bool PrintLinks { get; set; }
         public bool IncludeNewsPublicationDate { get; set; }
         public bool IncludeAgenda { get; set; }
         public bool IncludeNewsContent { get; set; }
         public bool IncludeNewsSummary { get; set; }
         public bool AgendaVooraan { get; set; }
-        public bool LargeFont { get; set; }
+        public BodyFontSize FontSize { get; set; }
         public bool IncludeLogos { get; set; }
         public int LogoHeight { get; set; }
         public bool LogoAfterHeading { get; set; }
         public bool EventTitleBold { get; set; }
         public bool NewsTitleBold { get; set; }
         public bool OrganizationTitleBold { get; set; }
+        public int Nummer { get; set; }
+        public DateTime PublicatieDatum { get; set; }
+
      
     }
 }

@@ -42,7 +42,6 @@
             this.dpAgendaTot = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dpAgendaVanaf = new System.Windows.Forms.DateTimePicker();
-            this.cbPaperLinks = new System.Windows.Forms.CheckBox();
             this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbIncludeLogos = new System.Windows.Forms.CheckBox();
@@ -68,6 +67,11 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.udNummer = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dpPublicatieDatum = new System.Windows.Forms.DateTimePicker();
+            this.rb9pt = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,6 +84,7 @@
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udNummer)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -130,7 +135,7 @@
             // 
             this.groupBox1.Controls.Add(this.rbpaper);
             this.groupBox1.Controls.Add(this.rbdigital);
-            this.groupBox1.Location = new System.Drawing.Point(467, 178);
+            this.groupBox1.Location = new System.Drawing.Point(467, 174);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(112, 79);
             this.groupBox1.TabIndex = 32;
@@ -203,16 +208,6 @@
             this.dpAgendaVanaf.Size = new System.Drawing.Size(200, 20);
             this.dpAgendaVanaf.TabIndex = 37;
             // 
-            // cbPaperLinks
-            // 
-            this.cbPaperLinks.AutoSize = true;
-            this.cbPaperLinks.Location = new System.Drawing.Point(6, 119);
-            this.cbPaperLinks.Name = "cbPaperLinks";
-            this.cbPaperLinks.Size = new System.Drawing.Size(168, 17);
-            this.cbPaperLinks.TabIndex = 38;
-            this.cbPaperLinks.Text = "Links in papieren nieuwsbrief?";
-            this.cbPaperLinks.UseVisualStyleBackColor = true;
-            // 
             // cbNewsPubdate
             // 
             this.cbNewsPubdate.AutoSize = true;
@@ -229,9 +224,8 @@
             this.groupBox2.Controls.Add(this.cbIncludeNewsSummary);
             this.groupBox2.Controls.Add(this.cbIncludeNewsContent);
             this.groupBox2.Controls.Add(this.cbAgenda);
-            this.groupBox2.Controls.Add(this.cbPaperLinks);
             this.groupBox2.Controls.Add(this.cbNewsPubdate);
-            this.groupBox2.Location = new System.Drawing.Point(30, 178);
+            this.groupBox2.Location = new System.Drawing.Point(30, 174);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(221, 181);
             this.groupBox2.TabIndex = 40;
@@ -243,7 +237,7 @@
             this.cbIncludeLogos.AutoSize = true;
             this.cbIncludeLogos.Checked = true;
             this.cbIncludeLogos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIncludeLogos.Location = new System.Drawing.Point(7, 143);
+            this.cbIncludeLogos.Location = new System.Drawing.Point(6, 117);
             this.cbIncludeLogos.Name = "cbIncludeLogos";
             this.cbIncludeLogos.Size = new System.Drawing.Size(104, 17);
             this.cbIncludeLogos.TabIndex = 42;
@@ -276,7 +270,7 @@
             // 
             this.groupBox3.Controls.Add(this.rbAchteraan);
             this.groupBox3.Controls.Add(this.rbAgendaVooraan);
-            this.groupBox3.Location = new System.Drawing.Point(361, 178);
+            this.groupBox3.Location = new System.Drawing.Point(361, 174);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(100, 79);
             this.groupBox3.TabIndex = 41;
@@ -308,11 +302,12 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.rb9pt);
             this.groupBox4.Controls.Add(this.rb12pt);
             this.groupBox4.Controls.Add(this.rb10pt);
-            this.groupBox4.Location = new System.Drawing.Point(257, 178);
+            this.groupBox4.Location = new System.Drawing.Point(257, 174);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(98, 79);
+            this.groupBox4.Size = new System.Drawing.Size(98, 102);
             this.groupBox4.TabIndex = 42;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lettergrootte";
@@ -320,7 +315,7 @@
             // rb12pt
             // 
             this.rb12pt.AutoSize = true;
-            this.rb12pt.Location = new System.Drawing.Point(16, 52);
+            this.rb12pt.Location = new System.Drawing.Point(16, 73);
             this.rb12pt.Name = "rb12pt";
             this.rb12pt.Size = new System.Drawing.Size(46, 17);
             this.rb12pt.TabIndex = 1;
@@ -332,7 +327,7 @@
             // 
             this.rb10pt.AutoSize = true;
             this.rb10pt.Checked = true;
-            this.rb10pt.Location = new System.Drawing.Point(16, 28);
+            this.rb10pt.Location = new System.Drawing.Point(16, 49);
             this.rb10pt.Name = "rb10pt";
             this.rb10pt.Size = new System.Drawing.Size(55, 17);
             this.rb10pt.TabIndex = 0;
@@ -356,9 +351,9 @@
             // 
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.udLogoHeight);
-            this.groupBox5.Location = new System.Drawing.Point(257, 263);
+            this.groupBox5.Location = new System.Drawing.Point(257, 282);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(98, 96);
+            this.groupBox5.Size = new System.Drawing.Size(98, 73);
             this.groupBox5.TabIndex = 44;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Logo hoogte";
@@ -388,7 +383,7 @@
             // 
             this.groupBox6.Controls.Add(this.rbLogoNaKop);
             this.groupBox6.Controls.Add(this.rbLogoVoorKop);
-            this.groupBox6.Location = new System.Drawing.Point(361, 263);
+            this.groupBox6.Location = new System.Drawing.Point(361, 259);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(100, 96);
             this.groupBox6.TabIndex = 45;
@@ -422,7 +417,7 @@
             this.groupBox7.Controls.Add(this.cbOrganizationTitleBold);
             this.groupBox7.Controls.Add(this.cbNewsTitleBold);
             this.groupBox7.Controls.Add(this.cbEeventTitleBold);
-            this.groupBox7.Location = new System.Drawing.Point(467, 263);
+            this.groupBox7.Location = new System.Drawing.Point(467, 259);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(112, 96);
             this.groupBox7.TabIndex = 46;
@@ -432,6 +427,8 @@
             // cbOrganizationTitleBold
             // 
             this.cbOrganizationTitleBold.AutoSize = true;
+            this.cbOrganizationTitleBold.Checked = true;
+            this.cbOrganizationTitleBold.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbOrganizationTitleBold.Location = new System.Drawing.Point(15, 65);
             this.cbOrganizationTitleBold.Name = "cbOrganizationTitleBold";
             this.cbOrganizationTitleBold.Size = new System.Drawing.Size(79, 17);
@@ -442,6 +439,8 @@
             // cbNewsTitleBold
             // 
             this.cbNewsTitleBold.AutoSize = true;
+            this.cbNewsTitleBold.Checked = true;
+            this.cbNewsTitleBold.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbNewsTitleBold.Location = new System.Drawing.Point(15, 41);
             this.cbNewsTitleBold.Name = "cbNewsTitleBold";
             this.cbNewsTitleBold.Size = new System.Drawing.Size(61, 17);
@@ -461,13 +460,17 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.dpPublicatieDatum);
+            this.groupBox8.Controls.Add(this.label7);
+            this.groupBox8.Controls.Add(this.udNummer);
+            this.groupBox8.Controls.Add(this.label6);
             this.groupBox8.Controls.Add(this.label1);
             this.groupBox8.Controls.Add(this.label2);
             this.groupBox8.Controls.Add(this.DateFromPicker);
             this.groupBox8.Controls.Add(this.MaxPosts);
             this.groupBox8.Location = new System.Drawing.Point(30, 23);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(226, 149);
+            this.groupBox8.Size = new System.Drawing.Size(437, 131);
             this.groupBox8.TabIndex = 47;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Nieuwsbrief";
@@ -478,9 +481,9 @@
             this.groupBox9.Controls.Add(this.label3);
             this.groupBox9.Controls.Add(this.dpAgendaTot);
             this.groupBox9.Controls.Add(this.dpAgendaVanaf);
-            this.groupBox9.Location = new System.Drawing.Point(263, 23);
+            this.groupBox9.Location = new System.Drawing.Point(473, 23);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(316, 149);
+            this.groupBox9.Size = new System.Drawing.Size(232, 131);
             this.groupBox9.TabIndex = 48;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Agenda";
@@ -489,18 +492,66 @@
             // 
             this.groupBox10.Controls.Add(this.button1);
             this.groupBox10.Controls.Add(this.DocPathValue);
-            this.groupBox10.Location = new System.Drawing.Point(30, 365);
+            this.groupBox10.Location = new System.Drawing.Point(30, 361);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(549, 84);
             this.groupBox10.TabIndex = 49;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rapport";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(224, 77);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.TabIndex = 44;
+            this.label6.Text = "Nummer";
+            // 
+            // udNummer
+            // 
+            this.udNummer.Location = new System.Drawing.Point(224, 93);
+            this.udNummer.Name = "udNummer";
+            this.udNummer.Size = new System.Drawing.Size(72, 20);
+            this.udNummer.TabIndex = 45;
+            this.udNummer.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(224, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 13);
+            this.label7.TabIndex = 46;
+            this.label7.Text = "Publicatiedatum";
+            // 
+            // dpPublicatieDatum
+            // 
+            this.dpPublicatieDatum.Location = new System.Drawing.Point(224, 42);
+            this.dpPublicatieDatum.Name = "dpPublicatieDatum";
+            this.dpPublicatieDatum.Size = new System.Drawing.Size(199, 20);
+            this.dpPublicatieDatum.TabIndex = 47;
+            // 
+            // rb9pt
+            // 
+            this.rb9pt.AutoSize = true;
+            this.rb9pt.Location = new System.Drawing.Point(16, 25);
+            this.rb9pt.Name = "rb9pt";
+            this.rb9pt.Size = new System.Drawing.Size(40, 17);
+            this.rb9pt.TabIndex = 2;
+            this.rb9pt.TabStop = true;
+            this.rb9pt.Text = "9pt";
+            this.rb9pt.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 469);
+            this.ClientSize = new System.Drawing.Size(735, 493);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -536,6 +587,7 @@
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udNummer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,7 +607,6 @@
         private System.Windows.Forms.DateTimePicker dpAgendaTot;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dpAgendaVanaf;
-        private System.Windows.Forms.CheckBox cbPaperLinks;
         private System.Windows.Forms.CheckBox cbNewsPubdate;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -581,6 +632,11 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.DateTimePicker dpPublicatieDatum;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown udNummer;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton rb9pt;
     }
 }
 

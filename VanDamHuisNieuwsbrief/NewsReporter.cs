@@ -63,10 +63,23 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private void RenderStyle(StringBuilder sb, NewsReporterOptions options)
         {
-            var fp = options.LargeFont ? "12pt" : "10.5pt";
-            var fh1 = options.LargeFont ? "16pt" : "14pt";
-            var fh2 = options.LargeFont ? "14pt" : "12pt";
+            var fp = "10.5pt";
+            var fh1 = "14pt";
+            var fh2 = "12pt";
 
+            if (options.FontSize == BodyFontSize.Large)
+            {
+                fp = "12pt";
+                fh1 = "16pt";
+                fh2 = "14pt";
+            }
+            else if (options.FontSize == BodyFontSize.Small)
+            {
+                fp = "9pt";
+                fh1 = "14pt";
+                fh2 = "12pt";
+            }
+ 
             string getBold()
             {
                 return options.ForPrint ? "font-family: 'Rubik Medium' !important;" : "font-weight: 500 !important;";
@@ -176,11 +189,20 @@ span.title {{
 </style>");
         }
 
+        public Organization GetVanDamHuis(NewsLetter newsLetter)
+        {
+            return newsLetter.Organizations.FirstOrDefault(p => p.Name == "Van Dam Huis");
+        }
+
         public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
             RenderHeader(sb, options);
             
+            if (options.ForPrint)
+            {
+                RenderPaperIntro(sb, newsLetter, options);
+            }
 
             if (options.IncludeAgenda && options.AgendaVooraan)
             {
@@ -209,6 +231,16 @@ span.title {{
             //return path;
             return html;
 
+        }
+
+        private void RenderPaperIntro(StringBuilder sb, NewsLetter newsLetter, NewsReporterOptions options)
+        {
+            var organization = GetVanDamHuis(newsLetter);
+            RenderLogo(sb, organization, options);
+
+            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Nieuwsbrief nr {options.Nummer} van het Van Dam Huis <span class='publication-date'>{options.PublicatieDatum:d MMMM yyyy}</span></h1>");
+
+            sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Burea Ouder & Kindzorg en Patiëntenvereniging De Keerkring. Deze vier organisaties komen samen in de Van Dam Huis Nieuwsbrief, welke 10 maal per jaar digitaal zal verschijnen. Inschrijven kan op onze website: vandamhuis.nl</p>");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
@@ -266,11 +298,7 @@ span.title {{
             }
             else
             {
-                sb.Append($"<p class='news-title'>{item.Title}</p>");
-                if (options.PrintLinks)
-                {
-                    sb.Append($"<p>{item.Url}</p>");
-                }
+                sb.Append($"<h2 class='news-title'>{item.Title}</h2>");
             }
             if (options.IncludeNewsPublicationDate)
             {
