@@ -237,7 +237,14 @@ span.title {{
 
             sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
 
-            sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Burea Ouder & Kindzorg en Patiëntenvereniging De Keerkring. Deze vier organisaties komen samen in de Van Dam Huis Nieuwsbrief, welke 10 maal per jaar digitaal zal verschijnen. Inschrijven kan op onze website: vandamhuis.nl</p>");
+            if (options.ForPrint)
+            {
+                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Burea Ouder & Kindzorg en Patiëntenvereniging De Keerkring. Deze vier organisaties komen samen in de Van Dam Huis Nieuwsbrief, welke 10 maal per jaar digitaal zal verschijnen. Inschrijven kan op onze website: vandamhuis.nl</p>");
+            }
+            else
+            {
+                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
+            }
 
             sb.AppendLine(@"<p>Inhoud van de nieuwsbrief</p>
 <ul>
