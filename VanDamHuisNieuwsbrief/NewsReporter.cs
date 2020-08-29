@@ -87,7 +87,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             string getNormal ()
             {
-                return "font-weight: 300 !important";
+                return "font-weight: 300 !important;";
             }
 
             var eventTitleWeight = options.EventTitleBold ? getBold() : getNormal();
@@ -100,7 +100,7 @@ html, p, section.nieuwsbrief * {{
     font-family: 'Rubik', sans-serif !important;
     font-size: {fp} !important;
     font-weight: 300 !important;
-    color: #222 !important;
+    color: {options.FontColor} !important;
 }}
 
 section.nieuwsbrief img {{
@@ -130,13 +130,17 @@ section.nieuwsbrief p span.event-title > a {{
 
 }}
 
-section.nieuwsbrief p.news-title,
+section.nieuwsbrief h2.news-title,
 section.nieuwsbrief a > h2.news-title {{
     {newsTitleWeight}
 }}
 
+section.nieuwsbrief a > h2.news-title {{
+    color: {options.LinkColor} !important;
+}}
+
 section.nieuwsbrief a {{
-    color: #222 !important;
+    color: {options.LinkColor} !important;
 }}
 
 section.nieuwsbrief h1.organization-title,
@@ -201,23 +205,14 @@ span.title {{
             
             RenderIntro(sb, newsLetter, options);
 
-            if (options.IncludeAgenda && options.AgendaVooraan)
-            {
-                RenderAgenda(sb, agenda, options);
-            }
+            RenderAgenda(sb, agenda, options);
 
             foreach (var organization in newsLetter.Organizations)
             {
                 sb.AppendLine(GenerateOrganizationReport(organization, options));
             }
 
-            if (options.IncludeAgenda && !options.AgendaVooraan)
-            {
-                RenderAgenda(sb, agenda, options);
-            }
-
             RenderStyle(sb, options);
-            
 
             sb.AppendLine("</section></body></html>");
 
@@ -237,57 +232,48 @@ span.title {{
 
             sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
 
-            if (options.ForPrint)
-            {
-                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Burea Ouder & Kindzorg en Patiëntenvereniging De Keerkring. Deze vier organisaties komen samen in de Van Dam Huis Nieuwsbrief, welke 10 maal per jaar digitaal zal verschijnen. Inschrijven kan op onze website: vandamhuis.nl</p>");
-            }
-            else
-            {
-                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
-            }
-
+            sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Bureau Ouder- & Kindzorg en Patiëntenvereniging De Keerkring.</p>");
+  
             sb.AppendLine(@"<p>Inhoud van de nieuwsbrief</p>
 <ul>
-    <li><a href='#agenda'>Agenda</a></li>
-    <li><a href='#vdh'>Van Dam Huis</a></li>
-    <li><a href='#gth'>Gezondheidscentrum Therapeuticum</a></li>
-    <li><a href='#avh'>Antroposofische Vereniging</a></li>
-    <li><a href='#pvk'>Patiëntenvereniging De Keerkring</a></li>
+    <li>Agenda</li>
+    <li>Van Dam Huis</li>
+    <li>Gezondheidscentrum Therapeuticum</li>
+    <li>Antroposofische Vereniging</li>
+    <li>Patiëntenvereniging De Keerkring</li>
 </ul>");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
         {
-            if (options.IncludeLogos)
-            {
-                string logo = "";
-                int h = options.LogoHeight;
-                int w = (int)(h * organization.LogoRatio);
+            string logo = "";
+            int h = options.LogoHeight;
+            int w = (int)(h * organization.LogoRatio);
 
-                if (options.ForPrint)
-                {
-                    logo = $"<div class='logo'><img src='{organization.LogoUrl}'width='{w}px' height='{h}px'></div>";
-                }
-                else
-                {
-                    logo = $"<div class='logo'><img src='{organization.LogoUrl}' width='{w}px' height='{h}px'></div>";
-                }
-                sb.AppendLine(logo);
+            if (options.ForPrint)
+            {
+                logo = $"<div class='logo'><img src='{organization.LogoUrl}'width='{w}px' height='{h}px'></div>";
             }
+            else
+            {
+                logo = $"<div class='logo'><img src='{organization.LogoUrl}' width='{w}px' height='{h}px'></div>";
+            }
+            sb.AppendLine(logo);
+
         }
 
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
             
-            if (options.IncludeLogos && !options.LogoAfterHeading)
+            if (!options.LogoAfterHeading)
             {
                 RenderLogo(sb, organization, options);
             }
 
-            sb.AppendLine($"<h1 id='{organization.Id}' class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
+            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
 
-            if (options.IncludeLogos && options.LogoAfterHeading)
+            if (options.LogoAfterHeading)
             {
                 RenderLogo(sb, organization, options);
             }
@@ -312,10 +298,6 @@ span.title {{
             else
             {
                 sb.Append($"<h2 class='news-title'>{item.Title}</h2>");
-            }
-            if (options.IncludeNewsPublicationDate)
-            {
-                sb.Append("<div class='publishdate'>" + item.PublishDate.ToString("d MMMM yyyy", ciNL.DateTimeFormat) + "</div>");
             }
 
             if (options.IncludeNewsSummary && !string.IsNullOrWhiteSpace(item.Summary))

@@ -37,25 +37,18 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbpaper = new System.Windows.Forms.RadioButton();
             this.rbdigital = new System.Windows.Forms.RadioButton();
-            this.cbAgenda = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dpAgendaTot = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dpAgendaVanaf = new System.Windows.Forms.DateTimePicker();
-            this.cbNewsPubdate = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbIncludeLogos = new System.Windows.Forms.CheckBox();
             this.cbIncludeNewsSummary = new System.Windows.Forms.CheckBox();
             this.cbIncludeNewsContent = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rbAchteraan = new System.Windows.Forms.RadioButton();
-            this.rbAgendaVooraan = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rb9pt = new System.Windows.Forms.RadioButton();
             this.rb12pt = new System.Windows.Forms.RadioButton();
             this.rb10pt = new System.Windows.Forms.RadioButton();
             this.MaxPosts = new System.Windows.Forms.NumericUpDown();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.udLogoHeight = new System.Windows.Forms.NumericUpDown();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -64,24 +57,23 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.cbOrganizationTitleBold = new System.Windows.Forms.CheckBox();
             this.cbNewsTitleBold = new System.Windows.Forms.CheckBox();
-            this.cbEeventTitleBold = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.dpPublicatieDatum = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
-            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLogoHeight)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -108,9 +100,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 13);
+            this.label2.Size = new System.Drawing.Size(146, 13);
             this.label2.TabIndex = 23;
-            this.label2.Text = "Maximum aantal berichten per organisatie";
+            this.label2.Text = "Max berichten per organisatie";
             // 
             // DocPathValue
             // 
@@ -123,18 +115,19 @@
             // 
             // DateFromPicker
             // 
+            this.DateFromPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DateFromPicker.Location = new System.Drawing.Point(9, 42);
             this.DateFromPicker.Name = "DateFromPicker";
-            this.DateFromPicker.Size = new System.Drawing.Size(200, 20);
+            this.DateFromPicker.Size = new System.Drawing.Size(102, 20);
             this.DateFromPicker.TabIndex = 30;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbpaper);
             this.groupBox1.Controls.Add(this.rbdigital);
-            this.groupBox1.Location = new System.Drawing.Point(467, 211);
+            this.groupBox1.Location = new System.Drawing.Point(349, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(112, 79);
+            this.groupBox1.Size = new System.Drawing.Size(195, 58);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nieuwsbrief media";
@@ -142,7 +135,7 @@
             // rbpaper
             // 
             this.rbpaper.AutoSize = true;
-            this.rbpaper.Location = new System.Drawing.Point(19, 48);
+            this.rbpaper.Location = new System.Drawing.Point(97, 25);
             this.rbpaper.Name = "rbpaper";
             this.rbpaper.Size = new System.Drawing.Size(54, 17);
             this.rbpaper.TabIndex = 1;
@@ -161,18 +154,6 @@
             this.rbdigital.Text = "digitaal";
             this.rbdigital.UseVisualStyleBackColor = true;
             // 
-            // cbAgenda
-            // 
-            this.cbAgenda.AutoSize = true;
-            this.cbAgenda.Checked = true;
-            this.cbAgenda.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAgenda.Location = new System.Drawing.Point(6, 19);
-            this.cbAgenda.Name = "cbAgenda";
-            this.cbAgenda.Size = new System.Drawing.Size(110, 17);
-            this.cbAgenda.TabIndex = 33;
-            this.cbAgenda.Text = "Agenda opnemen";
-            this.cbAgenda.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -184,9 +165,10 @@
             // 
             // dpAgendaTot
             // 
+            this.dpAgendaTot.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpAgendaTot.Location = new System.Drawing.Point(11, 93);
             this.dpAgendaTot.Name = "dpAgendaTot";
-            this.dpAgendaTot.Size = new System.Drawing.Size(200, 20);
+            this.dpAgendaTot.Size = new System.Drawing.Size(101, 20);
             this.dpAgendaTot.TabIndex = 35;
             // 
             // label4
@@ -200,55 +182,31 @@
             // 
             // dpAgendaVanaf
             // 
+            this.dpAgendaVanaf.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpAgendaVanaf.Location = new System.Drawing.Point(11, 42);
             this.dpAgendaVanaf.Name = "dpAgendaVanaf";
-            this.dpAgendaVanaf.Size = new System.Drawing.Size(200, 20);
+            this.dpAgendaVanaf.Size = new System.Drawing.Size(101, 20);
             this.dpAgendaVanaf.TabIndex = 37;
-            // 
-            // cbNewsPubdate
-            // 
-            this.cbNewsPubdate.AutoSize = true;
-            this.cbNewsPubdate.Location = new System.Drawing.Point(6, 44);
-            this.cbNewsPubdate.Name = "cbNewsPubdate";
-            this.cbNewsPubdate.Size = new System.Drawing.Size(184, 17);
-            this.cbNewsPubdate.TabIndex = 39;
-            this.cbNewsPubdate.Text = "Publicatiedatum nieuws opnemen";
-            this.cbNewsPubdate.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cbIncludeLogos);
             this.groupBox2.Controls.Add(this.cbIncludeNewsSummary);
             this.groupBox2.Controls.Add(this.cbIncludeNewsContent);
-            this.groupBox2.Controls.Add(this.cbAgenda);
-            this.groupBox2.Controls.Add(this.cbNewsPubdate);
-            this.groupBox2.Location = new System.Drawing.Point(30, 211);
+            this.groupBox2.Location = new System.Drawing.Point(349, 87);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(221, 181);
+            this.groupBox2.Size = new System.Drawing.Size(195, 118);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inhoud";
             // 
-            // cbIncludeLogos
-            // 
-            this.cbIncludeLogos.AutoSize = true;
-            this.cbIncludeLogos.Checked = true;
-            this.cbIncludeLogos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIncludeLogos.Location = new System.Drawing.Point(6, 117);
-            this.cbIncludeLogos.Name = "cbIncludeLogos";
-            this.cbIncludeLogos.Size = new System.Drawing.Size(104, 17);
-            this.cbIncludeLogos.TabIndex = 42;
-            this.cbIncludeLogos.Text = "Logo\'s opnemen";
-            this.cbIncludeLogos.UseVisualStyleBackColor = true;
-            // 
             // cbIncludeNewsSummary
             // 
             this.cbIncludeNewsSummary.AutoSize = true;
-            this.cbIncludeNewsSummary.Location = new System.Drawing.Point(6, 94);
+            this.cbIncludeNewsSummary.Location = new System.Drawing.Point(9, 44);
             this.cbIncludeNewsSummary.Name = "cbIncludeNewsSummary";
-            this.cbIncludeNewsSummary.Size = new System.Drawing.Size(174, 17);
+            this.cbIncludeNewsSummary.Size = new System.Drawing.Size(91, 17);
             this.cbIncludeNewsSummary.TabIndex = 41;
-            this.cbIncludeNewsSummary.Text = "Samenvatting nieuws opnemen";
+            this.cbIncludeNewsSummary.Text = "Samenvatting";
             this.cbIncludeNewsSummary.UseVisualStyleBackColor = true;
             // 
             // cbIncludeNewsContent
@@ -256,55 +214,21 @@
             this.cbIncludeNewsContent.AutoSize = true;
             this.cbIncludeNewsContent.Checked = true;
             this.cbIncludeNewsContent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIncludeNewsContent.Location = new System.Drawing.Point(6, 69);
+            this.cbIncludeNewsContent.Location = new System.Drawing.Point(9, 19);
             this.cbIncludeNewsContent.Name = "cbIncludeNewsContent";
-            this.cbIncludeNewsContent.Size = new System.Drawing.Size(142, 17);
+            this.cbIncludeNewsContent.Size = new System.Drawing.Size(98, 17);
             this.cbIncludeNewsContent.TabIndex = 40;
-            this.cbIncludeNewsContent.Text = "Inhoud nieuws opnemen";
+            this.cbIncludeNewsContent.Text = "Volledig bericht";
             this.cbIncludeNewsContent.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.rbAchteraan);
-            this.groupBox3.Controls.Add(this.rbAgendaVooraan);
-            this.groupBox3.Location = new System.Drawing.Point(361, 211);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(100, 79);
-            this.groupBox3.TabIndex = 41;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Agenda positie";
-            // 
-            // rbAchteraan
-            // 
-            this.rbAchteraan.AutoSize = true;
-            this.rbAchteraan.Location = new System.Drawing.Point(18, 49);
-            this.rbAchteraan.Name = "rbAchteraan";
-            this.rbAchteraan.Size = new System.Drawing.Size(74, 17);
-            this.rbAchteraan.TabIndex = 1;
-            this.rbAchteraan.TabStop = true;
-            this.rbAchteraan.Text = "Achteraan";
-            this.rbAchteraan.UseVisualStyleBackColor = true;
-            // 
-            // rbAgendaVooraan
-            // 
-            this.rbAgendaVooraan.AutoSize = true;
-            this.rbAgendaVooraan.Checked = true;
-            this.rbAgendaVooraan.Location = new System.Drawing.Point(18, 25);
-            this.rbAgendaVooraan.Name = "rbAgendaVooraan";
-            this.rbAgendaVooraan.Size = new System.Drawing.Size(65, 17);
-            this.rbAgendaVooraan.TabIndex = 0;
-            this.rbAgendaVooraan.TabStop = true;
-            this.rbAgendaVooraan.Text = "Vooraan";
-            this.rbAgendaVooraan.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rb9pt);
             this.groupBox4.Controls.Add(this.rb12pt);
             this.groupBox4.Controls.Add(this.rb10pt);
-            this.groupBox4.Location = new System.Drawing.Point(257, 211);
+            this.groupBox4.Location = new System.Drawing.Point(30, 211);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(98, 102);
+            this.groupBox4.Size = new System.Drawing.Size(99, 106);
             this.groupBox4.TabIndex = 42;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lettergrootte";
@@ -323,7 +247,7 @@
             // rb12pt
             // 
             this.rb12pt.AutoSize = true;
-            this.rb12pt.Location = new System.Drawing.Point(16, 73);
+            this.rb12pt.Location = new System.Drawing.Point(16, 71);
             this.rb12pt.Name = "rb12pt";
             this.rb12pt.Size = new System.Drawing.Size(46, 17);
             this.rb12pt.TabIndex = 1;
@@ -335,7 +259,7 @@
             // 
             this.rb10pt.AutoSize = true;
             this.rb10pt.Checked = true;
-            this.rb10pt.Location = new System.Drawing.Point(16, 49);
+            this.rb10pt.Location = new System.Drawing.Point(16, 48);
             this.rb10pt.Name = "rb10pt";
             this.rb10pt.Size = new System.Drawing.Size(55, 17);
             this.rb10pt.TabIndex = 0;
@@ -355,21 +279,10 @@
             0,
             0});
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.udLogoHeight);
-            this.groupBox5.Location = new System.Drawing.Point(257, 319);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(98, 73);
-            this.groupBox5.TabIndex = 44;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Logo hoogte";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(68, 22);
+            this.label5.Location = new System.Drawing.Point(63, 28);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(18, 13);
             this.label5.TabIndex = 1;
@@ -377,7 +290,7 @@
             // 
             // udLogoHeight
             // 
-            this.udLogoHeight.Location = new System.Drawing.Point(16, 20);
+            this.udLogoHeight.Location = new System.Drawing.Point(11, 28);
             this.udLogoHeight.Name = "udLogoHeight";
             this.udLogoHeight.Size = new System.Drawing.Size(46, 20);
             this.udLogoHeight.TabIndex = 0;
@@ -391,9 +304,9 @@
             // 
             this.groupBox6.Controls.Add(this.rbLogoNaKop);
             this.groupBox6.Controls.Add(this.rbLogoVoorKop);
-            this.groupBox6.Location = new System.Drawing.Point(361, 296);
+            this.groupBox6.Location = new System.Drawing.Point(135, 211);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(100, 96);
+            this.groupBox6.Size = new System.Drawing.Size(103, 106);
             this.groupBox6.TabIndex = 45;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Logo positie";
@@ -402,7 +315,7 @@
             // 
             this.rbLogoNaKop.AutoSize = true;
             this.rbLogoNaKop.Checked = true;
-            this.rbLogoNaKop.Location = new System.Drawing.Point(18, 41);
+            this.rbLogoNaKop.Location = new System.Drawing.Point(18, 48);
             this.rbLogoNaKop.Name = "rbLogoNaKop";
             this.rbLogoNaKop.Size = new System.Drawing.Size(60, 17);
             this.rbLogoNaKop.TabIndex = 1;
@@ -413,7 +326,7 @@
             // rbLogoVoorKop
             // 
             this.rbLogoVoorKop.AutoSize = true;
-            this.rbLogoVoorKop.Location = new System.Drawing.Point(18, 18);
+            this.rbLogoVoorKop.Location = new System.Drawing.Point(18, 24);
             this.rbLogoVoorKop.Name = "rbLogoVoorKop";
             this.rbLogoVoorKop.Size = new System.Drawing.Size(68, 17);
             this.rbLogoVoorKop.TabIndex = 0;
@@ -424,10 +337,9 @@
             // 
             this.groupBox7.Controls.Add(this.cbOrganizationTitleBold);
             this.groupBox7.Controls.Add(this.cbNewsTitleBold);
-            this.groupBox7.Controls.Add(this.cbEeventTitleBold);
-            this.groupBox7.Location = new System.Drawing.Point(467, 296);
+            this.groupBox7.Location = new System.Drawing.Point(349, 211);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(112, 96);
+            this.groupBox7.Size = new System.Drawing.Size(195, 106);
             this.groupBox7.TabIndex = 46;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Titels vet maken";
@@ -437,7 +349,7 @@
             this.cbOrganizationTitleBold.AutoSize = true;
             this.cbOrganizationTitleBold.Checked = true;
             this.cbOrganizationTitleBold.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbOrganizationTitleBold.Location = new System.Drawing.Point(15, 65);
+            this.cbOrganizationTitleBold.Location = new System.Drawing.Point(15, 49);
             this.cbOrganizationTitleBold.Name = "cbOrganizationTitleBold";
             this.cbOrganizationTitleBold.Size = new System.Drawing.Size(79, 17);
             this.cbOrganizationTitleBold.TabIndex = 2;
@@ -449,22 +361,12 @@
             this.cbNewsTitleBold.AutoSize = true;
             this.cbNewsTitleBold.Checked = true;
             this.cbNewsTitleBold.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbNewsTitleBold.Location = new System.Drawing.Point(15, 41);
+            this.cbNewsTitleBold.Location = new System.Drawing.Point(15, 24);
             this.cbNewsTitleBold.Name = "cbNewsTitleBold";
             this.cbNewsTitleBold.Size = new System.Drawing.Size(61, 17);
             this.cbNewsTitleBold.TabIndex = 1;
             this.cbNewsTitleBold.Text = "Nieuws";
             this.cbNewsTitleBold.UseVisualStyleBackColor = true;
-            // 
-            // cbEeventTitleBold
-            // 
-            this.cbEeventTitleBold.AutoSize = true;
-            this.cbEeventTitleBold.Location = new System.Drawing.Point(15, 17);
-            this.cbEeventTitleBold.Name = "cbEeventTitleBold";
-            this.cbEeventTitleBold.Size = new System.Drawing.Size(80, 17);
-            this.cbEeventTitleBold.TabIndex = 0;
-            this.cbEeventTitleBold.Text = "Evenement";
-            this.cbEeventTitleBold.UseVisualStyleBackColor = true;
             // 
             // groupBox8
             // 
@@ -476,16 +378,17 @@
             this.groupBox8.Controls.Add(this.MaxPosts);
             this.groupBox8.Location = new System.Drawing.Point(30, 23);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(221, 182);
+            this.groupBox8.Size = new System.Drawing.Size(171, 182);
             this.groupBox8.TabIndex = 47;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Nieuwsbrief";
             // 
             // dpPublicatieDatum
             // 
+            this.dpPublicatieDatum.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpPublicatieDatum.Location = new System.Drawing.Point(9, 143);
             this.dpPublicatieDatum.Name = "dpPublicatieDatum";
-            this.dpPublicatieDatum.Size = new System.Drawing.Size(199, 20);
+            this.dpPublicatieDatum.Size = new System.Drawing.Size(102, 20);
             this.dpPublicatieDatum.TabIndex = 47;
             // 
             // label7
@@ -503,9 +406,9 @@
             this.groupBox9.Controls.Add(this.label3);
             this.groupBox9.Controls.Add(this.dpAgendaTot);
             this.groupBox9.Controls.Add(this.dpAgendaVanaf);
-            this.groupBox9.Location = new System.Drawing.Point(257, 32);
+            this.groupBox9.Location = new System.Drawing.Point(207, 23);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(322, 173);
+            this.groupBox9.Size = new System.Drawing.Size(136, 182);
             this.groupBox9.TabIndex = 48;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Agenda";
@@ -514,26 +417,36 @@
             // 
             this.groupBox10.Controls.Add(this.button1);
             this.groupBox10.Controls.Add(this.DocPathValue);
-            this.groupBox10.Location = new System.Drawing.Point(30, 398);
+            this.groupBox10.Location = new System.Drawing.Point(30, 338);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(549, 84);
+            this.groupBox10.Size = new System.Drawing.Size(514, 84);
             this.groupBox10.TabIndex = 49;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rapport";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.udLogoHeight);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Location = new System.Drawing.Point(244, 211);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(99, 106);
+            this.groupBox3.TabIndex = 50;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Logo hoogte";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 505);
+            this.ClientSize = new System.Drawing.Size(565, 440);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -543,13 +456,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLogoHeight)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -561,6 +470,8 @@
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -575,24 +486,17 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbpaper;
         private System.Windows.Forms.RadioButton rbdigital;
-        private System.Windows.Forms.CheckBox cbAgenda;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dpAgendaTot;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dpAgendaVanaf;
-        private System.Windows.Forms.CheckBox cbNewsPubdate;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton rbAchteraan;
-        private System.Windows.Forms.RadioButton rbAgendaVooraan;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rb12pt;
         private System.Windows.Forms.RadioButton rb10pt;
         private System.Windows.Forms.NumericUpDown MaxPosts;
         private System.Windows.Forms.CheckBox cbIncludeNewsSummary;
         private System.Windows.Forms.CheckBox cbIncludeNewsContent;
-        private System.Windows.Forms.CheckBox cbIncludeLogos;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown udLogoHeight;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -601,13 +505,13 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox cbOrganizationTitleBold;
         private System.Windows.Forms.CheckBox cbNewsTitleBold;
-        private System.Windows.Forms.CheckBox cbEeventTitleBold;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.DateTimePicker dpPublicatieDatum;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RadioButton rb9pt;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

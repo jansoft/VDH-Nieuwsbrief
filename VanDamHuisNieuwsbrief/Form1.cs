@@ -74,16 +74,10 @@ namespace VanDamHuisNieuwsbriefGenerator
             var newsLetter = LoadNewsFeeds(GetAfter(), Convert.ToInt32(MaxPosts.Value), true);
 
             List<AgendaEvent> agenda = new List<AgendaEvent>();
-            if (cbAgenda.Checked)
-            {
-                agenda = GetAgenda();
-            }
+            agenda = GetAgenda();
 
             var options = new NewsReporterOptions();
             options.ForPrint = rbpaper.Checked;
-            options.IncludeNewsPublicationDate = cbNewsPubdate.Checked;
-            options.IncludeAgenda = cbAgenda.Checked;
-            options.AgendaVooraan = rbAgendaVooraan.Checked;
 
             if (rb9pt.Checked)
             {
@@ -97,12 +91,13 @@ namespace VanDamHuisNieuwsbriefGenerator
             {
                 options.FontSize = BodyFontSize.Medium;
             }
+            options.FontColor = "#222222";
+            options.LinkColor = "#007C89";
             options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
             options.IncludeNewsContent = cbIncludeNewsContent.Checked;
-            options.IncludeLogos = cbIncludeLogos.Checked;
             options.LogoHeight = (int)udLogoHeight.Value;
             options.LogoAfterHeading = rbLogoNaKop.Checked;
-            options.EventTitleBold = cbEeventTitleBold.Checked;
+            options.EventTitleBold = false;
             options.NewsTitleBold = cbNewsTitleBold.Checked;
             options.OrganizationTitleBold = cbOrganizationTitleBold.Checked;
             options.PublicatieDatum = dpPublicatieDatum.Value;
