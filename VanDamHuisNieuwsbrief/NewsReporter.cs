@@ -323,15 +323,18 @@ span.title {{
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(content);
             var images = doc.DocumentNode.SelectNodes(".//img");
-            foreach (var image in images)
+            if (images != null)
             {
-                image.Attributes.Remove("height");
-                image.Attributes.Remove("width");
-                image.Attributes.Remove("srcset");
-                image.Attributes.Remove("sizes");
-                image.Attributes.Remove("style");
-                image.Attributes.Add("style", "width:100%;max-width:600px");
-                
+                foreach (var image in images)
+                {
+                    image.Attributes.Remove("height");
+                    image.Attributes.Remove("width");
+                    image.Attributes.Remove("srcset");
+                    image.Attributes.Remove("sizes");
+                    image.Attributes.Remove("style");
+                    image.Attributes.Add("style", "width:100%;max-width:600px");
+
+                }
             }
             return doc.DocumentNode.OuterHtml;
         }
