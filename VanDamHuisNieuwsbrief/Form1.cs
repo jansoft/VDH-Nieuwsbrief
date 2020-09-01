@@ -71,11 +71,11 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private void GenerateHtml(object sender, EventArgs e)
         {
-            Invoke(new Action(() =>
-            {
-                DocPathValue.Text = "Bezig met genereren. Even geduld...";
+           
+            DocPathValue.Text = "Bezig met genereren. Even geduld...";
+            DocPathValue.Refresh();
 
-            }));
+
 
             var newsLetter = LoadNewsFeeds(GetAfter(), Convert.ToInt32(MaxPosts.Value), true);
             var appconfig = GetAppConfig();

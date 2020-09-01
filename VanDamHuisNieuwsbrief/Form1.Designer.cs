@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.DocPathValue = new System.Windows.Forms.Label();
@@ -58,15 +58,15 @@
             this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnGenerate
             // 
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "&Genereren";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.GenerateHtml);
+            this.btnGenerate.Location = new System.Drawing.Point(6, 19);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(105, 23);
+            this.btnGenerate.TabIndex = 28;
+            this.btnGenerate.Text = "&Genereren";
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.GenerateHtml);
             // 
             // label1
             // 
@@ -262,7 +262,7 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.button1);
+            this.groupBox10.Controls.Add(this.btnGenerate);
             this.groupBox10.Controls.Add(this.DocPathValue);
             this.groupBox10.Location = new System.Drawing.Point(30, 211);
             this.groupBox10.Name = "groupBox10";
@@ -301,7 +301,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label DocPathValue;
