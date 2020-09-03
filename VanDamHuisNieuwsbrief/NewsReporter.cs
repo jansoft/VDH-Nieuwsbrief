@@ -82,6 +82,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             var eventTitleWeight = options.Config.EventTitleBold ? getBold() : getNormal();
             var newsTitleWeight = options.Config.NewsTitleBold ? getBold() : getNormal();
+            var newsTitleUnderline = options.Config.NewsTitleUnderline ? "text-decoration:underline !important;" : "";
             var organizationTitleWeight = options.Config.OrganizationTitleBold ? getBold() : getNormal();
 
             sb.AppendLine($@"<style>
@@ -123,6 +124,7 @@ section.nieuwsbrief p span.event-title > a {{
 section.nieuwsbrief h2.news-title,
 section.nieuwsbrief a > h2.news-title {{
     {newsTitleWeight}
+    {newsTitleUnderline}
 }}
 
 section.nieuwsbrief a > h2.news-title {{

@@ -15,5 +15,6 @@
   },
   "EventTitleBold": "false",
   "NewsTitleBold": "true",
+  "NewsTitleUnderline": "true",
   "OrganizationTitleBold": "true"
 }
