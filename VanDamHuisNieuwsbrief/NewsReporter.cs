@@ -111,8 +111,11 @@ section.nieuwsbrief h1 {{
 }}
 
 h2.organization-title,
-section.nieuwsbrief h2.organization-title {{
-    font-size: {fh1} !important;
+h2.agenda-title,
+section.nieuwsbrief h2.organization-title,
+section.nieuwsbrief h2.agenda-title {{
+    font-size: {fh1} !important;    
+    {organizationTitleWeight}
 }}
 
 section.nieuwsbrief h2 {{
@@ -149,11 +152,6 @@ section.nieuwsbrief a > h2.news-title,
 section.nieuwsbrief a,
 .{{
     color: {options.Config.LinkColor} !important;
-}}
-
-section.nieuwsbrief h2.organization-title,
-section.nieuwsbrief h2.agenda-title {{
-    {organizationTitleWeight}
 }}
 
 section.nieuwsbrief {{
