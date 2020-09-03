@@ -35,18 +35,6 @@
     "Include": "49"
   },
   {
-    "Id": "avh",
-    "Name": "Antroposofische Vereniging Haarlem",
-    "Color": "#de557d",
-    "Url": "https://www.antroposofiehaarlem.nl",
-    "Categories": "46",
-    "LogoUrl": "https://www.vandamhuis.nl/wp-content/uploads/2020/08/Logo-Antroposofische-Vereniging-compact.png",
-    "LogoRatio": "2.36",
-    "Use": "",
-    "Exclude": "0",
-    "Include": "0"
-  },
-  {
     "Id": "pvkh",
     "Name": "Patiëntenvereniging De Keerkring Haarlem",
     "Color": "#901d6a",
@@ -57,7 +45,20 @@
     "Use": "",
     "Exclude": "0",
     "Include": "0"
+  },
+  {
+    "Id": "avh",
+    "Name": "Antroposofische Vereniging Haarlem",
+    "Color": "#de557d",
+    "Url": "https://www.antroposofiehaarlem.nl",
+    "Categories": "46",
+    "LogoUrl": "https://www.vandamhuis.nl/wp-content/uploads/2020/08/Logo-Antroposofische-Vereniging-compact.png",
+    "LogoRatio": "2.36",
+    "Use": "",
+    "Exclude": "0",
+    "Include": "0"
   }
+  
 
 
 

@@ -260,17 +260,14 @@ hr.item-divider {{
             {
                 sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
             }
-  
-            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief:</p>
-<ul>
-    <li><a href='#vdh'>Van Dam Huis</a></li>
-    <li><a href='#gth'>Gezondheidscentrum Therapeuticum Haarlem</a></li>
-    <li><a href='#avh'>Antroposofische Vereniging Haarlem</a></li>
-    <li><a href='#pvkh'>Patiëntenvereniging De Keerkring Haarlem</a></li>
-    <li><a href='#agenda'>Agenda</a></li>
 
-</ul>
-");
+            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief:</p>
+<ul>");
+            foreach(var contentOrganization in newsLetter.Organizations)
+            {
+                sb.AppendLine($"<li><a href='#{contentOrganization.Id}'>{contentOrganization.Name}</a></li>");
+            }
+            sb.AppendLine("<li><a href='#agenda'>Agenda</a></li></ul>");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
