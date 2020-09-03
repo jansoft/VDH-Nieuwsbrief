@@ -1,5 +1,6 @@
 ﻿[
   {
+    "Id":  "vdh",
     "Name": "Van Dam Huis",
     "Color": "#39469d",
     "Url": "https://www.vandamhuis.nl",
@@ -8,6 +9,7 @@
     "LogoRatio":  "1.88"
   },
   {
+    "Id":  "gth",
     "Name": "Gezondheidscentrum Therapeuticum Haarlem",
     "Color": "#2396C9",
     "Url": "https://www.therapeuticumhaarlem.nl",
@@ -16,6 +18,7 @@
     "LogoRatio": "2.67"
   },
   {
+    "Id": "avh",
     "Name": "Antroposofische Vereniging Haarlem",
     "Color": "#de557d",
     "Url": "https://www.antroposofiehaarlem.nl",
@@ -24,6 +27,7 @@
     "LogoRatio": "2.36"
   },
   {
+    "Id": "pvkh",
     "Name": "Patiëntenvereniging De Keerkring Haarlem",
     "Color": "#901d6a",
     "Url": "https://keerkring.antroposana.nl",

@@ -22,7 +22,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
-                sb.AppendLine($"<h2 class='mc-toc-title agenda-title' style='color:#39469d !important'>Agenda</h2>");
+                sb.AppendLine($"<h2 class='mc-toc-title agenda-title' style='color:#39469d !important'><a id='agenda' name='agenda'></a>Agenda</h2>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
@@ -261,8 +261,16 @@ hr.news-item-divider {{
                 sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
             }
   
-            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief<br />
-*|MC:TOC|*</p>");
+            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief:</p>
+<ul>
+    <li><a href='#vdh'>Van Dam Huis</a></li>
+    <li><a href='#gth'>Gezondheidscentrum Therapeuticum Haarlem</a></li>
+    <li><a href='#avh'>Antroposofische Vereniging Haarlem</a></li>
+    <li><a href='#pvkh'>Patiëntenvereniging De Keerkring Haarlem</a></li>
+    <li><a href='#agenda'>Agenda</a></li>
+
+</ul>
+");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
@@ -292,7 +300,7 @@ hr.news-item-divider {{
                 RenderLogo(sb, organization, options);
             }
 
-            sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'>{organization.Name}</h2>");
+            sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'><a id='{organization.Id}' name='{organization.Id}'></a>{organization.Name}</h2>");
 
             if (options.Config.LogoAfterHeading)
             {

@@ -8,6 +8,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 {
     public class Organization
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public List<NewsItem> NewsItems { get; set; } = new List<NewsItem>();
         public string Color { get; set; }
