@@ -22,7 +22,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
-                sb.AppendLine($"<h1 class='agenda-title' style='color:#39469d !important'>Agenda</h1>");
+                sb.AppendLine($"<h2 class='mc-toc-title agenda-title' style='color:#39469d !important'>Agenda</h2>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
@@ -87,11 +87,18 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             sb.AppendLine($@"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
-html, p, section.nieuwsbrief * {{
+html, p, li, section.nieuwsbrief *, .mcnTextContent * {{
     font-family: 'Rubik', sans-serif !important;
     font-size: {fp} !important;
     font-weight: 300 !important;
     color: {options.Config.TextColor} !important;
+}}
+
+p strong,
+li strong,
+p b,
+li b {{
+    font-weight: 500 !important;
 }}
 
 section.nieuwsbrief img {{
@@ -100,6 +107,11 @@ section.nieuwsbrief img {{
 }}
 
 section.nieuwsbrief h1 {{
+    font-size: {fh1} !important;
+}}
+
+h2.organization-title,
+section.nieuwsbrief h2.organization-title {{
     font-size: {fh1} !important;
 }}
 
@@ -120,23 +132,27 @@ section.nieuwsbrief p span.event-title > a {{
     {eventTitleWeight}
 
 }}
-
+ h2.news-title,
 section.nieuwsbrief h2.news-title,
+a > h2.news-title,
 section.nieuwsbrief a > h2.news-title {{
     {newsTitleWeight}
     {newsTitleUnderline}
 }}
 
-section.nieuwsbrief a > h2.news-title {{
+section.nieuwsbrief a > h2.news-title,
+.mcnTextContent a > h2.news-title {{
     color: {options.Config.LinkColor} !important;
 }}
 
-section.nieuwsbrief a {{
+.mcnTextContent a,
+section.nieuwsbrief a,
+.{{
     color: {options.Config.LinkColor} !important;
 }}
 
-section.nieuwsbrief h1.organization-title,
-section.nieuwsbrief h1.agenda-title {{
+section.nieuwsbrief h2.organization-title,
+section.nieuwsbrief h2.agenda-title {{
     {organizationTitleWeight}
 }}
 
@@ -182,6 +198,12 @@ span.title {{
     font-weight:500 !important;
 }}
 
+hr.news-item-divider {{
+    border: none !important;
+    height: 1px !important;
+    background-color: #222 !important;
+}}
+
 </style>");
         }
 
@@ -197,11 +219,19 @@ span.title {{
             
             RenderIntro(sb, newsLetter, options);
 
-            RenderAgenda(sb, agenda, options);
+            if (!options.Config.AgendaLast)
+            {
+                RenderAgenda(sb, agenda, options);
+            }
 
             foreach (var organization in newsLetter.Organizations)
             {
                 sb.AppendLine(GenerateOrganizationReport(organization, options));
+            }
+
+            if (options.Config.AgendaLast)
+            {
+                RenderAgenda(sb, agenda, options);
             }
 
             RenderStyle(sb, options);
@@ -222,7 +252,7 @@ span.title {{
             var organization = GetVanDamHuis(newsLetter);
             RenderLogo(sb, organization, options);
 
-            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
+            sb.AppendLine($"<h2 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
 
             if (options.ForPrint)
             {
@@ -233,14 +263,8 @@ span.title {{
                 sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
             }
   
-            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief</p>
-<ul>
-    <li>Agenda</li>
-    <li>Van Dam Huis</li>
-    <li>Gezondheidscentrum Therapeuticum</li>
-    <li>Antroposofische Vereniging</li>
-    <li>Patiëntenvereniging De Keerkring</li>
-</ul>");
+            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief<br />
+*|MC:TOC|*</p>");
         }
 
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
@@ -270,16 +294,23 @@ span.title {{
                 RenderLogo(sb, organization, options);
             }
 
-            sb.AppendLine($"<h1 class='organization-title' style='color:{organization.Color} !important'>{organization.Name}</h1>");
+            sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'>{organization.Name}</h2>");
 
             if (options.Config.LogoAfterHeading)
             {
                 RenderLogo(sb, organization, options);
             }
 
+            var first = true;
             foreach (var item in organization.NewsItems)
             {
+                if (options.Config.NewsItemDivider && !first)
+                {
+                    sb.AppendLine("<hr class='news-item-divider'/>");
+                }
                 sb.AppendLine(GetNewsItemHtml(item, options));
+                first = false;
+                
             }
             return sb.ToString();
         }

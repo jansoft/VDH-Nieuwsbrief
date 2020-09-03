@@ -17,6 +17,8 @@ namespace VanDamHuisNieuwsbriefGenerator
         public bool EventTitleBold { get; set; }
         public bool NewsTitleBold { get; set; }
         public bool NewsTitleUnderline { get; set; }
+        public bool NewsItemDivider { get; set; }
         public bool OrganizationTitleBold { get; set; }
+        public bool AgendaLast { get; set; }
     }
 }
