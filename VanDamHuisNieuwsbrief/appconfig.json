@@ -1,6 +1,5 @@
 {
-  "LogoAfterHeading": "false",
-  "LogoHeight": "75",
+  "LogoHeight": "100",
   "LinkColor": "#007C89",
   "TextColor": "#222222",
   "DigitalFontSize": {
@@ -16,7 +15,8 @@
   "EventTitleBold": "false",
   "NewsTitleBold": "true",
   "NewsTitleUnderline": "true",
-  "NewsItemDivider":  "true",
+  "NewsItemDivider": "true",
   "OrganizationTitleBold": "true",
-  "AgendaLast":  "true"
+  "AgendaLast": "true",
+  "ShowOrganizationName":  false
 }

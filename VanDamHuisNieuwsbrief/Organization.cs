@@ -18,6 +18,9 @@ namespace VanDamHuisNieuwsbriefGenerator
         public string After { get; set; } = "";
         public int MaxPosts { get; set; } = 15;
         public string Categories { get; set; } = "";
+        public string Use { get; set; }
+        public int Exclude { get; set; }
+        public int Include { get; set; }
 
 
     }

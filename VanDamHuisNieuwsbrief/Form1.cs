@@ -39,11 +39,51 @@ namespace VanDamHuisNieuwsbriefGenerator
         {
             var newsLetter = new NewsLetter();
             newsLetter.Organizations = LoadOrganizations();
+            var useOrganizations = new List<Organization>();
             foreach(var organization in newsLetter.Organizations)
             {
-                organization.After = after;
-                organization.MaxPosts = maxPosts;
-                loader.LoadFeed(organization, nieuwsbriefOnly);
+                if (string.IsNullOrWhiteSpace(organization.Use))
+                {
+                    organization.After = after;
+                    organization.MaxPosts = maxPosts;
+                    loader.LoadFeed(organization, nieuwsbriefOnly);
+                }
+                else
+                {
+                    useOrganizations.Add(organization);
+                }
+            }
+
+            if (useOrganizations.Count > 0)
+            {
+                foreach(var organization in useOrganizations)
+                {
+                    var useId = organization.Use;
+                    var useOrganization = newsLetter.Organizations.FirstOrDefault(predicate => predicate.Id == useId);
+                    if (useOrganization != null)
+                    {
+                        foreach(var newsItem in useOrganization.NewsItems)
+                        {
+                            if (newsItem.HasCategory(organization.Include))
+                            {
+                                organization.NewsItems.Add(newsItem);
+                            }
+                        }
+
+                        if (useOrganization.Exclude != 0)
+                        {
+                            var remaining = new List<NewsItem>();
+                            foreach (var newsItem in useOrganization.NewsItems)
+                            {
+                                if (!newsItem.HasCategory(useOrganization.Exclude))
+                                {
+                                    remaining.Add(newsItem);
+                                }
+                            }
+                            useOrganization.NewsItems = remaining;
+                        }
+                    }
+                }
             }
             return newsLetter;
         }

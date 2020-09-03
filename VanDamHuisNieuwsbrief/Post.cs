@@ -19,5 +19,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         public PostText excerpt { get; set; }
 
+        public List<int> categories { get; set; } = new List<int>();
+
     }
 }

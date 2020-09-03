@@ -196,10 +196,10 @@ span.title {{
     font-weight:500 !important;
 }}
 
-hr.news-item-divider {{
+hr.item-divider {{
     border: none !important;
-    height: 1px !important;
-    background-color: #222 !important;
+    height: 2px !important;
+    background-color: rgb(234, 234, 234) !important;
 }}
 
 </style>");
@@ -291,28 +291,31 @@ hr.news-item-divider {{
 
         }
 
+        private void ItemDivider(StringBuilder sb)
+        {
+            sb.AppendLine("<hr class='item-divider'/>");
+        }
+
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            
-            if (!options.Config.LogoAfterHeading)
-            {
-                RenderLogo(sb, organization, options);
-            }
+            ItemDivider(sb);
+            sb.AppendLine($"<p><a id='{organization.Id}' name='{organization.Id}'></a>&nbsp;</p>");
 
-            sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'><a id='{organization.Id}' name='{organization.Id}'></a>{organization.Name}</h2>");
+            RenderLogo(sb, organization, options);
 
-            if (options.Config.LogoAfterHeading)
+            if (options.Config.ShowOrganizationName)
             {
-                RenderLogo(sb, organization, options);
+                sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'>{organization.Name}</h2>");
             }
+ 
 
             var first = true;
             foreach (var item in organization.NewsItems)
             {
                 if (options.Config.NewsItemDivider && !first)
                 {
-                    sb.AppendLine("<hr class='news-item-divider'/>");
+                    ItemDivider(sb);
                 }
                 sb.AppendLine(GetNewsItemHtml(item, options));
                 first = false;

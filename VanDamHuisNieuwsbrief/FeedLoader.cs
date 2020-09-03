@@ -39,6 +39,7 @@ namespace VanDamHuisNieuwsbriefGenerator
                     newsItem.Content = CleanupJsonText(post.content.rendered);
                     newsItem.Summary = CleanupJsonText(post.excerpt.rendered);
                     newsItem.Url = post.link;
+                    newsItem.Categories = post.categories;
 
                     list.Add(newsItem);
                 }
