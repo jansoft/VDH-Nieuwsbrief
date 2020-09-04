@@ -87,7 +87,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             sb.AppendLine($@"<style>
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
-html, p, li, section.nieuwsbrief *, .mcnTextContent * {{
+html, body, p, li {{
     font-family: 'Rubik', sans-serif !important;
     font-size: {fp} !important;
     font-weight: 300 !important;
@@ -143,16 +143,10 @@ section.nieuwsbrief a > h2.news-title {{
     {newsTitleUnderline}
 }}
 
-section.nieuwsbrief a > h2.news-title,
-.mcnTextContent a > h2.news-title {{
+a {{
     color: {options.Config.LinkColor} !important;
 }}
 
-.mcnTextContent a,
-section.nieuwsbrief a,
-.{{
-    color: {options.Config.LinkColor} !important;
-}}
 
 section.nieuwsbrief {{
     box-sizing: border-box !important;
@@ -326,16 +320,13 @@ hr.item-divider {{
         {
             var sb = new StringBuilder();
             sb.Append("<article>");
+            sb.Append($"<p><strong>{item.Title}</strong></p>");
 
             if (!options.ForPrint)
             {
-                sb.Append($"<a href='{item.Url}'><h2 class='news-title'>{item.Title}</h2></a>");
+                sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
             }
-            else
-            {
-                sb.Append($"<h2 class='news-title'>{item.Title}</h2>");
-            }
-
+ 
             if (options.IncludeNewsSummary && !string.IsNullOrWhiteSpace(item.Summary))
             {
                 sb.Append("<div class='content'>" + item.Summary + "</div>");
