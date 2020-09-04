@@ -50,6 +50,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
@@ -262,20 +263,30 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.DocSizeLabel);
             this.groupBox10.Controls.Add(this.btnGenerate);
             this.groupBox10.Controls.Add(this.DocPathValue);
             this.groupBox10.Location = new System.Drawing.Point(30, 211);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(514, 84);
+            this.groupBox10.Size = new System.Drawing.Size(514, 106);
             this.groupBox10.TabIndex = 49;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rapport";
+            // 
+            // DocSizeLabel
+            // 
+            this.DocSizeLabel.AutoSize = true;
+            this.DocSizeLabel.Location = new System.Drawing.Point(6, 75);
+            this.DocSizeLabel.Name = "DocSizeLabel";
+            this.DocSizeLabel.Size = new System.Drawing.Size(42, 13);
+            this.DocSizeLabel.TabIndex = 30;
+            this.DocSizeLabel.Text = "Grootte";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 309);
+            this.ClientSize = new System.Drawing.Size(565, 344);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -322,6 +333,7 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.DateTimePicker dpPublicatieDatum;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label DocSizeLabel;
     }
 }
 

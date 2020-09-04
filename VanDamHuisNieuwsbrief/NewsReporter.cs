@@ -22,7 +22,8 @@ namespace VanDamHuisNieuwsbriefGenerator
             if (agenda.Count > 0)
             {
                 sb.AppendLine("<section class='agenda'>");
-                sb.AppendLine($"<h2 class='mc-toc-title agenda-title' style='color:#39469d !important'><a id='agenda' name='agenda'></a>Agenda</h2>");
+                sb.AppendLine("<p><a id='agenda' name='agenda'></a>&nbsp;</p>");
+                sb.AppendLine($"<h2 class='agenda-title' style='color:#39469d !important'>Agenda</h2>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");

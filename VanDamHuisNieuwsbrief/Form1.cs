@@ -136,6 +136,8 @@ namespace VanDamHuisNieuwsbriefGenerator
             File.WriteAllText(reportPath, html, Encoding.UTF8);
 
             DocPathValue.Text = reportPath;
+            var docsize = Convert.ToInt32(html.Length / 1000);
+            DocSizeLabel.Text = docsize > 102 ? $"Document lengte is {docsize}KB. Te lang voor GMail (Max 102KB)" : $"Document lengte is {docsize}KB";
             Process.Start(reportPath);
         }
 
