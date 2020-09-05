@@ -75,141 +75,6 @@ a {
     text-decoration: underline !important;
 }
 </style>");
-            return;
-            
-            var fontsizes = options.ForPrint ? options.Config.PaperFontSize : options.Config.DigitalFontSize;
-            var fp = fontsizes.Paragraph;
-            var fh1 = fontsizes.Heading1;
-            var fh2 = fontsizes.Heading2;
-
-  
-            string getBold()
-            {
-                return options.ForPrint ? "font-family: 'Rubik Medium' !important;" : "font-weight: 500 !important;";
-            }
-
-            string getNormal ()
-            {
-                return "font-weight: 300 !important;";
-            }
-
-            var eventTitleWeight = options.Config.EventTitleBold ? getBold() : getNormal();
-            var newsTitleWeight = options.Config.NewsTitleBold ? getBold() : getNormal();
-            var newsTitleUnderline = options.Config.NewsTitleUnderline ? "text-decoration:underline !important;" : "";
-            var organizationTitleWeight = options.Config.OrganizationTitleBold ? getBold() : getNormal();
-
-            sb.AppendLine($@"<style>
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap');
-html, body, p, li {{
-    font-family: 'Rubik', sans-serif !important;
-    font-size: {fp} !important;
-    font-weight: 300 !important;
-    color: {options.Config.TextColor} !important;
-}}
-
-p strong,
-li strong,
-p b,
-li b {{
-    font-weight: 500 !important;
-}}
-
-section.nieuwsbrief img {{
-    max-width:100% !important;
-    height: auto !important;
-}}
-
-section.nieuwsbrief h1 {{
-    font-size: {fh1} !important;
-}}
-
-h2.organization-title,
-h2.agenda-title,
-section.nieuwsbrief h2.organization-title,
-section.nieuwsbrief h2.agenda-title {{
-    font-size: {fh1} !important;    
-    {organizationTitleWeight}
-}}
-
-section.nieuwsbrief h2 {{
-    font-size: {fh2} !important;
-}}
-
-h1, h2, h3 {{
-    font-weight:300 !important;
-}}
-
-section.nieuwsbrief b, section.nieuwsbrief strong {{
-    font-weight:500 !important;
-}}
-
-section.nieuwsbrief p span.event-title,
-section.nieuwsbrief p span.event-title > a {{
-    {eventTitleWeight}
-
-}}
- h2.news-title,
-section.nieuwsbrief h2.news-title,
-a > h2.news-title,
-section.nieuwsbrief a > h2.news-title {{
-    {newsTitleWeight}
-    {newsTitleUnderline}
-}}
-
-a {{
-    color: {options.Config.LinkColor} !important;
-}}
-
-
-section.nieuwsbrief {{
-    box-sizing: border-box !important;
-    padding-left:2em !important;
-    padding-right: 2em !important;
-    margin-left:auto !important;
-    margin-right:auto !important;
-}}
-
-article {{
-    margin-bottom: 2em !important;
-    margin-top:1em !important;
-}}
-
-
-span.bar.algemeen {{
-    color: #39469D !important;
-}}
-
-span.bar.therapeuticum {{
-	color: #2396c9 !important;
-}}
-
-span.bar.vereniging {{
-	color: #DE557D !important;
-}}
-
-span.bar.keerkring {{
-	color: #ba79a0 !important;
-}}
-
-span.bar.consultatiebureau {{
-	color: #ec744e !important;
-}}
-
-section.agenda {{
-    margin-bottom: 2em !important;
-}}
-
-span.title {{
-    font-weight:500 !important;
-}}
-
-hr.item-divider {{
-    border: none !important;
-    height: 2px !important;
-    background-color: rgb(234, 234, 234) !important;
-}}
-
-</style>");
         }
 
         public Organization GetVanDamHuis(NewsLetter newsLetter)
@@ -245,38 +110,9 @@ hr.item-divider {{
 
         }
 
-        private void RenderIntro(StringBuilder sb, NewsLetter newsLetter, NewsReporterOptions options)
-        {
-            var organization = GetVanDamHuis(newsLetter);
-            RenderLogo(sb, organization, options);
-
-            sb.AppendLine($"<h2 class='organization-title' style='color:{organization.Color} !important'>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</h1>");
-
-            if (options.ForPrint)
-            {
-                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: Gezondheidscentrum Therapeuticum Haarlem, Antroposofische Vereniging Haarlem, Bureau Ouder- & Kindzorg en Patiëntenvereniging De Keerkring.</p>");
-            }
-            else
-            {
-                sb.AppendLine("<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- & Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Patiëntenvereniging De Keerkring</a>.</p>");
-            }
-
-            sb.AppendLine(@"<p>Inhoud van de nieuwsbrief:</p>
-<ul>");
-            foreach(var contentOrganization in newsLetter.Organizations)
-            {
-                sb.AppendLine($"<li><a href='#{contentOrganization.Id}'>{contentOrganization.Name}</a></li>");
-            }
-            sb.AppendLine("<li><a href='#agenda'>Agenda</a></li></ul>");
-        }
-
         private void RenderLogo(StringBuilder sb, Organization organization, NewsReporterOptions options)
         {
-            string logo = "";
-            int h = options.Config.LogoHeight;
-            int w = (int)(h * organization.LogoRatio);
-
-            logo = $"<div class='logo'><img src='{organization.LogoUrl}' style='height:auto;max-width:100%'></div>";
+            var logo = $"<div class='logo'><img src='{organization.LogoUrl}' style='height:auto;max-width:100%'></div>";
 
             sb.AppendLine(logo);
 
@@ -328,21 +164,37 @@ hr.item-divider {{
             {
                 sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
             }
-            
- 
+
+            var content = CleanupStyle(item.Content);
  
             if (options.ForPrint)
             {
-                sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
+                sb.Append("<div class='content'>" + Unlink(CleanUpImages(content)) + "</div>");
             }
             else
             {
-                sb.Append("<div class='content'>" + CleanUpImages(item.Content) + "</div>");
+                sb.Append("<div class='content'>" + CleanUpImages(content) + "</div>");
             }
 
             sb.Append("</article>");
 
             return sb.ToString();
+        }
+
+        private string CleanupStyle(string content)
+        {
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(content);
+            var nodes = doc.DocumentNode.SelectNodes(".//*[@style]");
+            if (nodes != null)
+            {
+                foreach(var node in nodes)
+                {
+                    node.Attributes.Remove("style");
+                }
+            }
+            return doc.DocumentNode.OuterHtml;
+
         }
 
         private string CleanUpImages(string content)

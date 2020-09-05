@@ -118,14 +118,13 @@ namespace VanDamHuisNieuwsbriefGenerator
 
 
             var newsLetter = LoadNewsFeeds(GetAfter(), Convert.ToInt32(MaxPosts.Value), true);
-            var appconfig = GetAppConfig();
 
             List<AgendaEvent> agenda = new List<AgendaEvent>();
             agenda = GetAgenda();
 
             var options = new NewsReporterOptions();
             options.ForPrint = rbpaper.Checked;
-            options.Config = GetAppConfig();
+ 
  
             options.PublicatieDatum = dpPublicatieDatum.Value;
 
@@ -142,13 +141,6 @@ namespace VanDamHuisNieuwsbriefGenerator
         private string GetExeDir()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        }
-
-        private AppConfig GetAppConfig()
-        {
-            var path = Path.Combine(GetExeDir(), "appconfig.json");
-            var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<AppConfig>(json);
         }
 
         private List<Organization> LoadOrganizations()

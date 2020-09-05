@@ -10,14 +10,7 @@ namespace VanDamHuisNieuwsbriefGenerator
     public class NewsReporterOptions
     {
         public bool ForPrint { get; set; }
-        public bool IncludeAgenda { get; set; }
-        public bool IncludeNewsContent { get; set; }
-        public bool IncludeNewsSummary { get; set; }
-        public bool AgendaVooraan { get; set; }
         public DateTime PublicatieDatum { get; set; }
 
-        public AppConfig Config { get; set; }
-
-     
     }
 }
