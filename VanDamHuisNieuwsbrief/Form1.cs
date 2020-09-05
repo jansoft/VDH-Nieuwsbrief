@@ -127,8 +127,6 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.ForPrint = rbpaper.Checked;
             options.Config = GetAppConfig();
  
-            options.IncludeNewsSummary = cbIncludeNewsSummary.Checked;
-            options.IncludeNewsContent = cbIncludeNewsContent.Checked;
             options.PublicatieDatum = dpPublicatieDatum.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);

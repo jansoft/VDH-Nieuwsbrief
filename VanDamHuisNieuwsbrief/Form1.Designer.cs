@@ -41,9 +41,6 @@
             this.dpAgendaTot = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dpAgendaVanaf = new System.Windows.Forms.DateTimePicker();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbIncludeNewsSummary = new System.Windows.Forms.CheckBox();
-            this.cbIncludeNewsContent = new System.Windows.Forms.CheckBox();
             this.MaxPosts = new System.Windows.Forms.NumericUpDown();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.dpPublicatieDatum = new System.Windows.Forms.DateTimePicker();
@@ -52,7 +49,6 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -171,39 +167,6 @@
             this.dpAgendaVanaf.Size = new System.Drawing.Size(101, 20);
             this.dpAgendaVanaf.TabIndex = 37;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cbIncludeNewsSummary);
-            this.groupBox2.Controls.Add(this.cbIncludeNewsContent);
-            this.groupBox2.Location = new System.Drawing.Point(349, 87);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(195, 118);
-            this.groupBox2.TabIndex = 40;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Inhoud";
-            // 
-            // cbIncludeNewsSummary
-            // 
-            this.cbIncludeNewsSummary.AutoSize = true;
-            this.cbIncludeNewsSummary.Location = new System.Drawing.Point(9, 44);
-            this.cbIncludeNewsSummary.Name = "cbIncludeNewsSummary";
-            this.cbIncludeNewsSummary.Size = new System.Drawing.Size(91, 17);
-            this.cbIncludeNewsSummary.TabIndex = 41;
-            this.cbIncludeNewsSummary.Text = "Samenvatting";
-            this.cbIncludeNewsSummary.UseVisualStyleBackColor = true;
-            // 
-            // cbIncludeNewsContent
-            // 
-            this.cbIncludeNewsContent.AutoSize = true;
-            this.cbIncludeNewsContent.Checked = true;
-            this.cbIncludeNewsContent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIncludeNewsContent.Location = new System.Drawing.Point(9, 19);
-            this.cbIncludeNewsContent.Name = "cbIncludeNewsContent";
-            this.cbIncludeNewsContent.Size = new System.Drawing.Size(98, 17);
-            this.cbIncludeNewsContent.TabIndex = 40;
-            this.cbIncludeNewsContent.Text = "Volledig bericht";
-            this.cbIncludeNewsContent.UseVisualStyleBackColor = true;
-            // 
             // MaxPosts
             // 
             this.MaxPosts.Location = new System.Drawing.Point(9, 93);
@@ -290,15 +253,12 @@
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Van Dam Huis nieuwsbrief generator ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
@@ -324,10 +284,7 @@
         private System.Windows.Forms.DateTimePicker dpAgendaTot;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dpAgendaVanaf;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown MaxPosts;
-        private System.Windows.Forms.CheckBox cbIncludeNewsSummary;
-        private System.Windows.Forms.CheckBox cbIncludeNewsContent;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;

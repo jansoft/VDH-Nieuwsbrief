@@ -21,9 +21,9 @@ namespace VanDamHuisNieuwsbriefGenerator
         {
             if (agenda.Count > 0)
             {
-                sb.AppendLine("<section class='agenda'>");
+                ItemDivider(sb);
                 sb.AppendLine("<p><a id='agenda' name='agenda'></a>&nbsp;</p>");
-                sb.AppendLine($"<h2 class='agenda-title' style='color:#39469d !important'>Agenda</h2>");
+                sb.AppendLine($"<h1>Agenda</h1>");
                 if (options.ForPrint)
                 {
                     sb.AppendLine("<p>U vindt de actuele agenda op https://vandamhuis.nl en op de prikborden in het Van Dam Huis</p>");
@@ -36,21 +36,25 @@ namespace VanDamHuisNieuwsbriefGenerator
 
                 // legend 
                 // black large square = &#x2B1B;
-                var mark = "&#x275A;";
-                sb.AppendLine($@"<p><span class='algemeen bar'>{mark}</span> Algemeen</span> <span class='therapeuticum bar'>{mark}</span> Therapeuticum <span class='vereniging bar'>{mark}</span> Vereniging <span class='consultatiebureau bar'>{mark}</span> Consultatiebureau <span class='keerkring bar'>{mark}</span>  Keerkring </p>");
- 
+                if (!options.ForPrint)
+                {
+                    sb.AppendLine("<ul>");
+                }
                 foreach (var item in agenda)
                 {
                     if (options.ForPrint)
                     {
-                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <span class='event-title'>{item.Event.event_name}</span><br><span>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
+                        sb.AppendLine($"<p><strong>{item.Event.event_name}</strong><br>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</p>");
                     }
                     else
                     {
-                        sb.AppendLine($"<p class='event'><span class='bar {item.Event.organisatie}'>{mark}</span> <span class='event-title'><a href='{item.Event.url}'>{item.Event.event_name}</a></span><br><span >{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</span></p>");
+                        sb.AppendLine($"<li><a href='{item.Event.url}'>{item.Event.event_name}</a><br>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</li>");
                     }
                 }
-                sb.AppendLine("</section>");
+                if (!options.ForPrint)
+                {
+                    sb.AppendLine("</ul>");
+                }
             }
 
         }
@@ -59,12 +63,20 @@ namespace VanDamHuisNieuwsbriefGenerator
         {
             var media = options.ForPrint ? "print" : "digital";
             sb.AppendLine($@"<html><head><title>Van Dam Huis | Nieuwsbrief {options.PublicatieDatum:MMMM yyyy}</title>
-</head><body>
-<section class='nieuwsbrief {media}' style='max-width:600px;width:100%'>");
+</head><body style='background-color:#FAFAFA'>
+<section style='color:#202020;background-color:#FFFFFF;max-width:600px;margin-left:auto;margin-right:auto;font-family:Verdana, geneva, sans-serif;font-size:12px;padding:9px'>");
         }
 
         private void RenderStyle(StringBuilder sb, NewsReporterOptions options)
         {
+            sb.AppendLine(@"<style>
+a {
+    color: #007C89 !important;
+    text-decoration: underline !important;
+}
+</style>");
+            return;
+            
             var fontsizes = options.ForPrint ? options.Config.PaperFontSize : options.Config.DigitalFontSize;
             var fp = fontsizes.Paragraph;
             var fh1 = fontsizes.Heading1;
@@ -210,22 +222,15 @@ hr.item-divider {{
             var sb = new StringBuilder();
             RenderHeader(sb, options);
             
-            RenderIntro(sb, newsLetter, options);
+            //RenderIntro(sb, newsLetter, options);
 
-            if (!options.Config.AgendaLast)
-            {
-                RenderAgenda(sb, agenda, options);
-            }
-
+ 
             foreach (var organization in newsLetter.Organizations)
             {
                 sb.AppendLine(GenerateOrganizationReport(organization, options));
             }
 
-            if (options.Config.AgendaLast)
-            {
-                RenderAgenda(sb, agenda, options);
-            }
+             RenderAgenda(sb, agenda, options);
 
             RenderStyle(sb, options);
 
@@ -271,21 +276,15 @@ hr.item-divider {{
             int h = options.Config.LogoHeight;
             int w = (int)(h * organization.LogoRatio);
 
-            if (options.ForPrint)
-            {
-                logo = $"<div class='logo'><img src='{organization.LogoUrl}'width='{w}px' height='{h}px'></div>";
-            }
-            else
-            {
-                logo = $"<div class='logo'><img src='{organization.LogoUrl}' width='{w}px' height='{h}px'></div>";
-            }
+            logo = $"<div class='logo'><img src='{organization.LogoUrl}' style='height:auto;max-width:100%'></div>";
+
             sb.AppendLine(logo);
 
         }
 
         private void ItemDivider(StringBuilder sb)
         {
-            sb.AppendLine("<hr class='item-divider'/>");
+            sb.AppendLine("<hr style='margin-top:18px;margin-bottom:18px'/>");
         }
 
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
@@ -296,21 +295,19 @@ hr.item-divider {{
 
             RenderLogo(sb, organization, options);
 
-            if (options.Config.ShowOrganizationName)
-            {
-                sb.AppendLine($"<h2 class='mc-toc-title organization-title' style='color:{organization.Color} !important'>{organization.Name}</h2>");
-            }
- 
-
             var first = true;
             foreach (var item in organization.NewsItems)
             {
-                if (options.Config.NewsItemDivider && !first)
+                if (!first)
                 {
                     ItemDivider(sb);
                 }
+                else
+                {
+                    first = false;
+                }
                 sb.AppendLine(GetNewsItemHtml(item, options));
-                first = false;
+ 
                 
             }
             return sb.ToString();
@@ -321,29 +318,28 @@ hr.item-divider {{
         {
             var sb = new StringBuilder();
             sb.Append("<article>");
-            sb.Append($"<p><strong>{item.Title}</strong></p>");
+            sb.Append($"<p style='font-size:13px'><strong>{item.Title}</strong></p>");
 
-            if (!options.ForPrint)
+            if (options.ForPrint)
+            {
+                sb.AppendLine($"<p>{item.Url}</p>");
+            }
+            else
             {
                 sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
             }
+            
  
-            if (options.IncludeNewsSummary && !string.IsNullOrWhiteSpace(item.Summary))
+ 
+            if (options.ForPrint)
             {
-                sb.Append("<div class='content'>" + item.Summary + "</div>");
+                sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
+            }
+            else
+            {
+                sb.Append("<div class='content'>" + CleanUpImages(item.Content) + "</div>");
             }
 
-            if (options.IncludeNewsContent)
-            {
-                if (options.ForPrint)
-                {
-                    sb.Append("<div class='content'>" + Unlink(item.Content) + "</div>");
-                }
-                else
-                {
-                    sb.Append("<div class='content'>" + CleanUpImages(item.Content) + "</div>");
-                }
-            }
             sb.Append("</article>");
 
             return sb.ToString();
