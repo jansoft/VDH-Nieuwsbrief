@@ -71,7 +71,7 @@ namespace VanDamHuisAgendaLogic
             agendaframe.Left = document.DefaultPageSetup.PageWidth - XUnit.FromMillimeter(rightmargin) - Unit.FromMillimeter(80);
             var ph1 = agendaframe.AddParagraph();
             ph1.Format.Alignment = ParagraphAlignment.Right;
-            var h1 = ph1.AddFormattedText("Agenda");
+            var h1 = ph1.AddFormattedText($"Agenda van {options.DateFrom:dd-MM} tot {options.DateUntil:dd-MM}");
             h1.Font.Color = vdhRgbColor;
             h1.Font.Size = Unit.FromPoint(16);
             h1.Font.Name = "Rubik Medium";
@@ -131,6 +131,11 @@ namespace VanDamHuisAgendaLogic
 
                 var reeksInfo = agendaEvent.ReeksInfo;
                 var datetext = para.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}");
+                if (!string.IsNullOrEmpty(agendaEvent.Event.info))
+                {
+                    para.AddLineBreak();
+                    para.AddFormattedText(agendaEvent.Event.info);
+                }
             }
 
  
@@ -260,7 +265,7 @@ namespace VanDamHuisAgendaLogic
             notice.Left = Unit.FromMillimeter(leftmargin);
             notice.Width = Unit.FromMillimeter(150);
             var pnotice = notice.AddParagraph();
-            pnotice.AddText("De meest recente agenda vindt u op vandamhuis.nl");
+            pnotice.AddText("De meest recente agenda vindt u op www.vandamhuis.nl");
             pnotice.Format.Font.Name = "Rubik Light";
             pnotice.Format.Font.Color = fontcolor;
             pnotice.Format.Font.Size = Unit.FromPoint(10.5);

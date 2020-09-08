@@ -25,5 +25,6 @@ namespace VanDamHuisAgendaLogic
         public string url { get; set; }
         public bool event_private { get; set; }
         public string event_status { get; set; }
+        public string info { get; set; }
     }
 }

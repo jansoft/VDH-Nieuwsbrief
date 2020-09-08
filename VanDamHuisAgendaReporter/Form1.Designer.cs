@@ -178,6 +178,8 @@
             // cbAllEvents
             // 
             this.cbAllEvents.AutoSize = true;
+            this.cbAllEvents.Checked = true;
+            this.cbAllEvents.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAllEvents.Location = new System.Drawing.Point(9, 45);
             this.cbAllEvents.Name = "cbAllEvents";
             this.cbAllEvents.Size = new System.Drawing.Size(48, 17);

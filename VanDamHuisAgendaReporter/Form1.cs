@@ -51,6 +51,8 @@ namespace VanDamHuisAgendaReporter
             reportOptions.PublicEventsIncluded = cbPublic.Checked;
             reportOptions.MaxEvents = Convert.ToInt32(udMaxEvents.Value);
             reportOptions.AllEvents = cbAllEvents.Checked;
+            reportOptions.DateFrom = dpFrom.Value;
+            reportOptions.DateUntil = dpUntil.Value;
             var reportPath = reporterLogic.ReportEvents(eventsToPreport, reportOptions);
             LocationLabel.Text = reportPath;
 
