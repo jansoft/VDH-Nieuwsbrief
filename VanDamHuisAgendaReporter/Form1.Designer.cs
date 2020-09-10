@@ -46,15 +46,23 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.OrganisatieMetKleurbalk = new System.Windows.Forms.RadioButton();
+            this.OrganisatieMetTekst = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.ShowHyperlinks = new System.Windows.Forms.RadioButton();
+            this.HideHyperlinks = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxEvents)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btGenerateReport
             // 
-            this.btGenerateReport.Location = new System.Drawing.Point(22, 150);
+            this.btGenerateReport.Location = new System.Drawing.Point(22, 232);
             this.btGenerateReport.Name = "btGenerateReport";
             this.btGenerateReport.Size = new System.Drawing.Size(116, 23);
             this.btGenerateReport.TabIndex = 0;
@@ -107,7 +115,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 192);
+            this.label4.Location = new System.Drawing.Point(19, 274);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 7;
@@ -116,7 +124,7 @@
             // LocationLabel
             // 
             this.LocationLabel.AutoSize = true;
-            this.LocationLabel.Location = new System.Drawing.Point(68, 192);
+            this.LocationLabel.Location = new System.Drawing.Point(68, 274);
             this.LocationLabel.Name = "LocationLabel";
             this.LocationLabel.Size = new System.Drawing.Size(59, 13);
             this.LocationLabel.TabIndex = 8;
@@ -124,7 +132,7 @@
             // 
             // btOpenLocation
             // 
-            this.btOpenLocation.Location = new System.Drawing.Point(22, 220);
+            this.btOpenLocation.Location = new System.Drawing.Point(22, 302);
             this.btOpenLocation.Name = "btOpenLocation";
             this.btOpenLocation.Size = new System.Drawing.Size(75, 23);
             this.btOpenLocation.TabIndex = 9;
@@ -224,11 +232,79 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Periode";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.OrganisatieMetTekst);
+            this.groupBox4.Controls.Add(this.OrganisatieMetKleurbalk);
+            this.groupBox4.Location = new System.Drawing.Point(22, 134);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(259, 70);
+            this.groupBox4.TabIndex = 20;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Weergave organisatie";
+            // 
+            // OrganisatieMetKleurbalk
+            // 
+            this.OrganisatieMetKleurbalk.AutoSize = true;
+            this.OrganisatieMetKleurbalk.Location = new System.Drawing.Point(12, 29);
+            this.OrganisatieMetKleurbalk.Name = "OrganisatieMetKleurbalk";
+            this.OrganisatieMetKleurbalk.Size = new System.Drawing.Size(116, 17);
+            this.OrganisatieMetKleurbalk.TabIndex = 0;
+            this.OrganisatieMetKleurbalk.Text = "Met gekleurde balk";
+            this.OrganisatieMetKleurbalk.UseVisualStyleBackColor = true;
+            // 
+            // OrganisatieMetTekst
+            // 
+            this.OrganisatieMetTekst.AutoSize = true;
+            this.OrganisatieMetTekst.Checked = true;
+            this.OrganisatieMetTekst.Location = new System.Drawing.Point(145, 29);
+            this.OrganisatieMetTekst.Name = "OrganisatieMetTekst";
+            this.OrganisatieMetTekst.Size = new System.Drawing.Size(69, 17);
+            this.OrganisatieMetTekst.TabIndex = 1;
+            this.OrganisatieMetTekst.TabStop = true;
+            this.OrganisatieMetTekst.Text = "Met tekst";
+            this.OrganisatieMetTekst.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.HideHyperlinks);
+            this.groupBox5.Controls.Add(this.ShowHyperlinks);
+            this.groupBox5.Location = new System.Drawing.Point(288, 135);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(212, 69);
+            this.groupBox5.TabIndex = 21;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Hyperlinks tonen";
+            // 
+            // ShowHyperlinks
+            // 
+            this.ShowHyperlinks.AutoSize = true;
+            this.ShowHyperlinks.Location = new System.Drawing.Point(21, 28);
+            this.ShowHyperlinks.Name = "ShowHyperlinks";
+            this.ShowHyperlinks.Size = new System.Drawing.Size(36, 17);
+            this.ShowHyperlinks.TabIndex = 0;
+            this.ShowHyperlinks.Text = "Ja";
+            this.ShowHyperlinks.UseVisualStyleBackColor = true;
+            // 
+            // HideHyperlinks
+            // 
+            this.HideHyperlinks.AutoSize = true;
+            this.HideHyperlinks.Checked = true;
+            this.HideHyperlinks.Location = new System.Drawing.Point(76, 28);
+            this.HideHyperlinks.Name = "HideHyperlinks";
+            this.HideHyperlinks.Size = new System.Drawing.Size(45, 17);
+            this.HideHyperlinks.TabIndex = 1;
+            this.HideHyperlinks.TabStop = true;
+            this.HideHyperlinks.Text = "Nee";
+            this.HideHyperlinks.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 301);
+            this.ClientSize = new System.Drawing.Size(682, 417);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -246,6 +322,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +350,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton OrganisatieMetTekst;
+        private System.Windows.Forms.RadioButton OrganisatieMetKleurbalk;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton HideHyperlinks;
+        private System.Windows.Forms.RadioButton ShowHyperlinks;
     }
 }
 

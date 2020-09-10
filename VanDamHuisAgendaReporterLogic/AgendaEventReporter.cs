@@ -97,11 +97,14 @@ namespace VanDamHuisAgendaLogic
 
             var pintro = section.AddParagraph();
             pintro.Format.SpaceAfter = Unit.FromPoint(16);
-           // var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
+            // var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
 
-            AddLegend(section);
-            var plegendspacer = section.AddParagraph("");
-            plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(10);
+            if (options.ShowOrganizationWithColorBar)
+            {
+                AddLegend(section);
+                var plegendspacer = section.AddParagraph("");
+                plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(10);
+            }
 
             var events = eventsToReport;
             if (!options.AllEvents)
@@ -109,36 +112,55 @@ namespace VanDamHuisAgendaLogic
                 events = eventsToReport.GetRange(0, options.MaxEvents);
             }
 
-            foreach(var agendaEvent in events)
+            foreach (var agendaEvent in events)
             {
                 var para = section.AddParagraph();
 
                 para.Format.SpaceAfter = Unit.FromPoint(12);
-                para.Format.Borders.Left.Style = BorderStyle.Single;
-                para.Format.Borders.Left.Width = Unit.FromMillimeter(2);
-                para.Format.Borders.Left.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
-                para.Format.Borders.DistanceFromLeft = Unit.FromMillimeter(2);
+                if (options.ShowOrganizationWithColorBar)
+                {
+                    para.Format.Borders.Left.Style = BorderStyle.Single;
+                    para.Format.Borders.Left.Width = Unit.FromMillimeter(2);
+                    para.Format.Borders.Left.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
+                    para.Format.Borders.DistanceFromLeft = Unit.FromMillimeter(2);
+                }
                 para.Format.KeepTogether = true;
-                
-                var hyperlink = para.AddHyperlink(agendaEvent.Event.url, HyperlinkType.Web);
-                var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
-                var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
-                linktext.Underline = Underline.Single;
-                linktext.Color = Color.FromRgb(53, 90, 162);
-                linktext.Font.Name = "Rubik Medium";
+
+                if (options.ShowLinks)
+                {
+                    var hyperlink = para.AddHyperlink(agendaEvent.Event.url, HyperlinkType.Web);
+                    var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
+                    var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
+                    linktext.Underline = Underline.Single;
+                    linktext.Color = Color.FromRgb(53, 90, 162);
+                    linktext.Font.Name = "Rubik Medium";
+                }
+                else
+                {
+                    var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
+                    var title = para.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
+                    title.Font.Name = "Rubik Medium";
+                }
 
                 para.AddLineBreak();
 
                 var reeksInfo = agendaEvent.ReeksInfo;
                 var datetext = para.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}");
+
+                
+                var text = "";
+                if (!options.ShowOrganizationWithColorBar)
+                {
+                    para.AddLineBreak();
+                    var orgtext = para.AddFormattedText(GetOrganizationName(agendaEvent.Event.organisatie));
+                    orgtext.Font.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
+                }
                 if (!string.IsNullOrEmpty(agendaEvent.Event.info))
                 {
                     para.AddLineBreak();
                     para.AddFormattedText(agendaEvent.Event.info);
                 }
             }
-
- 
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
             renderer.Document = document;
             renderer.RenderDocument();
@@ -180,7 +202,7 @@ namespace VanDamHuisAgendaLogic
             headerimg.Top = Unit.FromMillimeter(5);
         }
 
- 
+  
         private void AddLegend(Section section)
         {
             var table = section.AddTable();
@@ -236,6 +258,26 @@ namespace VanDamHuisAgendaLogic
             }
         }
 
+        private string GetOrganizationName(string organisatie)
+        {
+            switch (organisatie.ToLowerInvariant())
+            {
+                case "therapeuticum":
+                    return "Gezondheidscentrum Therapeuticum Haarlem";
+                case "vereniging":
+                    return "Antroposofische Vereniging Haarlem";
+                case "consultatiebureau":
+                    return "Bureau Ouder- & Kindzorg";
+                case "keerkring":
+                    return "Patiëntenvereniging De Keerkring"; 
+                case "algemeen":
+                    return "Van Dam Huis";
+                default:
+                    return "";
+
+            }
+        }
+
         private  Color HexToColor(string hexString)
         {
             //replace # occurences
@@ -265,7 +307,9 @@ namespace VanDamHuisAgendaLogic
             notice.Left = Unit.FromMillimeter(leftmargin);
             notice.Width = Unit.FromMillimeter(150);
             var pnotice = notice.AddParagraph();
-            pnotice.AddText("De meest recente agenda vindt u op www.vandamhuis.nl");
+            //pnotice.AddText("De meest recente agenda vindt u op www.vandamhuis.nl");
+            pnotice.AddText("Kijk voor meer info op www.vandamhuis.nl of op de flyers op dit prikbord.");
+
             pnotice.Format.Font.Name = "Rubik Light";
             pnotice.Format.Font.Color = fontcolor;
             pnotice.Format.Font.Size = Unit.FromPoint(10.5);
