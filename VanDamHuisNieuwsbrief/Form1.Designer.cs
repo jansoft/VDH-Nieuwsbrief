@@ -48,11 +48,14 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.DocSizeLabel = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ExterneMedia = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerate
@@ -245,11 +248,32 @@
             this.DocSizeLabel.TabIndex = 30;
             this.DocSizeLabel.Text = "Grootte";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ExterneMedia);
+            this.groupBox2.Location = new System.Drawing.Point(350, 88);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(194, 117);
+            this.groupBox2.TabIndex = 50;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Opties";
+            // 
+            // ExterneMedia
+            // 
+            this.ExterneMedia.AutoSize = true;
+            this.ExterneMedia.Location = new System.Drawing.Point(7, 28);
+            this.ExterneMedia.Name = "ExterneMedia";
+            this.ExterneMedia.Size = new System.Drawing.Size(117, 17);
+            this.ExterneMedia.TabIndex = 0;
+            this.ExterneMedia.Text = "Voor externe media";
+            this.ExterneMedia.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 344);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
@@ -266,6 +290,8 @@
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -291,6 +317,8 @@
         private System.Windows.Forms.DateTimePicker dpPublicatieDatum;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label DocSizeLabel;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ExterneMedia;
     }
 }
 

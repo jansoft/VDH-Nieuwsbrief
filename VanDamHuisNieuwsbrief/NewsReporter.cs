@@ -95,7 +95,7 @@ a {
                 sb.AppendLine(GenerateOrganizationReport(organization, options));
             }
 
-             RenderAgenda(sb, agenda, options);
+            RenderAgenda(sb, agenda, options);
 
             RenderStyle(sb, options);
 
@@ -134,6 +134,10 @@ a {
             var first = true;
             foreach (var item in organization.NewsItems)
             {
+                if (options.ForExternalMedia && ! item.Categories.Contains(organization.MediaCategory))
+                {
+                    continue;
+                }
                 if (!first)
                 {
                     ItemDivider(sb);

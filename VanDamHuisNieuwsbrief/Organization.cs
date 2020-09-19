@@ -19,6 +19,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public string Use { get; set; }
         public int Exclude { get; set; }
         public int Include { get; set; }
+        public int MediaCategory { get; set; }
 
 
     }

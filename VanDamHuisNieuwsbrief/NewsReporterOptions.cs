@@ -11,6 +11,7 @@ namespace VanDamHuisNieuwsbriefGenerator
     {
         public bool ForPrint { get; set; }
         public DateTime PublicatieDatum { get; set; }
+        public bool ForExternalMedia { get; set; }
 
     }
 }

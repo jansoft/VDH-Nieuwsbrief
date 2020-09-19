@@ -124,6 +124,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             var options = new NewsReporterOptions();
             options.ForPrint = rbpaper.Checked;
+            options.ForExternalMedia = ExterneMedia.Checked;
  
  
             options.PublicatieDatum = dpPublicatieDatum.Value;
