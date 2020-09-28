@@ -23,10 +23,13 @@ namespace VanDamHuisNieuwsbriefGenerator
         public Form1()
         {
             InitializeComponent();
-            DateFromPicker.Value = DateTime.Now.AddMonths(-1);
-            dpAgendaVanaf.Value = DateTime.Now;
-            dpAgendaTot.Value = DateTime.Now.AddMonths(2);
-            dpPublicatieDatum.Value = DateTime.Now;
+            var data = LoadAppData();
+            DateFromPicker.Value = data.NieuwsbriefVanaf;
+            dpAgendaVanaf.Value = data.AgendaVanaf;
+            dpAgendaTot.Value = data.AgendaTot;
+            dpPublicatieDatum.Value = data.PublicatieDatum;
+            ExterneMedia.Checked = data.ForMedia;
+            rbpaper.Checked = data.ForPaper;
  
         }
 
@@ -111,7 +114,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private void GenerateHtml(object sender, EventArgs e)
         {
-           
+            SaveAppData();
             DocPathValue.Text = "Bezig met genereren. Even geduld...";
             DocPathValue.Refresh();
 
@@ -137,6 +140,62 @@ namespace VanDamHuisNieuwsbriefGenerator
             var docsize = Convert.ToInt32(html.Length / 1000);
             DocSizeLabel.Text = docsize > 102 ? $"Document lengte is {docsize}KB. Te lang voor GMail (Max 102KB)" : $"Document lengte is {docsize}KB";
             Process.Start(reportPath);
+        }
+
+        private void SaveAppData()
+        {
+            var data = new AppData();
+            data.NieuwsbriefVanaf = DateFromPicker.Value;
+            data.AgendaVanaf = dpAgendaVanaf.Value;
+            data.AgendaTot = dpAgendaTot.Value;
+            data.PublicatieDatum = dpPublicatieDatum.Value;
+            data.ForMedia = ExterneMedia.Checked;
+            data.ForPaper = rbpaper.Checked;
+
+            var json = JsonConvert.SerializeObject(data);
+            File.WriteAllText(GetAppDataFile(), json);
+
+        }
+
+        private AppData LoadAppData()
+        {
+            var filepath = GetAppDataFile();
+            AppData data;
+            if (File.Exists(filepath))
+            {
+                var json = File.ReadAllText(filepath);
+                data = JsonConvert.DeserializeObject<AppData>(json);
+                if (data.PublicatieDatum == DateTime.MinValue)
+                {
+                    data.PublicatieDatum = DateTime.Now;
+                }
+            }
+            else
+            {
+                data = new AppData();
+                data.NieuwsbriefVanaf = DateTime.Now.AddMonths(-1);
+                data.AgendaVanaf = DateTime.Now;
+                data.AgendaTot = DateTime.Now.AddMonths(2);
+                data.PublicatieDatum = DateTime.Now;
+                
+            }
+            return data;
+        }
+
+        private string GetAppDataDirectory()
+        {
+            var appDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VDH Nieuwsbrief");
+            if (!Directory.Exists(appDataDirectory))
+            {
+                Directory.CreateDirectory(appDataDirectory);
+            }
+
+            return appDataDirectory;
+        }
+
+        private string GetAppDataFile()
+        {
+            return Path.Combine(GetAppDataDirectory(), "appdata.json");
         }
 
         private string GetExeDir()
