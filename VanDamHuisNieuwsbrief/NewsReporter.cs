@@ -215,7 +215,7 @@ a {
                     image.Attributes.Remove("srcset");
                     image.Attributes.Remove("sizes");
                     image.Attributes.Remove("style");
-                    image.Attributes.Add("style", "width:100%;max-width:600px");
+                    image.Attributes.Add("style", "max-width:600px;max-height:300px");
 
                 }
             }
