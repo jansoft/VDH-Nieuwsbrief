@@ -123,6 +123,27 @@ a {
             sb.AppendLine("<hr style='margin-top:18px;margin-bottom:18px'/>");
         }
 
+        private void AddFixedVdhNews(StringBuilder sb)
+        {
+            sb.AppendLine(@"<h1 class='null' style='text-align: left;'><span style='font-size:20px'><span style='font-family:verdana,geneva,sans-serif'>De nieuwsbrief van het Van Dam Huis</span></span></h1>
+
+<p>Deze eerste nieuwsbrief na de zomervakantie heeft het thema &#39;Weerstand&#39;. Hoe wapenen we ons tegen de kou die komen gaat en de virussen die weer opspelen? Vanuit diverse expertises wordt hierop ingegaan in deze nieuwsbrief.</p>
+
+<p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- &amp; Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Pati&euml;ntenvereniging De Keerkring</a>.</p>
+
+<p>Inhoud van de nieuwsbrief:</p>
+
+<ul>
+	<li><a href='#vdh'>Van Dam Huis</a></li>
+	<li><a href='#gth'>Gezondheidscentrum Therapeuticum Haarlem</a></li>
+	<li><a href='#bok'>Bureau Ouder- &amp; Kindzorg Haarlem</a></li>
+	<li><a href='#pvkh'>Pati&euml;ntenvereniging De Keerkring Haarlem</a></li>
+	<li><a href='#avh'>Antroposofische Vereniging Haarlem</a></li>
+	<li><a href='#agenda'>Agenda</a></li>
+</ul>
+");
+        }
+
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
@@ -130,8 +151,15 @@ a {
             sb.AppendLine($"<p><a id='{organization.Id}' name='{organization.Id}'></a>&nbsp;</p>");
 
             RenderLogo(sb, organization, options);
-
             var first = true;
+
+            if (organization.Id == "vdh")
+            {
+                AddFixedVdhNews(sb);
+                ItemDivider(sb);
+            }
+
+            
             foreach (var item in organization.NewsItems)
             {
                 if (options.ForExternalMedia && ! item.Categories.Contains(organization.MediaCategory))
