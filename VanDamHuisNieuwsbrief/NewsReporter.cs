@@ -243,7 +243,7 @@ a {
                     image.Attributes.Remove("srcset");
                     image.Attributes.Remove("sizes");
                     image.Attributes.Remove("style");
-                    image.Attributes.Add("style", "max-width:600px;max-height:300px");
+                    image.Attributes.Add("style", "max-width:100%;max-height:300px");
 
                 }
             }
