@@ -147,7 +147,10 @@ a {
         public string GenerateOrganizationReport(Organization organization, NewsReporterOptions options)
         {
             var sb = new StringBuilder();
-            ItemDivider(sb);
+            if (organization.Id != "vdh")
+            {
+                ItemDivider(sb);
+            }
             sb.AppendLine($"<p><a id='{organization.Id}' name='{organization.Id}'></a>&nbsp;</p>");
 
             RenderLogo(sb, organization, options);
@@ -156,7 +159,7 @@ a {
             if (organization.Id == "vdh")
             {
                 AddFixedVdhNews(sb);
-                ItemDivider(sb);
+                //ItemDivider(sb);
             }
 
             
