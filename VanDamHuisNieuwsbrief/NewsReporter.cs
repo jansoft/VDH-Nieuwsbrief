@@ -189,7 +189,7 @@ a {
         {
             var sb = new StringBuilder();
             sb.Append("<article>");
-            sb.Append($"<p style='font-size:13px'><strong>{item.Title}</strong></p>");
+            sb.Append($"<p><strong>{item.Title}</strong></p>");
 
             if (options.ForPrint)
             {
