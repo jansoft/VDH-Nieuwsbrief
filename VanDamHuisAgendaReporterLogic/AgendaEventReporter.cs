@@ -308,7 +308,7 @@ namespace VanDamHuisAgendaLogic
             notice.Width = Unit.FromMillimeter(150);
             var pnotice = notice.AddParagraph();
             //pnotice.AddText("De meest recente agenda vindt u op www.vandamhuis.nl");
-            pnotice.AddText("Kijk voor meer info op www.vandamhuis.nl of op de flyers op dit prikbord.");
+            pnotice.AddText("Kijk voor meer info op www.vandamhuis.nl of op de flyers op het prikbord of in de wachtruimte.");
 
             pnotice.Format.Font.Name = "Rubik Light";
             pnotice.Format.Font.Color = fontcolor;
