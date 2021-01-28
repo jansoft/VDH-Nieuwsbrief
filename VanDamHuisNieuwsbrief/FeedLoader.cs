@@ -67,6 +67,12 @@ namespace VanDamHuisNieuwsbriefGenerator
                     // append only if not inside paragraph
                     if (node.Ancestors("p").ToList().Count == 0)
                     {
+                        var fig = node.Ancestors("figure").FirstOrDefault();
+                        if (fig != null && fig.HasClass("alignright"))
+                        {
+                            node.AddClass("alignright");
+                        }
+
                         sbc.AppendLine(node.OuterHtml);
                     }
                 }

@@ -74,6 +74,12 @@ a {
     color: #007C89 !important;
     text-decoration: underline !important;
 }
+
+.clearfix::after {
+  content: '';
+  clear: both;
+  display: table;
+}
 </style>");
         }
 
@@ -204,11 +210,11 @@ a {
  
             if (options.ForPrint)
             {
-                sb.Append("<div class='content'>" + Unlink(CleanUpImages(content)) + "</div>");
+                sb.Append("<div class='content clearfix'>" + Unlink(CleanUpImages(content)) + "</div>");
             }
             else
             {
-                sb.Append("<div class='content'>" + CleanUpImages(content) + "</div>");
+                sb.Append("<div class='content clearfix'>" + CleanUpImages(content) + "</div>");
             }
 
             sb.Append("</article>");
@@ -241,12 +247,18 @@ a {
             {
                 foreach (var image in images)
                 {
+                    var imgstyle = "max-width:100%;max-height:300px";
+                    if (image.HasClass("alignright"))
+                    {
+                        imgstyle += ";float:right";
+                    }
+                    
                     image.Attributes.Remove("height");
                     image.Attributes.Remove("width");
                     image.Attributes.Remove("srcset");
                     image.Attributes.Remove("sizes");
                     image.Attributes.Remove("style");
-                    image.Attributes.Add("style", "max-width:100%;max-height:300px");
+                    image.Attributes.Add("style", imgstyle);
 
                 }
             }
