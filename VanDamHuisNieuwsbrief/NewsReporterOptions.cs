@@ -13,5 +13,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public DateTime PublicatieDatum { get; set; }
         public bool ForExternalMedia { get; set; }
 
+        public bool HideCanceledEvents { get; set; }
+
     }
 }

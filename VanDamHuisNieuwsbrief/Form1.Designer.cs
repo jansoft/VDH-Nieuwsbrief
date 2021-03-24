@@ -50,6 +50,7 @@
             this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ExterneMedia = new System.Windows.Forms.CheckBox();
+            this.HideCanceledEvents = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -250,6 +251,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.HideCanceledEvents);
             this.groupBox2.Controls.Add(this.ExterneMedia);
             this.groupBox2.Location = new System.Drawing.Point(350, 88);
             this.groupBox2.Name = "groupBox2";
@@ -267,6 +269,18 @@
             this.ExterneMedia.TabIndex = 0;
             this.ExterneMedia.Text = "Voor externe media";
             this.ExterneMedia.UseVisualStyleBackColor = true;
+            // 
+            // HideCanceledEvents
+            // 
+            this.HideCanceledEvents.AutoSize = true;
+            this.HideCanceledEvents.Checked = true;
+            this.HideCanceledEvents.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.HideCanceledEvents.Location = new System.Drawing.Point(7, 52);
+            this.HideCanceledEvents.Name = "HideCanceledEvents";
+            this.HideCanceledEvents.Size = new System.Drawing.Size(177, 17);
+            this.HideCanceledEvents.TabIndex = 1;
+            this.HideCanceledEvents.Text = "Verberg afgelaste evenementen";
+            this.HideCanceledEvents.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -319,6 +333,7 @@
         private System.Windows.Forms.Label DocSizeLabel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox ExterneMedia;
+        private System.Windows.Forms.CheckBox HideCanceledEvents;
     }
 }
 

@@ -42,6 +42,14 @@ namespace VanDamHuisNieuwsbriefGenerator
                 }
                 foreach (var item in agenda)
                 {
+                    if (options.HideCanceledEvents)
+                    {
+                        var eventname = item.Event.event_name.ToLowerInvariant();
+                        if (eventname.Contains("afgelast") || eventname.Contains("vervallen") || eventname.Contains("vervalt"))
+                        {
+                            continue;
+                        }
+                    }
                     if (options.ForPrint)
                     {
                         sb.AppendLine($"<p><strong>{item.Event.event_name}</strong><br>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</p>");
