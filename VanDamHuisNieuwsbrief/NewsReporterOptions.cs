@@ -15,5 +15,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         public bool HideCanceledEvents { get; set; }
 
+        public string Thema { get; set; }
+
     }
 }

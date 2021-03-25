@@ -30,6 +30,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             dpPublicatieDatum.Value = data.PublicatieDatum;
             ExterneMedia.Checked = data.ForMedia;
             rbpaper.Checked = data.ForPaper;
+            Thema.Text = data.Thema;
  
         }
 
@@ -129,6 +130,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.ForPrint = rbpaper.Checked;
             options.ForExternalMedia = ExterneMedia.Checked;
             options.HideCanceledEvents = HideCanceledEvents.Checked;
+            options.Thema = Thema.Text;
  
  
             options.PublicatieDatum = dpPublicatieDatum.Value;
@@ -152,6 +154,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             data.PublicatieDatum = dpPublicatieDatum.Value;
             data.ForMedia = ExterneMedia.Checked;
             data.ForPaper = rbpaper.Checked;
+            data.Thema = Thema.Text;
 
             var json = JsonConvert.SerializeObject(data);
             File.WriteAllText(GetAppDataFile(), json);
@@ -178,7 +181,6 @@ namespace VanDamHuisNieuwsbriefGenerator
                 data.AgendaVanaf = DateTime.Now;
                 data.AgendaTot = DateTime.Now.AddMonths(2);
                 data.PublicatieDatum = DateTime.Now;
-                
             }
             return data;
         }

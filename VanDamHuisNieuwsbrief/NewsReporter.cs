@@ -137,11 +137,11 @@ a {
             sb.AppendLine("<hr style='margin-top:18px;margin-bottom:18px'/>");
         }
 
-        private void AddFixedVdhNews(StringBuilder sb)
+        private void AddFixedVdhNews(StringBuilder sb, NewsReporterOptions options)
         {
-            sb.AppendLine(@"<h1 class='null' style='text-align: left;'><span style='font-size:20px'><span style='font-family:verdana,geneva,sans-serif'>De nieuwsbrief van het Van Dam Huis</span></span></h1>
+            sb.AppendLine($@"<h1 class='null' style='text-align: left;'><span style='font-size:20px'><span style='font-family:verdana,geneva,sans-serif'>De nieuwsbrief van het Van Dam Huis</span></span></h1>
 
-<p>Deze eerste nieuwsbrief na de zomervakantie heeft het thema &#39;Weerstand&#39;. Hoe wapenen we ons tegen de kou die komen gaat en de virussen die weer opspelen? Vanuit diverse expertises wordt hierop ingegaan in deze nieuwsbrief.</p>
+<p>Preview nieuwsbrief {options.PublicatieDatum.ToString("MMMM yyyy")} met als thema: {options.Thema}</p>
 
 <p>Het Van Dam Huis biedt onderdak aan vier organisaties: <a href='https://www.therapeuticumhaarlem.nl/'>Gezondheidscentrum Therapeuticum Haarlem</a>, <a href='https://www.antroposofiehaarlem.nl/'>Antroposofische Vereniging Haarlem</a>, <a href='https://www.therapeuticumhaarlem.nl/consultatiebureau/'>Bureau Ouder- &amp; Kindzorg</a> en <a href='https://keerkring.antroposana.nl/'>Pati&euml;ntenvereniging De Keerkring</a>.</p>
 
@@ -172,7 +172,7 @@ a {
 
             if (organization.Id == "vdh")
             {
-                AddFixedVdhNews(sb);
+                AddFixedVdhNews(sb, options);
                 //ItemDivider(sb);
             }
 

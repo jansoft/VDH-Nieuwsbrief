@@ -49,14 +49,17 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ExterneMedia = new System.Windows.Forms.CheckBox();
             this.HideCanceledEvents = new System.Windows.Forms.CheckBox();
+            this.ExterneMedia = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Thema = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerate
@@ -233,7 +236,7 @@
             this.groupBox10.Controls.Add(this.DocSizeLabel);
             this.groupBox10.Controls.Add(this.btnGenerate);
             this.groupBox10.Controls.Add(this.DocPathValue);
-            this.groupBox10.Location = new System.Drawing.Point(30, 211);
+            this.groupBox10.Location = new System.Drawing.Point(30, 310);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(514, 106);
             this.groupBox10.TabIndex = 49;
@@ -260,16 +263,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Opties";
             // 
-            // ExterneMedia
-            // 
-            this.ExterneMedia.AutoSize = true;
-            this.ExterneMedia.Location = new System.Drawing.Point(7, 28);
-            this.ExterneMedia.Name = "ExterneMedia";
-            this.ExterneMedia.Size = new System.Drawing.Size(117, 17);
-            this.ExterneMedia.TabIndex = 0;
-            this.ExterneMedia.Text = "Voor externe media";
-            this.ExterneMedia.UseVisualStyleBackColor = true;
-            // 
             // HideCanceledEvents
             // 
             this.HideCanceledEvents.AutoSize = true;
@@ -282,11 +275,42 @@
             this.HideCanceledEvents.Text = "Verberg afgelaste evenementen";
             this.HideCanceledEvents.UseVisualStyleBackColor = true;
             // 
+            // ExterneMedia
+            // 
+            this.ExterneMedia.AutoSize = true;
+            this.ExterneMedia.Location = new System.Drawing.Point(7, 28);
+            this.ExterneMedia.Name = "ExterneMedia";
+            this.ExterneMedia.Size = new System.Drawing.Size(117, 17);
+            this.ExterneMedia.TabIndex = 0;
+            this.ExterneMedia.Text = "Voor externe media";
+            this.ExterneMedia.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.Thema);
+            this.groupBox3.Location = new System.Drawing.Point(30, 212);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(514, 92);
+            this.groupBox3.TabIndex = 51;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Thema";
+            // 
+            // Thema
+            // 
+            this.Thema.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Thema.Location = new System.Drawing.Point(3, 16);
+            this.Thema.Multiline = true;
+            this.Thema.Name = "Thema";
+            this.Thema.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Thema.Size = new System.Drawing.Size(508, 73);
+            this.Thema.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 344);
+            this.ClientSize = new System.Drawing.Size(565, 455);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
@@ -306,6 +330,8 @@
             this.groupBox10.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -334,6 +360,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox ExterneMedia;
         private System.Windows.Forms.CheckBox HideCanceledEvents;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox Thema;
     }
 }
 
