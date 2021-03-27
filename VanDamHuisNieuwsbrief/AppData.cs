@@ -20,6 +20,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public bool ForMedia { get; set; }
 
         public string Thema { get; set; }
+        public bool ToonSamenvattingActiviteit { get; set; }
 
     }
 }

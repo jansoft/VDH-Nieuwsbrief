@@ -53,6 +53,7 @@
             this.ExterneMedia = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Thema = new System.Windows.Forms.TextBox();
+            this.ToonSamenvattingActiviteit = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -220,6 +221,7 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.ToonSamenvattingActiviteit);
             this.groupBox9.Controls.Add(this.label4);
             this.groupBox9.Controls.Add(this.label3);
             this.groupBox9.Controls.Add(this.dpAgendaTot);
@@ -305,6 +307,16 @@
             this.Thema.Size = new System.Drawing.Size(508, 73);
             this.Thema.TabIndex = 0;
             // 
+            // ToonSamenvattingActiviteit
+            // 
+            this.ToonSamenvattingActiviteit.AutoSize = true;
+            this.ToonSamenvattingActiviteit.Location = new System.Drawing.Point(11, 127);
+            this.ToonSamenvattingActiviteit.Name = "ToonSamenvattingActiviteit";
+            this.ToonSamenvattingActiviteit.Size = new System.Drawing.Size(117, 17);
+            this.ToonSamenvattingActiviteit.TabIndex = 38;
+            this.ToonSamenvattingActiviteit.Text = "Toon samenvatting";
+            this.ToonSamenvattingActiviteit.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +374,7 @@
         private System.Windows.Forms.CheckBox HideCanceledEvents;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox Thema;
+        private System.Windows.Forms.CheckBox ToonSamenvattingActiviteit;
     }
 }
 

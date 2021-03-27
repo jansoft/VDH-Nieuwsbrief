@@ -10,6 +10,7 @@ namespace VanDamHuisAgendaLogic
     {
         public int event_id { get; set; }
         public string event_name { get; set; }
+        public string post_excerpt { get; set; }
         public DateTime event_start_date { get; set; }
         public DateTime event_end_date { get; set; }
         public DateTime event_start_time { get; set; }

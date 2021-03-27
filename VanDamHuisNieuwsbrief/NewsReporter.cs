@@ -56,7 +56,13 @@ namespace VanDamHuisNieuwsbriefGenerator
                     }
                     else
                     {
-                        sb.AppendLine($"<li><a href='{item.Event.url}'>{item.Event.event_name}</a><br>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}</li>");
+                        var samenvatting = "";
+                        if (options.ToonSamenvattingActiviteit && !string.IsNullOrWhiteSpace(item.Event.post_excerpt))
+                        {
+                            samenvatting = "<br/>" +  item.Event.post_excerpt.Trim();
+
+                        }
+                        sb.AppendLine($"<li><a href='{item.Event.url}'>{item.Event.event_name}</a><br>{item.Event.event_start_date:d MMMMM yyyy} {item.Event.event_start_time:HH:mm} - {item.Event.event_end_time:HH:mm}{samenvatting}</li>");
                     }
                 }
                 if (!options.ForPrint)
