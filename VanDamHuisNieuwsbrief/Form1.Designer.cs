@@ -46,6 +46,7 @@
             this.dpPublicatieDatum = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.ToonSamenvattingActiviteit = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -53,7 +54,10 @@
             this.ExterneMedia = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Thema = new System.Windows.Forms.TextBox();
-            this.ToonSamenvattingActiviteit = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Edition = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Preview = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -233,8 +237,22 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Agenda";
             // 
+            // ToonSamenvattingActiviteit
+            // 
+            this.ToonSamenvattingActiviteit.AutoSize = true;
+            this.ToonSamenvattingActiviteit.Location = new System.Drawing.Point(11, 127);
+            this.ToonSamenvattingActiviteit.Name = "ToonSamenvattingActiviteit";
+            this.ToonSamenvattingActiviteit.Size = new System.Drawing.Size(117, 17);
+            this.ToonSamenvattingActiviteit.TabIndex = 38;
+            this.ToonSamenvattingActiviteit.Text = "Toon samenvatting";
+            this.ToonSamenvattingActiviteit.UseVisualStyleBackColor = true;
+            // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.Preview);
+            this.groupBox10.Controls.Add(this.label6);
+            this.groupBox10.Controls.Add(this.Edition);
+            this.groupBox10.Controls.Add(this.label5);
             this.groupBox10.Controls.Add(this.DocSizeLabel);
             this.groupBox10.Controls.Add(this.btnGenerate);
             this.groupBox10.Controls.Add(this.DocPathValue);
@@ -307,15 +325,37 @@
             this.Thema.Size = new System.Drawing.Size(508, 73);
             this.Thema.TabIndex = 0;
             // 
-            // ToonSamenvattingActiviteit
+            // label5
             // 
-            this.ToonSamenvattingActiviteit.AutoSize = true;
-            this.ToonSamenvattingActiviteit.Location = new System.Drawing.Point(11, 127);
-            this.ToonSamenvattingActiviteit.Name = "ToonSamenvattingActiviteit";
-            this.ToonSamenvattingActiviteit.Size = new System.Drawing.Size(117, 17);
-            this.ToonSamenvattingActiviteit.TabIndex = 38;
-            this.ToonSamenvattingActiviteit.Text = "Toon samenvatting";
-            this.ToonSamenvattingActiviteit.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(117, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Editie";
+            // 
+            // Edition
+            // 
+            this.Edition.Location = new System.Drawing.Point(156, 21);
+            this.Edition.Name = "Edition";
+            this.Edition.Size = new System.Drawing.Size(200, 20);
+            this.Edition.TabIndex = 32;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(363, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Preview";
+            // 
+            // Preview
+            // 
+            this.Preview.Location = new System.Drawing.Point(415, 21);
+            this.Preview.Name = "Preview";
+            this.Preview.Size = new System.Drawing.Size(89, 20);
+            this.Preview.TabIndex = 34;
             // 
             // Form1
             // 
@@ -375,6 +415,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox Thema;
         private System.Windows.Forms.CheckBox ToonSamenvattingActiviteit;
+        private System.Windows.Forms.TextBox Preview;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox Edition;
+        private System.Windows.Forms.Label label5;
     }
 }
 

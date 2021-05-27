@@ -284,7 +284,7 @@ a {
             return Regex.Replace(source, @"<a[^>]+>([^<]+)</a>", "$1");
         }
 
-        private string GetOutPutPath()
+        public string GetOutPutPath()
         {
             var docpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var outputpath = Path.Combine(docpath, "VanDamHuis-Nieuwsbrief");

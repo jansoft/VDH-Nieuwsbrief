@@ -32,6 +32,8 @@ namespace VanDamHuisNieuwsbriefGenerator
             rbpaper.Checked = data.ForPaper;
             Thema.Text = data.Thema;
             ToonSamenvattingActiviteit.Checked = data.ToonSamenvattingActiviteit;
+            Edition.Text = data.Edition ?? "";
+            Preview.Text = data.Preview ?? "";
  
         }
 
@@ -116,7 +118,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
         private void GenerateHtml(object sender, EventArgs e)
         {
-            SaveAppData();
+            var data = SaveAppData();
             DocPathValue.Text = "Bezig met genereren. Even geduld...";
             DocPathValue.Refresh();
 
@@ -138,7 +140,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.PublicatieDatum = dpPublicatieDatum.Value;
 
             var html = reporter.GenerateNewsLetterReport(newsLetter, agenda, options);
-            var reportPath = reporter.GetReportPath();
+            var reportPath = Path.Combine(reporter.GetOutPutPath(), $"Nieuwsbrief-Van-Dam-Huis-{data.Edition}-preview-{data.Preview}.html").Replace(" ", "-");
             File.WriteAllText(reportPath, html, Encoding.UTF8);
 
             DocPathValue.Text = reportPath;
@@ -147,7 +149,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             Process.Start(reportPath);
         }
 
-        private void SaveAppData()
+        private AppData SaveAppData()
         {
             var data = new AppData();
             data.NieuwsbriefVanaf = DateFromPicker.Value;
@@ -158,9 +160,13 @@ namespace VanDamHuisNieuwsbriefGenerator
             data.ForPaper = rbpaper.Checked;
             data.Thema = Thema.Text;
             data.ToonSamenvattingActiviteit = ToonSamenvattingActiviteit.Checked;
+            data.Edition = Edition.Text;
+            data.Preview = Preview.Text;
 
             var json = JsonConvert.SerializeObject(data);
             File.WriteAllText(GetAppDataFile(), json);
+
+            return data;
 
         }
 
