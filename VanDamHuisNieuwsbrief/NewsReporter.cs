@@ -182,8 +182,9 @@ a {
                 //ItemDivider(sb);
             }
 
+            var newsitems = organization.NewsItems.OrderBy(p => p.Url);
             
-            foreach (var item in organization.NewsItems)
+            foreach (var item in newsitems)
             {
                 if (options.ForExternalMedia && ! item.Categories.Contains(organization.MediaCategory))
                 {
