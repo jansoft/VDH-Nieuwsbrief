@@ -48,16 +48,17 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.ToonSamenvattingActiviteit = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.Preview = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Edition = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.DocSizeLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.HideCanceledEvents = new System.Windows.Forms.CheckBox();
             this.ExterneMedia = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Thema = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.Edition = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Preview = new System.Windows.Forms.TextBox();
+            this.Uitklapbaar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxPosts)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -263,6 +264,38 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rapport";
             // 
+            // Preview
+            // 
+            this.Preview.Location = new System.Drawing.Point(415, 21);
+            this.Preview.Name = "Preview";
+            this.Preview.Size = new System.Drawing.Size(89, 20);
+            this.Preview.TabIndex = 34;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(363, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Preview";
+            // 
+            // Edition
+            // 
+            this.Edition.Location = new System.Drawing.Point(156, 21);
+            this.Edition.Name = "Edition";
+            this.Edition.Size = new System.Drawing.Size(200, 20);
+            this.Edition.TabIndex = 32;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(117, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Editie";
+            // 
             // DocSizeLabel
             // 
             this.DocSizeLabel.AutoSize = true;
@@ -274,6 +307,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Uitklapbaar);
             this.groupBox2.Controls.Add(this.HideCanceledEvents);
             this.groupBox2.Controls.Add(this.ExterneMedia);
             this.groupBox2.Location = new System.Drawing.Point(350, 88);
@@ -325,37 +359,15 @@
             this.Thema.Size = new System.Drawing.Size(508, 73);
             this.Thema.TabIndex = 0;
             // 
-            // label5
+            // Uitklapbaar
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(117, 24);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Editie";
-            // 
-            // Edition
-            // 
-            this.Edition.Location = new System.Drawing.Point(156, 21);
-            this.Edition.Name = "Edition";
-            this.Edition.Size = new System.Drawing.Size(200, 20);
-            this.Edition.TabIndex = 32;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(363, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "Preview";
-            // 
-            // Preview
-            // 
-            this.Preview.Location = new System.Drawing.Point(415, 21);
-            this.Preview.Name = "Preview";
-            this.Preview.Size = new System.Drawing.Size(89, 20);
-            this.Preview.TabIndex = 34;
+            this.Uitklapbaar.AutoSize = true;
+            this.Uitklapbaar.Location = new System.Drawing.Point(7, 76);
+            this.Uitklapbaar.Name = "Uitklapbaar";
+            this.Uitklapbaar.Size = new System.Drawing.Size(80, 17);
+            this.Uitklapbaar.TabIndex = 2;
+            this.Uitklapbaar.Text = "Uitklapbaar";
+            this.Uitklapbaar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -419,6 +431,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox Edition;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox Uitklapbaar;
     }
 }
 

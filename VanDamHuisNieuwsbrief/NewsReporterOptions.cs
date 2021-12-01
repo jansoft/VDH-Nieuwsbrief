@@ -18,5 +18,7 @@ namespace VanDamHuisNieuwsbriefGenerator
         public string Thema { get; set; }
         public bool ToonSamenvattingActiviteit { get; set; }
 
+        public bool Uitklapbaar { get; set; }
+
     }
 }

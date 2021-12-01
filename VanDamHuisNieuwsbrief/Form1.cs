@@ -135,6 +135,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             options.HideCanceledEvents = HideCanceledEvents.Checked;
             options.Thema = Thema.Text;
             options.ToonSamenvattingActiviteit = ToonSamenvattingActiviteit.Checked;
+            options.Uitklapbaar =Uitklapbaar.Checked;
  
  
             options.PublicatieDatum = dpPublicatieDatum.Value;
@@ -158,6 +159,7 @@ namespace VanDamHuisNieuwsbriefGenerator
             data.PublicatieDatum = dpPublicatieDatum.Value;
             data.ForMedia = ExterneMedia.Checked;
             data.ForPaper = rbpaper.Checked;
+            data.Uitklapbaar = Uitklapbaar.Checked;
             data.Thema = Thema.Text;
             data.ToonSamenvattingActiviteit = ToonSamenvattingActiviteit.Checked;
             data.Edition = Edition.Text;

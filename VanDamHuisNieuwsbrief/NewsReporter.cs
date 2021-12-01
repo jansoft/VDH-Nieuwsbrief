@@ -16,6 +16,7 @@ namespace VanDamHuisNieuwsbriefGenerator
     public class NewsReporter
     {
         private CultureInfo ciNL = new CultureInfo("nl-NL");
+        private int newsId = 0; 
 
         private void RenderAgenda(StringBuilder sb, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
@@ -94,6 +95,14 @@ a {
   clear: both;
   display: table;
 }
+
+.expandable {
+    display:none;
+}
+
+.expandable:target {
+    display:block;
+}
 </style>");
         }
 
@@ -104,6 +113,7 @@ a {
 
         public string GenerateNewsLetterReport(NewsLetter newsLetter, List<AgendaEvent> agenda, NewsReporterOptions options)
         {
+            newsId = 1;
             var sb = new StringBuilder();
             RenderHeader(sb, options);
             
@@ -198,7 +208,8 @@ a {
                 {
                     first = false;
                 }
-                sb.AppendLine(GetNewsItemHtml(item, options));
+                sb.AppendLine(GetNewsItemHtml(item, options, "nieuws" + newsId));
+                newsId++;   
  
                 
             }
@@ -206,11 +217,13 @@ a {
         }
 
  
-        private string GetNewsItemHtml(NewsItem item, NewsReporterOptions options)
+        private string GetNewsItemHtml(NewsItem item, NewsReporterOptions options, string id)
         {
             var sb = new StringBuilder();
             sb.Append("<article>");
             sb.Append($"<p><strong>{item.Title}</strong></p>");
+
+            string expandable = options.Uitklapbaar ? "expandable" : "";
 
             if (options.ForPrint)
             {
@@ -218,7 +231,15 @@ a {
             }
             else
             {
-                sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
+                if (options.Uitklapbaar)
+                {
+                    sb.Append($"<p><a href='#{id}'>Lees verder</a></p>");
+                }
+                else
+                {
+                    sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
+                }
+  
             }
 
             var content = CleanupStyle(item.Content);
@@ -229,7 +250,7 @@ a {
             }
             else
             {
-                sb.Append("<div class='content clearfix'>" + CleanUpImages(content) + "</div>");
+                sb.Append($"<div id='{id}' class='content clearfix {expandable}'>" + CleanUpImages(content) + "</div>");
             }
 
             sb.Append("</article>");
