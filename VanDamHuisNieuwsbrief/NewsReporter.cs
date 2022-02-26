@@ -229,18 +229,7 @@ a {
             {
                 sb.AppendLine($"<p>{item.Url}</p>");
             }
-            else
-            {
-                if (options.Uitklapbaar)
-                {
-                    sb.Append($"<p><a href='#{id}'>Lees verder</a></p>");
-                }
-                else
-                {
-                    sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
-                }
-  
-            }
+
 
             var content = CleanupStyle(item.Content);
  
@@ -251,6 +240,15 @@ a {
             else
             {
                 sb.Append($"<div id='{id}' class='content clearfix {expandable}'>" + CleanUpImages(content) + "</div>");
+
+                if (options.Uitklapbaar)
+                {
+                    sb.Append($"<p><a href='#{id}'>Lees verder</a></p>");
+                }
+                else
+                {
+                    sb.Append($"<p><a href='{item.Url}'>Lees verder</a></p>");
+                }
             }
 
             sb.Append("</article>");
