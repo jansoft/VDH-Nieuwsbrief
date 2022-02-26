@@ -15,7 +15,6 @@ namespace VanDamHuisAgendaLogic
         public bool AllEvents { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateUntil { get; set; }
-        public bool ShowOrganizationWithColorBar { get; set; }
-        public bool ShowLinks { get; set; }
+         public bool IncludeQRCodes { get; set; }
     }
 }

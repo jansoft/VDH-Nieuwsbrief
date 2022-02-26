@@ -53,8 +53,7 @@ namespace VanDamHuisAgendaReporter
             reportOptions.AllEvents = cbAllEvents.Checked;
             reportOptions.DateFrom = dpFrom.Value;
             reportOptions.DateUntil = dpUntil.Value;
-            reportOptions.ShowOrganizationWithColorBar = OrganisatieMetKleurbalk.Checked;
-            reportOptions.ShowLinks = ShowHyperlinks.Checked;
+            reportOptions.IncludeQRCodes = IncludeQRCodes.Checked;
             var reportPath = reporterLogic.ReportEvents(eventsToPreport, reportOptions);
             LocationLabel.Text = reportPath;
 

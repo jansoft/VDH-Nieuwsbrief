@@ -3,15 +3,19 @@ using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Color = MigraDoc.DocumentObjectModel.Color;
 
 namespace VanDamHuisAgendaLogic
 {
@@ -69,6 +73,12 @@ namespace VanDamHuisAgendaLogic
             agendaframe.RelativeHorizontal = RelativeHorizontal.Page;
             agendaframe.Top = Unit.FromMillimeter(15);
             agendaframe.Left = document.DefaultPageSetup.PageWidth - XUnit.FromMillimeter(rightmargin) - Unit.FromMillimeter(80);
+
+            var imgqr = header.AddImage(GetQRCode("https://vandamhuis.nl#agenda"));
+            imgqr.Width = Unit.FromMillimeter(30);
+            imgqr.Height = Unit.FromMillimeter(30);
+            imgqr.Left = Unit.FromMillimeter(40);
+            imgqr.Top = Unit.FromMillimeter(0);
             var ph1 = agendaframe.AddParagraph();
             ph1.Format.Alignment = ParagraphAlignment.Right;
             var h1 = ph1.AddFormattedText($"Agenda van {options.DateFrom:dd-MM} tot {options.DateUntil:dd-MM}");
@@ -99,13 +109,6 @@ namespace VanDamHuisAgendaLogic
             pintro.Format.SpaceAfter = Unit.FromPoint(16);
             // var introtext = pintro.AddFormattedText("Deze agenda bevat de evenementen van alle deelnemende organisaties: therapeuticum, vereniging, consultatieburea en keerkring.");
 
-            if (options.ShowOrganizationWithColorBar)
-            {
-                AddLegend(section);
-                var plegendspacer = section.AddParagraph("");
-                plegendspacer.Format.SpaceAfter = Unit.FromMillimeter(10);
-            }
-
             var events = eventsToReport;
             if (!options.AllEvents)
             {
@@ -114,52 +117,83 @@ namespace VanDamHuisAgendaLogic
 
             foreach (var agendaEvent in events)
             {
+                if (agendaEvent.Event.event_status == "-1")
+                {
+                    continue;
+                }
+                
+
+                if (options.IncludeQRCodes)
+                {
+
+                    var table = section.AddTable();
+                    table.Format.SpaceAfter = Unit.FromCentimeter(0.5);
+                    var col1 = table.AddColumn();
+                    col1.Width = Unit.FromCentimeter(2.5);
+                    var col2 = table.AddColumn();
+                    col2.Width = Unit.FromCentimeter(15);
+                    var row = table.AddRow();
+
+
+                    var qrimage = row.Cells[0].AddImage(GetQRCode(agendaEvent.Event.url));
+                    qrimage.Height = Unit.FromCentimeter(2);
+                    qrimage.Width = Unit.FromCentimeter(2);
+
+                    var para2 = row.Cells[1].AddParagraph();
+                    var title2 = para2.AddFormattedText(agendaEvent.Event.event_name);
+                    title2.Font.Name = "Rubik Medium";
+                    para2.AddLineBreak();
+
+                    var reeksInfo2 = agendaEvent.ReeksInfo;
+                    var datetext2 = para2.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo2}");
+
+                    if (!string.IsNullOrEmpty(agendaEvent.Event.info))
+                    {
+                        para2.AddLineBreak();
+                        para2.AddFormattedText(agendaEvent.Event.info);
+                    }
+
+                    para2.AddLineBreak();
+                    var orgtext2 = para2.AddFormattedText(GetOrganizationName(agendaEvent.Event.organisatie));
+                    orgtext2.Font.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
+
+ 
+                    continue;
+                }
+
                 var para = section.AddParagraph();
-
                 para.Format.SpaceAfter = Unit.FromPoint(12);
-                if (options.ShowOrganizationWithColorBar)
-                {
-                    para.Format.Borders.Left.Style = BorderStyle.Single;
-                    para.Format.Borders.Left.Width = Unit.FromMillimeter(2);
-                    para.Format.Borders.Left.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
-                    para.Format.Borders.DistanceFromLeft = Unit.FromMillimeter(2);
-                }
-                para.Format.KeepTogether = true;
 
-                if (options.ShowLinks)
+                para.Format.KeepTogether = true;
+                if (options.IncludeQRCodes)
                 {
-                    var hyperlink = para.AddHyperlink(agendaEvent.Event.url, HyperlinkType.Web);
-                    var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
-                    var linktext = hyperlink.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
-                    linktext.Underline = Underline.Single;
-                    linktext.Color = Color.FromRgb(53, 90, 162);
-                    linktext.Font.Name = "Rubik Medium";
+                    var qrimage = para.AddImage(GetQRCode(agendaEvent.Event.url));
+                    qrimage.Height = Unit.FromCentimeter(2);
+                    qrimage.Width = Unit.FromCentimeter(2);
                 }
-                else
-                {
+
+
                     var privateIndicator = options.PrivateEventsIncluded && options.PublicEventsIncluded && agendaEvent.Event.event_private ? " (intern)" : "";
                     var title = para.AddFormattedText(agendaEvent.Event.event_name + privateIndicator);
                     title.Font.Name = "Rubik Medium";
-                }
 
                 para.AddLineBreak();
 
                 var reeksInfo = agendaEvent.ReeksInfo;
                 var datetext = para.AddFormattedText($"{agendaEvent.Event.event_start_date:dd MMMM yyyy} {agendaEvent.Event.event_start_time:HH:mm} - {agendaEvent.Event.event_end_time:HH:mm} {reeksInfo}");
 
-                
-                var text = "";
-                if (!options.ShowOrganizationWithColorBar)
-                {
-                    para.AddLineBreak();
-                    var orgtext = para.AddFormattedText(GetOrganizationName(agendaEvent.Event.organisatie));
-                    orgtext.Font.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
-                }
+
                 if (!string.IsNullOrEmpty(agendaEvent.Event.info))
                 {
                     para.AddLineBreak();
                     para.AddFormattedText(agendaEvent.Event.info);
                 }
+
+                para.AddLineBreak();
+                var orgtext = para.AddFormattedText(GetOrganizationName(agendaEvent.Event.organisatie));
+                orgtext.Font.Color = GetOrganizationColor(agendaEvent.Event.organisatie);
+
+
             }
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
             renderer.Document = document;
@@ -191,6 +225,35 @@ namespace VanDamHuisAgendaLogic
             return reportpath;
         }
 
+        private string GetQRCode(string url)
+        {
+            string imageFilename = GetPngImageFileName(url);
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            qrCodeImage.Save(imageFilename, ImageFormat.Png);
+            return imageFilename;
+        }
+
+        private string GetPngImageFileName(string url)
+        {
+            string directory = GetAppDirectory();
+            string filename = url.ToLowerInvariant().Replace("https://", "").Replace("http://", "").Replace("/", ".").RemoveTrailingCharacter(".") + ".qrcode.png";
+            return Path.Combine(directory, filename);
+        }
+
+
+
+        private string GetAppDirectory()
+        {
+            string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Van Dam Huis agenda\\QRCodes");
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            return directory;
+        }
         private void AddLogo(HeaderFooter header)
         {
             var logoPath = GetLogoPath();
