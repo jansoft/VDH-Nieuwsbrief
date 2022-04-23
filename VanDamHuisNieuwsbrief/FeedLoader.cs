@@ -57,7 +57,7 @@ namespace VanDamHuisNieuwsbriefGenerator
 
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(RemoveShortCodes(html));
-            var nodes = doc.DocumentNode.SelectNodes("//h1 | //h2 | //h3 | //h4 | //p | //img | //ul | //ol");
+            var nodes = doc.DocumentNode.SelectNodes("//h1 | //h2 | //h3 | //h4 | //p | //img | //ul | //ol | div");
 
             var sbc = new StringBuilder();
             foreach (HtmlNode node in nodes)
